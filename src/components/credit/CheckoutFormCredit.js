@@ -1,12 +1,12 @@
 import React from 'react';
-import axios from 'axios';
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
 
 import CardSection from './CardSection';
 
-export default function CheckoutFormCredit() {
+export default function CheckoutFormCredit(props) {
     const stripe = useStripe();
     const elements = useElements();
+    console.log(props)
 
     const handleSubmit = async (event) => {
         // We don't want to let default form submission happen here,
@@ -21,10 +21,10 @@ export default function CheckoutFormCredit() {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ amount: 1000, currency: 'USD' })
+            body: JSON.stringify({ amount: props.data.amount, currency: props.data.currency })
         }
         var secret
-        await fetch('http://localhost:1323/secret', requestOptions)
+        await fetch('http://localhost/api/v1/payment/card', requestOptions)
             .then(response => response.json())
             .then(data => secret = data.client_secret )
 
@@ -33,7 +33,7 @@ export default function CheckoutFormCredit() {
             payment_method: {
                 card: elements.getElement(CardElement),
                 billing_details: {
-                    name: 'Jenny Rosen',
+                    name: props.data.firstName + ' ' + props.data.lastName,
                 },
             }
         });

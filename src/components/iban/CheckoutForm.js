@@ -52,6 +52,9 @@ export default function CheckoutForm() {
   };
 
   return (
-    <IbanForm onSubmit={handleSubmit} disabled={!stripe} />
+    <form onSubmit={handleSubmit}>
+    <IbanForm disabled={!stripe} />
+    <button disabled={!stripe}>Confirm order</button>
+    </form>
   );
 }

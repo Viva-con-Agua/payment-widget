@@ -1,47 +1,24 @@
-import React, { Component } from 'react'
-import { Form, Label } from 'semantic-ui-react'
-import PaymentTab from './PaymentTab'
-import DropdownCountry from './DropdownCountry'
-import Interval from './Interval'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import * as serviceWorker from './serviceWorker';
+import 'semantic-ui-css/semantic.min.css';
 
-class PaymentForm extends Component {
-  state = {}
+import Membership from './Membership'
 
-  handleChange = (e, { value }) => this.setState({ value })
+class Payment extends HTMLElement {
+    connectedCallback() {
+        const mountPoint = document.createElement('div')
+        this.attachShadow({ mode: 'open' }).appendChild(mountPoint)
 
-  render() {
-    const { value } = this.state
-    return (
-      <Form>
-        <Form.Group widths='equal'>
-            <Form.Input fluid label='Betrag' placeholder='First name'>
-                <input />
-                <Label>€</Label>
-            </Form.Input>
-        </Form.Group>
-        <Form.Field label='Spendenintervall auswählen' control={Interval}/>
-        <Form.Group widths='equal'>
-          <Form.Input fluid label='First name' placeholder='First name' />
-          <Form.Input fluid label='Last name' placeholder='Last name' />
-        </Form.Group>
-        <Form.Group widths='equal'>
-          <Form.Input fluid label='Email' placeholder='Email' />
-        </Form.Group>
-        <Form.Group widths='equal'>
-          <Form.Input fluid label='Straße, Hausnummer' placeholder='Straße, Hausnummer' />
-        </Form.Group>       <Form.Group widths='equal'>
-          <Form.Input fluid label='PLZ' width={2} placeholder='PLZ' />
-          <Form.Input fluid label='Stadt' placeholder='Stadt' />
-        </Form.Group>
-        <Form.Group>
-            <DropdownCountry/>
-        </Form.Group>
-        <Form.Checkbox label='I agree to the Terms and Conditions' />
-        <PaymentTab/>
-        <Form.Button>Submit</Form.Button>
-      </Form>
-    )
-  }
+        const name = this.getAttribute('name')
+        if (name === 'membership') {
+            ReactDOM.render(<Membership />, this.mountPoint);
+
+        }
+    }
+    disconnectedCallback() {
+        ReactDOM.unmountComponentAtNode(this.mountPoint);
+    }
 }
-
-export default PaymentForm
+window.customElements.define('Payment', Payment);
