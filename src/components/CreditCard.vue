@@ -1,8 +1,7 @@
 <template>
     <div>
         <div ref="card"></div>
-
-        <button type="button" v-on:click.prevent="purchase"> Donate </button>
+        <button type="button" v-on:click.prevent="validate"> Donate </button>
     </div>
 </template>
 
@@ -16,8 +15,27 @@ let stripe = window.Stripe('pk_test_XWflMvuFJqV9fLbCH9cUVLsV00fZ9g4zXq'),
 
 export default {
     name: 'CreditCard',
-    mounted () {
+    props: {
+        payment: {
+            type: Object,
+            default: function () {
+                return {
+                    email: '',
+                    firstName: '',
+                    lastName:'',
+                    loop: 'single',
+                    money: {
+                        amount: 0,
+                        currency: 'EUR'
+                    },
+                    address: null,
+                    newsletter: false
 
+                }
+            }
+        }
+    },
+    mounted () {
         element.mount(this.$refs.card)
     },
     methods: {
@@ -27,31 +45,35 @@ export default {
                 payment_method: {
                     card: element,
                     billing_details: {
-                        name: 'Dennis Rosen'
+                        name: this.payment.firstName + ' ' + this.payment.lastName,
+                        email: this.payment.email
                     }
                 }
-            }).then(function(result) {
+            }).then(result => {
                 if (result.error) {
                     // Show error to your customer (e.g., insufficient funds)
                     console.log(result.error.message);
                 } else {
                     // The payment has been processed!
                     if (result.paymentIntent.status === 'succeeded') {
-                        // Show a success message to your customer
-                        // There's a risk of the customer closing the window before callback
-                        // execution. Set up a webhook or plugin to listen for the
-                        // payment_intent.succeeded event that handles any business critical
-                        // post-payment actions.
+                        this.$emit('success')  
                     }
                 }
             });
         },
         purchase () {
-            axios.post('http://localhost/api/v1/payment/card', {amount: 1000, currency: 'EUR'})
+            axios.post('http://localhost/api/v1/payment/card', 
+                { 
+                    amount: this.payment.money.amount,
+                    currency: this.payment.money.currency
+                })
                 .then(response => (
                     console.log(response.data),
                     this.stripeRequestCard(response.data.client_secret)
                 ))
+        },
+        validate () {
+           this.$emit('validate') 
         }
     }
 

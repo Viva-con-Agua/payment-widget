@@ -4,7 +4,7 @@
             <SEPA/>
         </sui-tab-pane>
         <sui-tab-pane title="CARD">
-            <CreditCard/>
+            <CreditCard v-on:success="success" :payment="payment"/>
         </sui-tab-pane>
         <sui-tab-pane title="PAYPAL">
             Triangle
@@ -17,15 +17,36 @@ import CreditCard from './CreditCard'
 export default {
     name: 'Payment',
     components: {SEPA, CreditCard}, 
-    data() {
-        return {
-            payment: 'first'
-        };
+    props: {
+        payment: {
+            type: Object,
+            default: function () {
+                return {
+                    email: '',
+                    firstName: '',
+                    lastName:'',
+                    loop: 'single',
+                    money: {
+                        amount: 0,
+                        currency: 'EUR'
+                    },
+                    address: null,
+                    newsletter: false
+
+                }
+            }
+        }
     },
+
     methods: {
         handleClick(tab, event) {
             console.log(tab, event);
-        }
-    }
+        },
+        success() {
+            this.$emit("success")
+        },
+        validate
+
+    },
 };
 </script>
