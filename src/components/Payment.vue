@@ -7,30 +7,32 @@
             <CreditCard v-on:success="success" :payment="payment"/>
         </sui-tab-pane>
         <sui-tab-pane title="PAYPAL">
-            Triangle
+            <PayPalButton v-on:success="success" :payment="payment"/>
         </sui-tab-pane>
     </sui-tab>
 </template>
 <script>
-import SEPA from './SEPA'
-import CreditCard from './CreditCard'
+import SEPA from './payments/SEPA'
+import PayPalButton from './payments/PayPal'
+import CreditCard from './payments/CreditCard'
 export default {
     name: 'Payment',
-    components: {SEPA, CreditCard}, 
+    components: {SEPA, CreditCard, PayPalButton}, 
     props: {
         payment: {
             type: Object,
             default: function () {
                 return {
+                    name: {
+                        first: '',
+                        last: ''
+                    },
                     email: '',
-                    firstName: '',
-                    lastName:'',
                     loop: 'single',
                     money: {
                         amount: 0,
                         currency: 'EUR'
                     },
-                    address: null,
                     newsletter: false
 
                 }
@@ -45,8 +47,6 @@ export default {
         success() {
             this.$emit("success")
         },
-        validate
-
     },
 };
 </script>

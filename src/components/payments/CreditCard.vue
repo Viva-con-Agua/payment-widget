@@ -45,7 +45,7 @@ export default {
                 payment_method: {
                     card: element,
                     billing_details: {
-                        name: this.payment.firstName + ' ' + this.payment.lastName,
+                        name: this.payment.name.first + ' ' + this.payment.name.last,
                         email: this.payment.email
                     }
                 }

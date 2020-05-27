@@ -3,37 +3,8 @@
         <div class="donation-form" v-if="!successView">
             <div class="vca">
                 <form>
-                <NameInput/>
-                </form>
-            </div>
-            <MoneyInput v-model="payment.money" :amount="payment.money"/>
-            <NameInput/>
-            <sui-form>
-                <sui-form-field class="classes.money">
-                    <MoneyInput v-model="payment.money" :amount="payment.money"/>
-                </sui-form-field>
-
-                <sui-form-fields fields="two">
-                    <sui-form-field :class="classes.firstNamae">
-                        <input
-                            v-model="payment.firstName"
-                            type="text"
-                            name="firstName"
-                            placeholder="First Name"
-                            v-validate="'required'"
-                            />
-                    </sui-form-field>
-                    <sui-form-field :class="classes.lastName">
-                        <input
-                            v-model="payment.lastName"
-                            type="text"
-                            name="lastName"
-                            placeholder="Last Name"
-                            v-validate="'required'"
-                            />
-                    </sui-form-field>
-                </sui-form-fields>
-                <sui-form-field :class="classes.email">
+                <NameInput v-model="payment.name"/>
+                <div class="field">
                     <input
                         v-model="payment.email"
                         type="email"
@@ -42,9 +13,13 @@
                         v-validate="'required|email'"
                         @blur="validate"
                         />
-                </sui-form-field>
-                <Payment v-on:success="success" :payment="payment"/>
-            </sui-form>
+                </div>
+                <div class="field">
+                    <MoneyInput v-model="payment.money" :amount="payment.money"/>
+                </div>
+                    <Payment v-on:success="success" :payment="payment"/>
+                </form>
+            </div>
         </div>
         <div class="success-view" v-if="successView">
             <h2> Danke für deine Spende </h2>
@@ -67,24 +42,18 @@ export default {
         return {
             successView: false,
             payment: {
+                name: {
+                    first: '',
+                    last: ''
+                },
                 email: '',
-                firstName: '',
-                lastName:'',
                 loop: 'single',
                 money: {
                     amount: 0,
                     currency: 'EUR'
                 },
-                address: null,
                 newsletter: false
-            },
-            classes: {
-                email: '',
-                firstName: '',
-                lastName: '',
-                money: ''
             }
-
         }
     },
     validators: {
@@ -144,16 +113,29 @@ export default {
     margin: 0 0 1em;
 }
 .vca form .fields input {
+    width: 100%;
     border: 1px solid #ccc;
     border-radius: 0.2rem;
     padding: 0.6em 1em;
     box-shadow: none;
 }
-.vca form .fields .first input {
+.vca form .field {
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 1em;
+}
+.vca form .field input {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 0.2rem;
+    padding: 0.6em 1em;
+    box-shadow: none;
+}
+.vca form .fields .first {
     width: 100%;
     padding-right: 0.6em;
 }
-.vca form .fields .last input {
+.vca form .fields .last {
     width: 100%;
     padding-left: 0.6em;
 }
