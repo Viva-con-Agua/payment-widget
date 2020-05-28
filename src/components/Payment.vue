@@ -1,31 +1,34 @@
 <template>
-    <sui-tab >
-        <sui-tab-pane title="SEPA">
-            <SEPA/>
-        </sui-tab-pane>
-        <sui-tab-pane title="CARD">
-            <CreditCard/>
-        </sui-tab-pane>
-        <sui-tab-pane title="PAYPAL">
-            Triangle
-        </sui-tab-pane>
-    </sui-tab>
+    <div>
+        <Tabs>
+            <Tab title="SEPA">
+                <SEPA/>
+            </Tab>
+            <Tab title="CARD">
+                <CreditCard v-on:success="success" :payment="payment"/>
+            </Tab>
+            <Tab title="PAYPAL">
+                <PayPalButton v-on:success="success" :payment="payment"/>
+            </Tab>
+        </Tabs>
+    </div>
 </template>
 <script>
-import SEPA from './SEPA'
-import CreditCard from './CreditCard'
+import SEPA from './payments/SEPA'
+import PayPalButton from './payments/PayPal'
+import CreditCard from './payments/CreditCard'
+import Tab from './utils/Tab'
+import Tabs from './utils/Tabs'
 export default {
     name: 'Payment',
-    components: {SEPA, CreditCard}, 
-    data() {
-        return {
-            payment: 'first'
-        };
-    },
+    components: {SEPA, CreditCard, PayPalButton, Tabs, Tab}, 
+    props: ['payment'],
     methods: {
-        handleClick(tab, event) {
-            console.log(tab, event);
+        success(e) {
+            this.$emit("success", e)
         }
-    }
+    },
 };
 </script>
+
+

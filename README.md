@@ -1,6 +1,46 @@
-# donation-form
+# payment-widget
 
-## Project setup
+## Setup
+
+### HTML  
+
+Embedded in Website:
+```
+<payment-widget type=donation></payment-widget>
+<script src=/payment-widget.js></script>
+```
+### Success
+
+Send Json to crm service.
+```
+{
+    "campaign":{
+        "id":"",
+        "name":"",
+        "description":""
+    },
+    "provider":{
+        "id":"",
+        "name":"paypal"
+    },
+    "loop":"single",
+    "supporter":{
+        "email":"",
+        "first_name":"",
+        "last_name":""
+    },
+    "money":{
+        "amount":12000,
+        "currency":"EUR"
+    },
+    "offset":{
+        "newsletter":false
+    }
+}
+```
+
+## Develop
+
 ```
 npm install
 ```
