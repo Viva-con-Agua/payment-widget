@@ -48,9 +48,9 @@ export default {
         }
     },
     methods: {
-
-
-        success() {
+        success(e) {
+            this.payment.provider.id = e.id,
+            this.payment.provider.name = 'paypal'
             this.$emit("success")
         },
     }

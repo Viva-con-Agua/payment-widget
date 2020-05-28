@@ -1,5 +1,5 @@
 <template>
-    <div class="money">
+    <div class="field money">
         <input ref="ta" v-model="displayAmount" :placeholder="label" :disabled="disabled" @change="change">
         <select v-model="amount.currency"  class="currency-select">
             <option label="€" value="EUR">€</option>

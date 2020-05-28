@@ -1,7 +1,7 @@
 <template>
     <div>
         <div ref="card"></div>
-        <button type="button" v-on:click.prevent="validate"> Donate </button>
+        <button type="button" v-on:click.prevent="purchase"> Donate </button>
     </div>
 </template>
 
@@ -15,26 +15,7 @@ let stripe = window.Stripe('pk_test_XWflMvuFJqV9fLbCH9cUVLsV00fZ9g4zXq'),
 
 export default {
     name: 'CreditCard',
-    props: {
-        payment: {
-            type: Object,
-            default: function () {
-                return {
-                    email: '',
-                    firstName: '',
-                    lastName:'',
-                    loop: 'single',
-                    money: {
-                        amount: 0,
-                        currency: 'EUR'
-                    },
-                    address: null,
-                    newsletter: false
-
-                }
-            }
-        }
-    },
+    props: ['payment'],
     mounted () {
         element.mount(this.$refs.card)
     },
@@ -45,8 +26,8 @@ export default {
                 payment_method: {
                     card: element,
                     billing_details: {
-                        name: this.payment.name.first + ' ' + this.payment.name.last,
-                        email: this.payment.email
+                        name: this.payment.supporter.first_name + ' ' + this.payment.supporter.last_name,
+                        email: this.payment.supporter.email
                     }
                 }
             }).then(result => {
@@ -56,6 +37,8 @@ export default {
                 } else {
                     // The payment has been processed!
                     if (result.paymentIntent.status === 'succeeded') {
+                        this.payment.provider.id = result.paymentIntent.id,
+                        this.payment.provider.name = "stripe"
                         this.$emit('success')  
                     }
                 }

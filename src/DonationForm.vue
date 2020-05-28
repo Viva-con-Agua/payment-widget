@@ -3,33 +3,20 @@
         <div class="donation-form" v-if="!successView">
             <div class="vca">
                 <form>
-                <NameInput v-model="payment.name"/>
-                <div class="field">
-                    <input
-                        v-model="payment.email"
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        v-validate="'required|email'"
-                        @blur="validate"
-                        />
-                </div>
-                <div class="field">
+                    <NameInput v-model="payment.supporter"/>
                     <MoneyInput v-model="payment.money" :amount="payment.money"/>
-                </div>
                     <Payment v-on:success="success" :payment="payment"/>
                 </form>
             </div>
         </div>
         <div class="success-view" v-if="successView">
             <h2> Danke für deine Spende </h2>
-            Bla blub blub plun gru tanablabla <br>
-            Hmpfkle bimpkle Johnny Johnny Kaestle <br>
-            UHHH NAA Freddy hnpg Frontend 
+            {{ this.payment }}
         </div>
     </div>
 </template>
 <script>
+import axios from 'axios'
 import { required, between } from 'vuelidate/lib/validators'
 import MoneyInput from './components/MoneyInput'
 import Payment from './components/Payment'
@@ -38,21 +25,38 @@ import NameInput from './components/NameInput'
 export default {
     name: 'DonationForm',
     components: {MoneyInput, Payment, NameInput},
+    props: {
+        description: {
+            type: String,
+            default: 'donation'
+        }
+    },
     data() {
         return {
             successView: false,
             payment: {
-                name: {
-                    first: '',
-                    last: ''
+                campaign: {
+                    id: '',
+                    name: '',
+                    description: ''
                 },
-                email: '',
+                provider: {
+                    id: '',
+                    name: '',
+                },
                 loop: 'single',
+                supporter: {
+                    email: '',
+                    first_name: '',
+                    last_name: ''
+                },
                 money: {
                     amount: 0,
                     currency: 'EUR'
                 },
-                newsletter: false
+                offset: {
+                    newsletter: false
+                }
             }
         }
     },
@@ -67,9 +71,7 @@ export default {
             if ( this.payment.firstName === '' ) { return 'error' } else { return ''}
         }
     },
-
     methods: {
-
         setAmount (value) {
             if (value.amount > this.open) {
                 this.unit.amount.amount = this.open
@@ -77,15 +79,16 @@ export default {
                 this.unit.amount = value
             }
         },
-        setFirstName (value){
-            this.donation.firstName = value
-        },
         setLastName (value){
             this.donation.lastName = value
         },
 
-        success() {
+        success(e) {
             this.successView = true
+            axios.post('http://localhost/api/v1/payment/success', e)
+                .then(response => (
+                    this.successContext = response.data
+                ))
         },
         validate () {
             if ( this.formFields.email.invalid ) {
