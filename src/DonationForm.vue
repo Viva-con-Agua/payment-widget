@@ -16,7 +16,6 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
 import { required, between } from 'vuelidate/lib/validators'
 import MoneyInput from './components/MoneyInput'
 import Payment from './components/Payment'
@@ -29,6 +28,12 @@ export default {
         description: {
             type: String,
             default: 'donation'
+        },
+        campaign: {
+            type: Object,
+            default() {
+                return {}
+            }
         }
     },
     data() {
@@ -40,9 +45,9 @@ export default {
                     name: '',
                     description: ''
                 },
-                provider: {
+                transaction: {
                     id: '',
-                    name: '',
+                    provider: '',
                 },
                 loop: 'single',
                 supporter: {
@@ -71,6 +76,9 @@ export default {
             if ( this.payment.firstName === '' ) { return 'error' } else { return ''}
         }
     },
+    mounted() {
+        this.payment.campaign = this.campaign
+    },
     methods: {
         setAmount (value) {
             if (value.amount > this.open) {
@@ -82,13 +90,9 @@ export default {
         setLastName (value){
             this.donation.lastName = value
         },
-
         success(e) {
             this.successView = true
-            axios.post('http://localhost/api/v1/payment/success', e)
-                .then(response => (
-                    this.successContext = response.data
-                ))
+            this.$emit("success", e)
         },
         validate () {
             if ( this.formFields.email.invalid ) {
