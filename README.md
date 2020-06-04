@@ -6,9 +6,36 @@
 
 Embedded in Website:
 ```
-<payment-widget type=donation></payment-widget>
+<payment-widget type="donation" campaign_id=123 campaign_name="Campaign 1" campaign_description="Campaign description 1" country="DE"></payment-widget>
 <script src=/payment-widget.js></script>
 ```
+
+### PARAMETER
+
+```
+type => [donation|membership]
+
+The parameter describes the type of contribution that was made using the form
+----
+campaign_id => (int)
+
+The parameter describes the ID of the campaign, which was created in civiCRM for the form
+----
+campaign_name => (string)
+
+The parameter describes the name of the campaign, which was created in civiCRM for the form
+----
+campaign_description => (string)
+
+The parameter describes campaign, which was created in civiCRM for the form
+----
+!Not fully implemented yet!
+country => [DE|CH|AT]
+
+The parameter describes the country in which the form is used. Depending on this, the corresponding payment methods respectively recipient accounts are used
+```
+
+
 ### Success
 
 Send Json to crm service.
@@ -19,9 +46,9 @@ Send Json to crm service.
         "name":"",
         "description":""
     },
-    "provider":{
+    "transaction":{
         "id":"",
-        "name":"paypal"
+        "provider":"paypal"
     },
     "loop":"single",
     "supporter":{
