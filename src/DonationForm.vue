@@ -2,11 +2,35 @@
     <div class="simple-donation">
         <div class="donation-form" v-if="!successView">
             <div class="vca">
-                <form>
-                    <NameInput v-model="payment.supporter"/>
-                    <MoneyInput v-model="payment.money" :amount="payment.money"/>
+                <vca-form>
+                    <vca-field label="Betrag" >
+                        <vca-money-input v-model="payment.money" :amount="payment.money"/>
+                    </vca-field>
+                    <vca-field>
+                        <vca-input 
+                 errorMsg="Required Email" 
+                 v-model="payment.supporter.email" 
+                 :rules="$v.payment.supporter.email"/>
+                    </vca-field>
+                    <vca-field>
+                        <vca-input 
+                 first
+                 errorMsg="Required Email" 
+                 v-model="payment.supporter.first_name" 
+                 :rules="$v.payment.supporter.first_name">
+                        </vca-input>
+                        <vca-input
+                            last
+                            errorMsg="Required Email" 
+                            v-model="payment.supporter.last_name" 
+                            :rules="$v.payment.supporter.last_name">
+                        </vca-input>
+                    </vca-field>
+
                     <Payment v-on:success="success" :payment="payment"/>
-                </form>
+                </vca-form>
+
+
             </div>
         </div>
         <div class="success-view" v-if="successView">
@@ -15,15 +39,14 @@
         </div>
     </div>
 </template>
+
 <script>
-import { required, between } from 'vuelidate/lib/validators'
-import MoneyInput from './components/MoneyInput'
+import { required, email } from 'vuelidate/lib/validators'
 import Payment from './components/Payment'
-import NameInput from './components/NameInput'
 
 export default {
     name: 'DonationForm',
-    components: {MoneyInput, Payment, NameInput},
+    components: {Payment},
     props: {
         description: {
             type: String,
@@ -65,10 +88,20 @@ export default {
             }
         }
     },
-    validators: {
-        firstName: {
-            between: between(0, 3),
-            required
+    validations: {
+        payment: {
+            supporter: {
+                email: {
+                    required,
+                    email
+                },
+                first_name: {
+                    required
+                },
+                last_name: {
+                    required
+                }
+            }
         }
     },
     computed: {
@@ -106,26 +139,75 @@ export default {
 </script>
 <style>
 .simple-donation {
-    width: 800px;
+    width: 500px;
     position: center;
 
 }
-.vca form {
+.vca-form form {
     width: 100%;
     max-width: 100%;
 }
-.vca form .fields {
+.vca-form form .vca-field {
     display: flex;
     flex-direction: row;
     margin: 0 0 1em;
 }
-.vca form .fields input {
+.vca-form form .vca-field label {
+    position: center;
+}
+.vca-form form .vca-field .vca-field-content .first {
+    width: 100%;
+    box-shadow: none;
+    padding-right: 0.6em;
+}
+
+.vca-form form .vca-field .vca-field-content .last {
+    width: 100%;
+    box-shadow: none;
+    padding-left: 0.6em;
+}
+.vca-form form .vca-field .vca-field-content .vca-input {
+    width: 100%;
+    box-shadow: none;
+}
+
+.vca-form form .vca-field .vca-field-content .vca-money-input {
+    width: 100%;
+    display: inline-flex;
+    border-radius: 0em;
+    border: 0em;
+}
+
+.vca-form form .vca-field .vca-money-input input {
+    width: 80%;
+    border-radius: 0em;
+    border-radius: 0.2rem;
+    padding: 0.6em 1em;
+    border: 1px solid #ccc;
+    border-right: none;
+    border-top-right-radius: 0em;
+    border-bottom-right-radius: 0em;
+}
+
+.vca-form form .vca-field .vca-money-input select {
+    background: rgba(34,36,38,.15);
+    width: 20%;
+    border: none;
+    border-left: none;
+    border-top-left-radius: 0em;
+    border-bottom-left-radius: 0em;
+}
+
+.vca-form form .vca-field .vca-input input {
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 0.2rem;
     padding: 0.6em 1em;
     box-shadow: none;
 }
+
+
+
 .vca form .field {
     display: flex;
     flex-direction: row;
@@ -138,6 +220,9 @@ export default {
     padding: 0.6em 1em;
     box-shadow: none;
 }
+.vca form .field .error {
+    border-color: #f00;
+} 
 .vca form .fields .first {
     width: 100%;
     padding-right: 0.6em;
