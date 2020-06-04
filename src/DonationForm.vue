@@ -27,7 +27,7 @@
                             </vca-field-row>
                         </vca-field>
 
-                        <Payment v-on:success="success" :payment="payment"/>
+                        <Payment v-on:success="success" :payment="payment" :country="country"/>
                 </vca-form>
             </div>
         </div>
@@ -168,6 +168,8 @@ export default {
 
 
 .vca-field-row {
+    width: 100%;
+   box-shadow: none;
     display: inline-flex;
 }
 .vca-field-row .first {
@@ -184,6 +186,7 @@ export default {
 .vca-input {
     width: 100%;
     box-shadow: none;
+    margin: 0 0 1em;
 }
 
 .vca-input input {
@@ -239,7 +242,45 @@ export default {
 }
 
 
+.vca-tabs ul{
+  overflow: hidden;
+  border: 1px solid #ccc;
 
+    margin-bottom: -1px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background-color: #fff;
+}
+
+ul li {
+    list-style: none;
+}
+/* Style the buttons inside the tab */
+.vca-tabs li {
+  background-color: inherit;
+  float: left;
+border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    border: 1px solid transparent;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.vca-tabs li:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.vca-tabs li.is-active {
+
+  background-color: #fff;
+    border-color: #ccc #ccc #fff;
+}
 
 
 

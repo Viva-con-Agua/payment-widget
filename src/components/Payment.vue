@@ -1,29 +1,27 @@
 <template>
     <div>
-        <Tabs>
-            <Tab v-if="isDE" title="SEPA">
+        <vca-tabs>
+            <vca-tab v-if="isDE" title="SEPA">
                 <SEPA v-on:success="success" :payment="payment"/>
-            </Tab>
-            <Tab v-if="isDE" title="CARD">
+            </vca-tab>
+            <vca-tab v-if="isDE" title="CARD">
                 <CreditCard v-on:success="success" :payment="payment"/>
-            </Tab>
-            <Tab v-if="isDE" title="PAYPAL">
+            </vca-tab>
+            <vca-tab v-if="isDE" title="PAYPAL">
                 <PayPalButton v-on:success="success" :payment="payment"/>
-            </Tab>
-            <Tab v-if="isCH" title="TWINT">
-            </Tab>
-        </Tabs>
+            </vca-tab>
+            <vca-tab v-if="isCH" title="TWINT">
+            </vca-tab>
+        </vca-tabs>
     </div>
 </template>
 <script>
 import SEPA from './payments/SEPA'
 import PayPalButton from './payments/PayPal'
 import CreditCard from './payments/CreditCard'
-import Tab from './utils/Tab'
-import Tabs from './utils/Tabs'
 export default {
     name: 'Payment',
-    components: {SEPA, CreditCard, PayPalButton, Tabs, Tab}, 
+    components: {SEPA, CreditCard, PayPalButton}, 
     props: ['payment', 'country'],
     computed: {
         isCH() {
