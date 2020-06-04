@@ -29,8 +29,6 @@
 
                         <Payment v-on:success="success" :payment="payment"/>
                 </vca-form>
-
-
             </div>
         </div>
         <div class="success-view" v-if="successView">
@@ -51,6 +49,10 @@ export default {
         description: {
             type: String,
             default: 'donation'
+        },
+        country: {
+            type: String,
+            default: 'DE'
         },
         campaign: {
             type: Object,

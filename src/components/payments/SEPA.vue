@@ -36,17 +36,17 @@ const options = {
     // placeholderCountry.
     placeholderCountry: 'DE',
 };
-let stripe = window.Stripe('pk_test_XWflMvuFJqV9fLbCH9cUVLsV00fZ9g4zXq'),
+let stripe = window.Stripe('pk_test_Se23Zwa0HzMj8OPt3ijaxz8X'),
     elements = stripe.elements(),
     element = elements.create('iban', options)
 
 export default {
     name: 'SEPA',
+    props: ['payment'],
     mounted () {
         element.mount(this.$refs.element)
     },
     methods: {
-
         stripeRequestIBAN (client_secret) {
             stripe.confirmSepaDebitPayment(
                 client_secret,
@@ -54,14 +54,26 @@ export default {
                     payment_method: {
                         sepa_debit: element,
                         billing_details: {
-                            name: 'dennis',
-                            email: 'dennis_kleber@mailbox.org',
+                            name: this.payment.supporter.first_name + ' ' + this.payment.supporter.last_name,
+                            email: this.payment.supporter.email
                         },
                     },
-                })
+                }).then(result => {
+                    if (result.error) {
+                        // Show error to your customer (e.g., insufficient funds)
+                        console.log(result.error.message);
+                    } else {
+                        // The payment is state processing!
+                        if (result.paymentIntent.status === 'processing') {
+                            this.payment.transaction.id = result.paymentIntent.id,
+                            this.payment.transaction.provider = "stripe"
+                            this.$emit('success', this.payment)
+                        }
+                    }
+                });
         },
         purchase () {
-            axios.post('http://localhost/api/v1/payment/iban', {amount: 1000, currency: 'EUR'})
+            axios.post('http://localhost:1323/api/v1/payment/iban', {amount: this.payment.money.amount, currency: this.payment.money.currency})
                 .then(response => (
                     console.log(response.data),
                     this.stripeRequestIBAN(response.data.client_secret)
