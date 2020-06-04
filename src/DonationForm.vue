@@ -2,11 +2,33 @@
     <div class="simple-donation">
         <div class="donation-form" v-if="!successView">
             <div class="vca">
-                <form>
-                    <NameInput v-model="payment.supporter"/>
-                    <MoneyInput v-model="payment.money" :amount="payment.money"/>
-                    <Payment v-on:success="success" :payment="payment" :country="country"/>
-                </form>
+                <vca-form>
+                    <vca-field label="Betrag" >
+                        <vca-money-input v-model="payment.money" :amount="payment.money"/>
+                    </vca-field>
+                        <vca-field label="Personal INfo">
+                            <vca-input 
+                                         errorMsg="Required Email" 
+                                         v-model="payment.supporter.email" 
+                                         :rules="$v.payment.supporter.email"/>
+                            <vca-field-row>
+                            <vca-input 
+                                   first
+                                   errorMsg="Required Email" 
+                                   v-model="payment.supporter.first_name" 
+                                   :rules="$v.payment.supporter.first_name">
+                            </vca-input>
+                            <vca-input
+                                last
+                                errorMsg="Required Email" 
+                                v-model="payment.supporter.last_name" 
+                                :rules="$v.payment.supporter.last_name">
+                            </vca-input>
+                            </vca-field-row>
+                        </vca-field>
+
+                        <Payment v-on:success="success" :payment="payment"/>
+                </vca-form>
             </div>
         </div>
         <div class="success-view" v-if="successView">
@@ -15,15 +37,14 @@
         </div>
     </div>
 </template>
+
 <script>
-import { required, between } from 'vuelidate/lib/validators'
-import MoneyInput from './components/MoneyInput'
+import { required, email } from 'vuelidate/lib/validators'
 import Payment from './components/Payment'
-import NameInput from './components/NameInput'
 
 export default {
     name: 'DonationForm',
-    components: {MoneyInput, Payment, NameInput},
+    components: {Payment},
     props: {
         description: {
             type: String,
@@ -69,10 +90,20 @@ export default {
             }
         }
     },
-    validators: {
-        firstName: {
-            between: between(0, 3),
-            required
+    validations: {
+        payment: {
+            supporter: {
+                email: {
+                    required,
+                    email
+                },
+                first_name: {
+                    required
+                },
+                last_name: {
+                    required
+                }
+            }
         }
     },
     computed: {
@@ -110,46 +141,107 @@ export default {
 </script>
 <style>
 .simple-donation {
-    width: 800px;
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    width: 500px;
     position: center;
 
 }
-.vca form {
+.vca-form {
     width: 100%;
     max-width: 100%;
+    padding: 0.6em 0.6em;
 }
-.vca form .fields {
+.vca-field {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin: 0 0 1em;
 }
-.vca form .fields input {
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 0.2rem;
-    padding: 0.6em 1em;
-    box-shadow: none;
+.vca-field-label {
+    font-size: 1rem;
+    margin-bottom: 1em;
 }
-.vca form .field {
-    display: flex;
-    flex-direction: row;
+.vca-field-content{
+    flex-direction: column;
     margin: 0 0 1em;
 }
-.vca form .field input {
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 0.2rem;
-    padding: 0.6em 1em;
-    box-shadow: none;
+
+
+.vca-field-row {
+    display: inline-flex;
 }
-.vca form .fields .first {
+.vca-field-row .first {
     width: 100%;
+    box-shadow: none;
     padding-right: 0.6em;
 }
-.vca form .fields .last {
+
+.vca-field-row .last {
     width: 100%;
+    box-shadow: none;
     padding-left: 0.6em;
 }
+.vca-input {
+    width: 100%;
+    box-shadow: none;
+}
+
+.vca-input input {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 0.2rem;
+    padding: 0.6em 1em;
+    box-shadow: none;
+    outline-color: #008fc2;
+}
+
+.vca-input .error {
+    border-color: #dc3545;
+}
+
+.error span {
+    color: #dc3545;
+}
+
+
+.vca-form form .vca-field .vca-money-input {
+    width: 100%;
+    display: inline-flex;
+    border-radius: 0em;
+    border: 0em;
+}
+
+
+
+
+
+
+.vca-form form .vca-field .vca-money-input input {
+    width: 80%;
+    border-radius: 0em;
+    border-radius: 0.2rem;
+    padding: 0.6em 1em;
+    border: 1px solid #ccc;
+    border-right: none;
+    border-top-right-radius: 0em;
+    border-bottom-right-radius: 0em;
+    outline-color: #008fc2;
+
+}
+
+.vca-form form .vca-field .vca-money-input select {
+    background: rgba(34,36,38,.15);
+    width: 20%;
+    border: none;
+    border-left: none;
+    border-top-left-radius: 0em;
+    border-bottom-left-radius: 0em;
+}
+
+
+
+
+
 
 
 
