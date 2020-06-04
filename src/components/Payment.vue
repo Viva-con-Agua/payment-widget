@@ -1,14 +1,16 @@
 <template>
     <div>
         <Tabs>
-            <Tab title="SEPA">
+            <Tab v-if="isDE" title="SEPA">
                 <SEPA v-on:success="success" :payment="payment"/>
             </Tab>
-            <Tab title="CARD">
+            <Tab v-if="isDE" title="CARD">
                 <CreditCard v-on:success="success" :payment="payment"/>
             </Tab>
-            <Tab title="PAYPAL">
+            <Tab v-if="isDE" title="PAYPAL">
                 <PayPalButton v-on:success="success" :payment="payment"/>
+            </Tab>
+            <Tab v-if="isCH" title="TWINT">
             </Tab>
         </Tabs>
     </div>
@@ -22,7 +24,15 @@ import Tabs from './utils/Tabs'
 export default {
     name: 'Payment',
     components: {SEPA, CreditCard, PayPalButton, Tabs, Tab}, 
-    props: ['payment'],
+    props: ['payment', 'country'],
+    computed: {
+        isCH() {
+            return this.country == 'CH'
+        },
+        isDE() {
+            return this.country == 'DE'
+        }
+    },
     methods: {
         success(e) {
             this.$emit("success", e)

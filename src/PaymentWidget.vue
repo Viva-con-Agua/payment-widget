@@ -1,7 +1,7 @@
 <template>
     <div id=payment-widget>
     <div v-if="donation">
-        <DonationForm v-on:success="success" :campaign="campaign"/>
+        <DonationForm v-on:success="success" :campaign="campaign" :country="country"/>
     </div>
     <div v-if="membership">
         <MembershipForm v-on:success="success"/>
@@ -32,6 +32,10 @@ export default {
         campaign_description: {
             type: String,
             default: 'Default description'
+        },
+        country: {
+            type: String,
+            default: 'DE'
         }
     },
     data() {
