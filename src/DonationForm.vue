@@ -5,7 +5,7 @@
                 <form>
                     <NameInput v-model="payment.supporter"/>
                     <MoneyInput v-model="payment.money" :amount="payment.money"/>
-                    <Payment v-on:success="success" :payment="payment"/>
+                    <Payment v-on:success="success" :payment="payment" :country="country"/>
                 </form>
             </div>
         </div>
@@ -28,6 +28,10 @@ export default {
         description: {
             type: String,
             default: 'donation'
+        },
+        country: {
+            type: String,
+            default: 'DE'
         },
         campaign: {
             type: Object,
