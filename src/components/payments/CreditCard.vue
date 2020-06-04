@@ -9,7 +9,7 @@
 import axios from 'axios'
 
 
-let stripe = window.Stripe('pk_test_XWflMvuFJqV9fLbCH9cUVLsV00fZ9g4zXq'),
+let stripe = window.Stripe('pk_test_Se23Zwa0HzMj8OPt3ijaxz8X'),
     elements = stripe.elements(),
     element = elements.create('card');
 

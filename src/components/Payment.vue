@@ -2,7 +2,7 @@
     <div>
         <Tabs>
             <Tab title="SEPA">
-                <SEPA/>
+                <SEPA v-on:success="success" :payment="payment"/>
             </Tab>
             <Tab title="CARD">
                 <CreditCard v-on:success="success" :payment="payment"/>
