@@ -37,15 +37,15 @@ export default {
                 } else {
                     // The payment has been processed!
                     if (result.paymentIntent.status === 'succeeded') {
-                        this.payment.provider.id = result.paymentIntent.id,
-                        this.payment.provider.name = "stripe"
-                        this.$emit('success')  
+                        this.payment.transaction.id = result.paymentIntent.id,
+                        this.payment.transaction.provider = "stripe"
+                        this.$emit('success', this.payment)
                     }
                 }
             });
         },
         purchase () {
-            axios.post('http://localhost/api/v1/payment/card', 
+            axios.post('http://localhost:1323/api/v1/payment/card', 
                 { 
                     amount: this.payment.money.amount,
                     currency: this.payment.money.currency
