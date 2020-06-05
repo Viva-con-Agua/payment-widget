@@ -4,7 +4,7 @@
             <div class="vca">
                 <vca-form>
                     <vca-field label="Betrag" >
-                        <vca-money-input v-model="payment.money" :amount="payment.money"/>
+                        <vca-money-input v-model="payment.money" :currency="currency" :amount="payment.money"/>
                     </vca-field>
                         <vca-field label="Personal INfo">
                             <vca-input 
@@ -56,6 +56,10 @@ export default {
         country: {
             type: String,
             default: 'DE'
+        },
+        currency: {
+            type: String,
+            default: 'EUR'
         },
         campaign: {
             type: Object,
@@ -109,13 +113,9 @@ export default {
             }
         }
     },
-    computed: {
-        validFirstName () {
-            if ( this.payment.firstName === '' ) { return 'error' } else { return ''}
-        }
-    },
     mounted() {
         this.payment.campaign = this.campaign
+        this.payment.money.currency = this.currency
     },
     methods: {
         setAmount (value) {
