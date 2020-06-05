@@ -4,21 +4,24 @@
             <div class="vca">
                 <vca-form>
                     <vca-field label="Betrag" >
-                        <vca-money-input v-model="payment.money" :amount="payment.money"/>
+                        <vca-money-input v-model="payment.money" :currency="currency" :amount="payment.money"/>
                     </vca-field>
                         <vca-field label="Personal INfo">
                             <vca-input 
+                                   ref="email"
                                          errorMsg="Required Email" 
                                          v-model="payment.supporter.email" 
                                          :rules="$v.payment.supporter.email"/>
                             <vca-field-row>
                             <vca-input 
+                                    ref="first_name"
                                    first
                                    errorMsg="Required Email" 
                                    v-model="payment.supporter.first_name" 
                                    :rules="$v.payment.supporter.first_name">
                             </vca-input>
                             <vca-input
+                                ref="last_name"
                                 last
                                 errorMsg="Required Email" 
                                 v-model="payment.supporter.last_name" 
@@ -27,7 +30,7 @@
                             </vca-field-row>
                         </vca-field>
 
-                        <Payment v-on:success="success" :payment="payment"/>
+                        <Payment v-on:success="success" :payment="payment" :country="country" :valid="$v.payment" @notValid="validate"/>
                 </vca-form>
             </div>
         </div>
@@ -53,6 +56,10 @@ export default {
         country: {
             type: String,
             default: 'DE'
+        },
+        currency: {
+            type: String,
+            default: 'EUR'
         },
         campaign: {
             type: Object,
@@ -106,21 +113,13 @@ export default {
             }
         }
     },
-    computed: {
-        validFirstName () {
-            if ( this.payment.firstName === '' ) { return 'error' } else { return ''}
-        }
-    },
     mounted() {
         this.payment.campaign = this.campaign
+        this.payment.money.currency = this.currency
     },
     methods: {
         setAmount (value) {
-            if (value.amount > this.open) {
-                this.unit.amount.amount = this.open
-            } else {
-                this.unit.amount = value
-            }
+            this.payment.money.amount = value
         },
         setLastName (value){
             this.donation.lastName = value
@@ -130,9 +129,9 @@ export default {
             this.$emit("success", e)
         },
         validate () {
-            if ( this.formFields.email.invalid ) {
-                this.er
-            }
+            this.$refs.email.validate()
+            this.$refs.first_name.validate()
+            this.$refs.last_name.validate()
         },
 
     }
@@ -168,6 +167,8 @@ export default {
 
 
 .vca-field-row {
+    width: 100%;
+   box-shadow: none;
     display: inline-flex;
 }
 .vca-field-row .first {
@@ -184,6 +185,7 @@ export default {
 .vca-input {
     width: 100%;
     box-shadow: none;
+    margin: 0 0 1em;
 }
 
 .vca-input input {
@@ -239,7 +241,45 @@ export default {
 }
 
 
+.vca-tabs ul{
+  overflow: hidden;
+  border: 1px solid #ccc;
 
+    margin-bottom: -1px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background-color: #fff;
+}
+
+ul li {
+    list-style: none;
+}
+/* Style the buttons inside the tab */
+.vca-tabs li {
+  background-color: inherit;
+  float: left;
+border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    border: 1px solid transparent;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.vca-tabs li:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.vca-tabs li.is-active {
+
+  background-color: #fff;
+    border-color: #ccc #ccc #fff;
+}
 
 
 
