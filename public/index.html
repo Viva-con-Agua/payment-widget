@@ -7,12 +7,13 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
     <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AcZoPYe27lkRTq651m-q_3XFdv_kph3PEDpOUzdWZ3QNj7sBMi7dovF0N8fxQ69-G46kRqHPz4ThRo4V&disable-funding=credit,card,sepa,giropay,sofort&currency=EUR"></script>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <payment-widget type="donation" campaign_id=333 campaign_name="Testkampagne" campaign_description="Testbeschreibung" country="DE"></payment-widget>
+    <payment-widget type="donation" campaign_id=333 campaign_name="Testkampagne" campaign_description="Testbeschreibung" country="DE" currency="EUR"></payment-widget>
     <!-- built files will be auto injected -->
   </body>
 </html>

@@ -7,8 +7,10 @@
         :currency="payment.money.currency"
         :client="credentials"
         :items="items"
+        :disabled="this.valid.$invalid"
         @payment_authorized="purchase"
         @payment-completed="success"
+        @payment-validation-error="validationError"
         env="sandbox">
     </PayPal>
     </button>
@@ -17,7 +19,7 @@
 
 <script>
 import Money from '@/utils/Money'
-import PayPal from 'vue-paypal-checkout'
+import PayPal from './paypal/PayPalCheckout'
 export default {
     name: 'PayPalButton',
     components: {PayPal},
@@ -58,6 +60,12 @@ export default {
             this.payment.transaction.id = e.id,
             this.payment.transaction.provider = 'paypal'
             this.$emit("success", this.payment)
+        },
+        error(e) {
+            this.$emit("error", e)
+        },
+        validationError() {
+            this.$emit("notValid")
         },
         purchase () {
             if (this.valid.$invalid === false ) {

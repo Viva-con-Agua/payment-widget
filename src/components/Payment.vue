@@ -8,7 +8,7 @@
                 <CreditCard v-on:success="success" :payment="payment" :valid="valid" @notValid="notValid"/>
             </vca-tab>
             <vca-tab v-if="isDE" title="PAYPAL">
-                <PayPalButton v-on:success="success" :payment="payment" :valid="valid" @notValid="notValid"/>
+                <PayPalButton v-on:success="success" v-on:error="error" :payment="payment" :valid="valid" @notValid="notValid"/>
             </vca-tab>
             <vca-tab v-if="isCH" title="TWINT">
             </vca-tab>
@@ -33,6 +33,9 @@ export default {
     },
     methods: {
         success(e) {
+            this.$emit("success", e)
+        },
+        error(e) {
             this.$emit("success", e)
         },
         notValid() {
