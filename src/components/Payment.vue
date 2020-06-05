@@ -36,7 +36,7 @@ export default {
             this.$emit("success", e)
         },
         error(e) {
-            this.$emit("success", e)
+            this.$emit("error", e)
         },
         notValid() {
             this.$emit("notValid")

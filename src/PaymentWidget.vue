@@ -1,5 +1,5 @@
 <template>
-    <div id=payment-widget class="payment-widget">        
+    <div id=payment-widget class="payment-widget">
         <div class="widget">
             <CupSlide @amount="setAmount"/>
         </div>

@@ -89,7 +89,7 @@ export default {
                 },
                 money: {
                     amount: 0,
-                    currency: "EUR"
+                    currency: 'EUR'
                 },
                 offset: {
                     newsletter: false
@@ -112,11 +112,6 @@ export default {
                 }
             }
         }
-    },
-    computed: {
-        validFirstName () {
-            if ( this.payment.firstName === '' ) { return 'error' } else { return ''}
-        },
     },
     mounted() {
         this.payment.campaign = this.campaign
