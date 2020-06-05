@@ -1,12 +1,18 @@
 <template>
-    <PayPal
+    <div>
+    <button @click.prevent="purchase"> 
+    <PayPal 
+        ref="paypal"
         :amount="pAmount"
         :currency="payment.money.currency"
         :client="credentials"
         :items="items"
+        @payment_authorized="purchase"
         @payment-completed="success"
         env="sandbox">
     </PayPal>
+    </button>
+    </div>
 </template>
 
 <script>
@@ -15,7 +21,7 @@ import PayPal from 'vue-paypal-checkout'
 export default {
     name: 'PayPalButton',
     components: {PayPal},
-    props: ['payment'],
+    props: ['payment', 'valid'],
     computed : {
         pAmount () {
             return Money.getPayPalString(this.payment.money.amount)
@@ -44,7 +50,7 @@ export default {
                     "price": this.pAmount,
                     "currency": this.payment.money.currency
                 },
-            ]
+            ],
         }
     },
     methods: {
@@ -53,6 +59,14 @@ export default {
             this.payment.transaction.provider = 'paypal'
             this.$emit("success", this.payment)
         },
+        purchase () {
+            if (this.valid.$invalid === false ) {
+                this.$refs.paypal 
+            } else {
+                this.$emit('notValid')
+            }
+        }
+
     }
 }
 </script> 

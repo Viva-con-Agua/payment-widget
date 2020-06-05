@@ -2,13 +2,13 @@
     <div>
         <vca-tabs>
             <vca-tab v-if="isDE" title="SEPA">
-                <SEPA v-on:success="success" :payment="payment"/>
+                <SEPA v-on:success="success" :payment="payment" :valid="valid" @notValid="notValid"/>
             </vca-tab>
             <vca-tab v-if="isDE" title="CARD">
-                <CreditCard v-on:success="success" :payment="payment"/>
+                <CreditCard v-on:success="success" :payment="payment" :valid="valid" @notValid="notValid"/>
             </vca-tab>
             <vca-tab v-if="isDE" title="PAYPAL">
-                <PayPalButton v-on:success="success" :payment="payment"/>
+                <PayPalButton v-on:success="success" :payment="payment" :valid="valid" @notValid="notValid"/>
             </vca-tab>
             <vca-tab v-if="isCH" title="TWINT">
             </vca-tab>
@@ -22,7 +22,7 @@ import CreditCard from './payments/CreditCard'
 export default {
     name: 'Payment',
     components: {SEPA, CreditCard, PayPalButton}, 
-    props: ['payment', 'country'],
+    props: ['payment', 'country', 'valid'],
     computed: {
         isCH() {
             return this.country == 'CH'
@@ -34,6 +34,9 @@ export default {
     methods: {
         success(e) {
             this.$emit("success", e)
+        },
+        notValid() {
+            this.$emit("notValid")
         }
     },
 };

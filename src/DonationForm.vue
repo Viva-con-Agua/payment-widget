@@ -8,17 +8,20 @@
                     </vca-field>
                         <vca-field label="Personal INfo">
                             <vca-input 
+                                   ref="email"
                                          errorMsg="Required Email" 
                                          v-model="payment.supporter.email" 
                                          :rules="$v.payment.supporter.email"/>
                             <vca-field-row>
                             <vca-input 
+                                    ref="first_name"
                                    first
                                    errorMsg="Required Email" 
                                    v-model="payment.supporter.first_name" 
                                    :rules="$v.payment.supporter.first_name">
                             </vca-input>
                             <vca-input
+                                ref="last_name"
                                 last
                                 errorMsg="Required Email" 
                                 v-model="payment.supporter.last_name" 
@@ -27,7 +30,7 @@
                             </vca-field-row>
                         </vca-field>
 
-                        <Payment v-on:success="success" :payment="payment" :country="country"/>
+                        <Payment v-on:success="success" :payment="payment" :country="country" :valid="$v.payment" @notValid="validate"/>
                 </vca-form>
             </div>
         </div>
@@ -130,9 +133,9 @@ export default {
             this.$emit("success", e)
         },
         validate () {
-            if ( this.formFields.email.invalid ) {
-                this.er
-            }
+            this.$refs.email.validate()
+            this.$refs.first_name.validate()
+            this.$refs.last_name.validate()
         },
 
     }

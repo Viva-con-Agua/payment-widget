@@ -15,7 +15,7 @@ let stripe = window.Stripe('pk_test_Se23Zwa0HzMj8OPt3ijaxz8X'),
 
 export default {
     name: 'CreditCard',
-    props: ['payment'],
+    props: ['payment', 'valid'],
     mounted () {
         element.mount(this.$refs.card)
     },
@@ -38,25 +38,29 @@ export default {
                     // The payment has been processed!
                     if (result.paymentIntent.status === 'succeeded') {
                         this.payment.transaction.id = result.paymentIntent.id,
-                        this.payment.transaction.provider = "stripe"
+                            this.payment.transaction.provider = "stripe"
                         this.$emit('success', this.payment)
                     }
                 }
             });
         },
         purchase () {
-            axios.post('http://localhost:1323/api/v1/payment/card', 
-                { 
-                    amount: this.payment.money.amount,
-                    currency: this.payment.money.currency
-                })
-                .then(response => (
-                    console.log(response.data),
-                    this.stripeRequestCard(response.data.client_secret)
-                ))
+            if (this.valid.$invalid === false) {
+                axios.post('http://localhost:1323/api/v1/payment/card', 
+                    { 
+                        amount: this.payment.money.amount,
+                        currency: this.payment.money.currency
+                    })
+                    .then(response => (
+                        console.log(response.data),
+                        this.stripeRequestCard(response.data.client_secret)
+                    ))
+            }else {
+                this.$emit('notValid')
+            }
         },
         validate () {
-           this.$emit('validate') 
+            this.$emit('validate') 
         }
     }
 

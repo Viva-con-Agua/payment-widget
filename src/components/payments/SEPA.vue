@@ -42,7 +42,7 @@ let stripe = window.Stripe('pk_test_Se23Zwa0HzMj8OPt3ijaxz8X'),
 
 export default {
     name: 'SEPA',
-    props: ['payment'],
+    props: ['payment', 'valid'],
     mounted () {
         element.mount(this.$refs.element)
     },
@@ -73,11 +73,15 @@ export default {
                 });
         },
         purchase () {
+            if (this.valid.$invalid === false ) {
             axios.post('http://localhost:1323/api/v1/payment/iban', {amount: this.payment.money.amount, currency: this.payment.money.currency})
                 .then(response => (
                     console.log(response.data),
                     this.stripeRequestIBAN(response.data.client_secret)
                 ))
+            } else {
+                this.$emit('notValid')
+            }
         }
     }
 
