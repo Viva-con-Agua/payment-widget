@@ -119,11 +119,7 @@ export default {
     },
     methods: {
         setAmount (value) {
-            if (value.amount > this.open) {
-                this.unit.amount.amount = this.open
-            } else {
-                this.unit.amount = value
-            }
+            this.payment.money.amount = value
         },
         setLastName (value){
             this.donation.lastName = value
