@@ -14,7 +14,7 @@
     "element-ui": "^2.13.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-vue": "^0.10.1",
-    "vca-ui": "0.0.4",
+    "vca-ui": "0.0.5",
     "vee-validate": "^2.2.15",
     "vue": "^2.6.11",
     "vue-custom-element": "^3.2.14",
