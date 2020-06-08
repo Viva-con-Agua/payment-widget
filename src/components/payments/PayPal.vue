@@ -1,6 +1,5 @@
 <template>
     <div>
-    <button @click.prevent="purchase"> 
     <PayPal 
         ref="paypal"
         :amount="pAmount"
@@ -13,7 +12,6 @@
         @payment-validation-error="validationError"
         env="sandbox">
     </PayPal>
-    </button>
     </div>
 </template>
 
