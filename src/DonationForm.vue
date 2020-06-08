@@ -4,7 +4,7 @@
             <div class="vca">
                 <vca-form>
                     <vca-field label="Betrag" >
-                        <vca-money-input v-model="payment.money" :currency="currency" :amount="payment.money"/>
+                        <vca-money-input ref="money" v-model="payment.money" :currency="currencies" :money="payment.money" :rules="$v.payment.money" errorMsg="mindestens 1 cent"/>
                     </vca-field>
                         <vca-field label="Personal INfo">
                             <vca-input 
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { required, email } from 'vuelidate/lib/validators'
+import { required, email, minValue } from 'vuelidate/lib/validators'
 import Payment from './components/Payment'
 
 export default {
@@ -94,7 +94,13 @@ export default {
                 offset: {
                     newsletter: false
                 }
-            }
+            },
+            currencies: [
+                {
+                    label: '€',
+                    value: 'EUR'
+                }
+            ]
         }
     },
     validations: {
@@ -109,6 +115,12 @@ export default {
                 },
                 last_name: {
                     required
+                }
+            },
+            money: {
+                amount: {
+                    required,
+                    minValue: minValue(1)
                 }
             }
         }
@@ -132,6 +144,7 @@ export default {
             this.$refs.email.validate()
             this.$refs.first_name.validate()
             this.$refs.last_name.validate()
+            this.$refs.money.validate()
         },
 
     }
@@ -202,6 +215,8 @@ export default {
 }
 
 .error span {
+
+    width: 100%;
     color: #dc3545;
 }
 
@@ -231,14 +246,43 @@ export default {
 
 }
 
-.vca-form form .vca-field .vca-money-input select {
-    background: rgba(34,36,38,.15);
+.currency-select {
     width: 20%;
     border: none;
     border-left: none;
     border-top-left-radius: 0em;
     border-bottom-left-radius: 0em;
 }
+
+.currency-select select {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-left: none;
+    border-top-left-radius: 0em;
+    border-bottom-left-radius: 0em;
+    background: rgba(34,36,38,.15);
+   box-shadow: none;
+}
+
+
+
+.currency-label {
+    background: rgba(34,36,38,.15);
+    width: 20%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    border: none;
+    border-left: none;
+    border-top-left-radius: 0em;
+    border-bottom-left-radius: 0em;
+
+}
+.currency-label label {
+    width: 100%;
+}
+
 
 
 .vca-tabs ul{
