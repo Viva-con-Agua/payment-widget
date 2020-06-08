@@ -4,30 +4,35 @@
             <div class="vca">
                 <vca-form>
                     <vca-field label="Betrag" >
-                        <vca-money-input ref="money" v-model="payment.money" :currency="currencies" :money="payment.money" :rules="$v.payment.money" errorMsg="mindestens 1 cent"/>
+                    <vca-field-row>
+                        <label class="vca-label"> {{ amountString}}  €</label>
+                        <vca-money-input ref="money" v-model="payment.money" :currency="currencies" :money="payment.money" :rules="$v.payment.money" errorMsg="mindestens 1 cent" @change="replyAmount">
+                        </vca-money-input>
+
+                    </vca-field-row>
                     </vca-field>
                         <vca-field label="Personal INfo">
                             <vca-input 
                                    ref="email"
-                                         errorMsg="Required Email" 
-                                         v-model="payment.supporter.email" 
-                                         :rules="$v.payment.supporter.email"/>
-                            <vca-field-row>
-                            <vca-input 
-                                    ref="first_name"
+                                   errorMsg="Required Email" 
+                                   v-model="payment.supporter.email" 
+                                   :rules="$v.payment.supporter.email"/>
+                                <vca-field-row>
+                                    <vca-input 
+                                   ref="first_name"
                                    first
                                    errorMsg="Required Email" 
                                    v-model="payment.supporter.first_name" 
                                    :rules="$v.payment.supporter.first_name">
-                            </vca-input>
-                            <vca-input
-                                ref="last_name"
-                                last
-                                errorMsg="Required Email" 
-                                v-model="payment.supporter.last_name" 
-                                :rules="$v.payment.supporter.last_name">
-                            </vca-input>
-                            </vca-field-row>
+                                    </vca-input>
+                                    <vca-input
+                                        ref="last_name"
+                                        last
+                                        errorMsg="Required Email" 
+                                        v-model="payment.supporter.last_name" 
+                                        :rules="$v.payment.supporter.last_name">
+                                    </vca-input>
+                                </vca-field-row>
                         </vca-field>
 
                         <Payment v-on:success="success" :payment="payment" :country="country" :valid="$v.payment" @notValid="validate"/>
@@ -44,6 +49,7 @@
 <script>
 import { required, email, minValue } from 'vuelidate/lib/validators'
 import Payment from './components/Payment'
+import Money from './utils/Money'
 
 export default {
     name: 'DonationForm',
@@ -103,6 +109,11 @@ export default {
             ]
         }
     },
+    computed: {
+        amountString () {
+                return Money.getInputString(this.payment.money.amount, this.payment.money.currency)
+        }
+    },
     validations: {
         payment: {
             supporter: {
@@ -132,6 +143,9 @@ export default {
     methods: {
         setAmount (value) {
             this.payment.money.amount = value
+        },
+        replyAmount () {
+            this.$emit("replyAmount", this.payment.money.amount)
         },
         setLastName (value){
             this.donation.lastName = value
@@ -181,7 +195,7 @@ export default {
 
 .vca-field-row {
     width: 100%;
-   box-shadow: none;
+    box-shadow: none;
     display: inline-flex;
 }
 .vca-field-row .first {
@@ -201,6 +215,7 @@ export default {
     margin: 0 0 1em;
 }
 
+
 .vca-input input {
     width: 100%;
     border: 1px solid #ccc;
@@ -218,6 +233,12 @@ export default {
 
     width: 100%;
     color: #dc3545;
+}
+
+.vca-label {
+    width: 100%;
+    box-shadow: none;
+    margin: 0 0 1em;
 }
 
 
@@ -262,7 +283,7 @@ export default {
     border-top-left-radius: 0em;
     border-bottom-left-radius: 0em;
     background: rgba(34,36,38,.15);
-   box-shadow: none;
+    box-shadow: none;
 }
 
 
@@ -286,14 +307,14 @@ export default {
 
 
 .vca-tabs ul{
-  overflow: hidden;
-  border: 1px solid #ccc;
+    overflow: hidden;
+    border: 1px solid #ccc;
 
     margin-bottom: -1px;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  background-color: #fff;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: #fff;
 }
 
 ul li {
@@ -301,27 +322,27 @@ ul li {
 }
 /* Style the buttons inside the tab */
 .vca-tabs li {
-  background-color: inherit;
-  float: left;
-border-top-left-radius: 0.25rem;
+    background-color: inherit;
+    float: left;
+    border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
     border: 1px solid transparent;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
-  font-size: 17px;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
 }
 
 /* Change background color of buttons on hover */
 .vca-tabs li:hover {
-  background-color: #ddd;
+    background-color: #ddd;
 }
 
 /* Create an active/current tablink class */
 .vca-tabs li.is-active {
 
-  background-color: #fff;
+    background-color: #fff;
     border-color: #ccc #ccc #fff;
 }
 
