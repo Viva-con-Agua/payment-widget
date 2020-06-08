@@ -4,7 +4,7 @@
             <div class="vca">
                 <vca-form>
                     <vca-field label="Betrag" >
-                        <vca-money-input ref="money" v-model="payment.money" :currency="currencies" :money="payment.money" :rules="$v.payment.money" errorMsg="mindestens 1 cent"/>
+                        <vca-money-input ref="money" v-model="payment.money" :currency="currencies" :money="payment.money" :rules="$v.payment.money" errorMsg="Bitte wähle mindestens 1 Cent"/>
                     </vca-field>
                     <vca-field label="Kontaktinformationen">
                         <vca-input 
@@ -320,15 +320,14 @@ ul li {
     background-color: #ddd;
 }
 
-/* Change background color of buttons on hover */
-.vca-tabs li:active {
-    background-color: #fff;
-}
-
 /* Create an active/current tablink class */
 .vca-tabs li.is-active {
-    background-color: #fff;
-    border-color: #ccc #ccc #fff;
+    background-color: #0070ba;
+    border-color: #0070ba #0070ba #0070ba;
+}
+
+.vca-tabs li.is-active a {
+    color: white;
 }
 
 .stripe-payment-container, .paypal-payment-container {
@@ -342,12 +341,13 @@ ul li {
     box-shadow: none;
     outline-color: #008fc2;
 }
-.stripe-donation-button:hover {
+.stripe-donation-button:hover, .vca-tabs li.is-active:hover {
     background-color: #006ab1;
 }
 .stripe-donation-button {
     cursor: pointer;
     margin-top: 1em;
+    font-size: 1.3em;
     margin-bottom: 1em;
     height: 45px;
     width: 100%;
