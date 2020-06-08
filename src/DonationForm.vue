@@ -30,7 +30,7 @@
                             </vca-field-row>
                         </vca-field>
 
-                        <Payment v-on:success="success" :payment="payment" :country="country" :valid="$v.payment" @notValid="validate"/>
+                        <Payment v-on:success="success" :payment="payment" :label="getLabel" :country="country" :valid="$v.payment" @notValid="validate"/>
                 </vca-form>
             </div>
         </div>
@@ -111,6 +111,14 @@ export default {
                     required
                 }
             }
+        }
+    },
+    computed: {
+        getLabel() {
+            if (this.country == 'DE' || this.country == 'CH' || this.country == 'AT') {
+                return "Spenden"
+            }
+            return "Donate"
         }
     },
     mounted() {
@@ -240,16 +248,18 @@ export default {
     border-bottom-left-radius: 0em;
 }
 
-
-.vca-tabs ul{
-  overflow: hidden;
-  border: 1px solid #ccc;
-
+.vca-tabs ul {
+    border-spacing: 5px 0;
+    overflow: hidden;
+    display: table;
+    width: 100%;
+    padding-left: 5px;
+    border: 1px solid #ccc;
     margin-bottom: -1px;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  background-color: #fff;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: #fff;
 }
 
 ul li {
@@ -257,16 +267,19 @@ ul li {
 }
 /* Style the buttons inside the tab */
 .vca-tabs li {
-  background-color: inherit;
-  float: left;
-border-top-left-radius: 0.25rem;
+    background-color: inherit;
+    display: table-cell;
+    margin: 0 2px;
+    border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
-    border: 1px solid transparent;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
-  font-size: 17px;
+    border-top: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
 }
 
 /* Change background color of buttons on hover */
@@ -280,9 +293,36 @@ border-top-left-radius: 0.25rem;
   background-color: #fff;
     border-color: #ccc #ccc #fff;
 }
-
-
-
-
-
+.stripe-payment-container {
+    padding-top: 10px;
+}
+.stripe-donation-button {
+    margin-top: 10px;
+}
+.vca-input-border {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 0.2rem;
+    padding: 0.6em 1em;
+    box-shadow: none;
+    outline-color: #008fc2;
+}
+.stripe-donation-button {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    width: 100%;
+    background-color: #008fc3;
+    color: #FFFFFF;
+    padding: 0.5em 0;
+    border: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
 </style>

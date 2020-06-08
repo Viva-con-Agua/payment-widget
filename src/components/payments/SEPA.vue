@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <div ref="element"></div>
-        <button type="button" v-on:click.prevent="purchase"> Donate </button>
+    <div class="stripe-payment-container">
+        <div class="vca-input-border"><div ref="element" class="stripe-payment"></div></div>
+        <button type="button" v-on:click.prevent="purchase" class="stripe-donation-button"> {{ label }} </button>
     </div>
 </template>
 
@@ -11,7 +11,6 @@ import axios from 'axios'
 const style = {
     base: {
         color: '#32325d',
-        fontSize: '16px',
         '::placeholder': {
             color: '#aab7c4'
         },
@@ -24,6 +23,13 @@ const style = {
         iconColor: '#fa755a',
         ':-webkit-autofill': {
             color: '#fa755a',
+        },
+    },
+    empty: {
+        color: '#0a6b91',
+        iconColor: '#0a6b91',
+        ':-webkit-autofill': {
+            color: '#0a6b91',
         },
     },
 };
@@ -42,7 +48,7 @@ let stripe = window.Stripe('pk_test_Se23Zwa0HzMj8OPt3ijaxz8X'),
 
 export default {
     name: 'SEPA',
-    props: ['payment', 'valid'],
+    props: ['payment', 'valid', 'label'],
     mounted () {
         element.mount(this.$refs.element)
     },
@@ -87,4 +93,4 @@ export default {
 
 
 }
-</script> 
+</script>
