@@ -161,11 +161,9 @@ export default {
 </script>
 <style>
 .simple-donation {
-
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     width: 500px;
     position: center;
-
 }
 .vca-form {
     width: 100%;
@@ -185,11 +183,9 @@ export default {
     flex-direction: column;
     margin: 0 0 1em;
 }
-
-
 .vca-field-row {
     width: 100%;
-   box-shadow: none;
+    box-shadow: none;
     display: inline-flex;
 }
 .vca-field-row .first {
@@ -223,11 +219,9 @@ export default {
 }
 
 .error span {
-
     width: 100%;
     color: #dc3545;
 }
-
 
 .vca-form form .vca-field .vca-money-input {
     width: 100%;
@@ -235,11 +229,6 @@ export default {
     border-radius: 0em;
     border: 0em;
 }
-
-
-
-
-
 
 .vca-form form .vca-field .vca-money-input input {
     width: 80%;
@@ -270,10 +259,8 @@ export default {
     border-top-left-radius: 0em;
     border-bottom-left-radius: 0em;
     background: rgba(34,36,38,.15);
-   box-shadow: none;
+    box-shadow: none;
 }
-
-
 
 .currency-label {
     background: rgba(34,36,38,.15);
@@ -290,7 +277,6 @@ export default {
 .currency-label label {
     width: 100%;
 }
-
 
 .vca-tabs ul {
     border-spacing: 5px 0;
@@ -328,20 +314,17 @@ ul li {
 
 /* Change background color of buttons on hover */
 .vca-tabs li:hover {
-  background-color: #ddd;
+    background-color: #ddd;
 }
 
 /* Create an active/current tablink class */
 .vca-tabs li.is-active {
-
-  background-color: #fff;
+    background-color: #fff;
     border-color: #ccc #ccc #fff;
 }
-.stripe-payment-container {
+
+.stripe-payment-container, .paypal-payment-container {
     padding-top: 10px;
-}
-.stripe-donation-button {
-    margin-top: 10px;
 }
 .vca-input-border {
     width: 100%;
@@ -351,11 +334,15 @@ ul li {
     box-shadow: none;
     outline-color: #008fc2;
 }
+.stripe-donation-button:hover {
+    background-color: #006ab1;
+}
 .stripe-donation-button {
     margin-top: 1em;
     margin-bottom: 1em;
+    height: 45px;
     width: 100%;
-    background-color: #008fc3;
+    background-color: #0070ba;
     color: #FFFFFF;
     padding: 0.5em 0;
     border: 0;

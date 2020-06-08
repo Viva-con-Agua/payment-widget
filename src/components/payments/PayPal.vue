@@ -1,17 +1,17 @@
 <template>
-    <div>
-    <PayPal 
-        ref="paypal"
-        :amount="pAmount"
-        :currency="payment.money.currency"
-        :client="credentials"
-        :items="items"
-        :disabled="this.valid.$invalid"
-        @payment_authorized="purchase"
-        @payment-completed="success"
-        @payment-validation-error="validationError"
-        env="sandbox">
-    </PayPal>
+    <div class="paypal-payment-container">
+        <PayPal 
+            ref="paypal"
+            :amount="pAmount"
+            :currency="payment.money.currency"
+            :client="credentials"
+            :items="items"
+            :disabled="this.valid.$invalid"
+            @payment_authorized="purchase"
+            @payment-completed="success"
+            @payment-validation-error="validationError"
+            env="sandbox">
+        </PayPal>
     </div>
 </template>
 

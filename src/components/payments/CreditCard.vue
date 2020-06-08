@@ -18,10 +18,10 @@ const style = {
         },
     },
     invalid: {
-        color: '#fa755a',
-        iconColor: '#fa755a',
+        color: '#dc3545',
+        iconColor: '#dc3545',
         ':-webkit-autofill': {
-            color: '#fa755a',
+            color: '#dc3545',
         },
     },
     empty: {
