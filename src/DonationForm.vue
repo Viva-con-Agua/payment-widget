@@ -4,39 +4,42 @@
             <div class="vca">
                 <vca-form>
                     <vca-field label="Betrag" >
-                        <vca-money-input ref="money" v-model="payment.money" :currency="currencies" :money="payment.money" :rules="$v.payment.money" errorMsg="mindestens 1 cent"/>
+                        <vca-money-input ref="money" v-model="payment.money" :currency="currencies" :money="payment.money" :rules="$v.payment.money" errorMsg="Bitte wähle mindestens 1 Cent"/>
                     </vca-field>
-                        <vca-field label="Personal INfo">
-                            <vca-input 
-                                   ref="email"
-                                         errorMsg="Required Email" 
-                                         v-model="payment.supporter.email" 
-                                         :rules="$v.payment.supporter.email"/>
-                            <vca-field-row>
-                            <vca-input 
-                                    ref="first_name"
-                                   first
-                                   errorMsg="Required Email" 
-                                   v-model="payment.supporter.first_name" 
-                                   :rules="$v.payment.supporter.first_name">
-                            </vca-input>
-                            <vca-input
-                                ref="last_name"
-                                last
-                                errorMsg="Required Email" 
-                                v-model="payment.supporter.last_name" 
-                                :rules="$v.payment.supporter.last_name">
-                            </vca-input>
-                            </vca-field-row>
-                        </vca-field>
+                    <vca-field label="Kontaktinformationen">
+                        <vca-input 
+                            ref="email"
+                            errorMsg="Bitte E-Mail Adresse eintragen"
+                            placeholder="E-Mail Adresse"
+                            v-model="payment.supporter.email" 
+                            :rules="$v.payment.supporter.email"/>
+                        <vca-field-row>
+                        <vca-input 
+                            ref="first_name"
+                            first
+                            errorMsg="Bitte Vornamen eintragen"
+                            placeholder="Vorname"
+                            v-model="payment.supporter.first_name" 
+                            :rules="$v.payment.supporter.first_name">
+                        </vca-input>
+                        <vca-input
+                            ref="last_name"
+                            last
+                            errorMsg="Bitte Nachnamen eintragen"
+                            placeholder="Nachname"
+                            v-model="payment.supporter.last_name" 
+                            :rules="$v.payment.supporter.last_name">
+                        </vca-input>
+                        </vca-field-row>
+                    </vca-field>
 
-                        <Payment v-on:success="success" :payment="payment" :label="getLabel" :country="country" :valid="$v.payment" @notValid="validate"/>
+                    <Payment v-on:success="success" :payment="payment" :label="getLabel" :country="country" :valid="$v.payment" @notValid="validate"/>
                 </vca-form>
             </div>
         </div>
         <div class="success-view" v-if="successView">
             <h2> Danke für deine Spende </h2>
-            {{ this.payment }}
+            <a @click="successView = false" style="cursor: pointer;">Erneut spenden!</a>
         </div>
     </div>
 </template>
@@ -161,7 +164,7 @@ export default {
 </script>
 <style>
 .simple-donation {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     width: 500px;
     position: center;
 }
@@ -319,8 +322,12 @@ ul li {
 
 /* Create an active/current tablink class */
 .vca-tabs li.is-active {
-    background-color: #fff;
-    border-color: #ccc #ccc #fff;
+    background-color: #0070ba;
+    border-color: #0070ba #0070ba #0070ba;
+}
+
+.vca-tabs li.is-active a {
+    color: white;
 }
 
 .stripe-payment-container, .paypal-payment-container {
@@ -334,11 +341,13 @@ ul li {
     box-shadow: none;
     outline-color: #008fc2;
 }
-.stripe-donation-button:hover {
+.stripe-donation-button:hover, .vca-tabs li.is-active:hover {
     background-color: #006ab1;
 }
 .stripe-donation-button {
+    cursor: pointer;
     margin-top: 1em;
+    font-size: 1.3em;
     margin-bottom: 1em;
     height: 45px;
     width: 100%;

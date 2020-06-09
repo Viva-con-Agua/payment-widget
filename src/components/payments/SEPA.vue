@@ -42,7 +42,7 @@ const options = {
     // placeholderCountry.
     placeholderCountry: 'DE',
 };
-let stripe = window.Stripe('pk_test_Se23Zwa0HzMj8OPt3ijaxz8X'),
+let stripe = window.Stripe(process.env.VUE_APP_STRIPE_PUBLIC_KEY),
     elements = stripe.elements(),
     element = elements.create('iban', options)
 
@@ -80,7 +80,7 @@ export default {
         },
         purchase () {
             if (this.valid.$invalid === false ) {
-            axios.post('http://localhost:1323/api/v1/payment/iban', {amount: this.payment.money.amount, currency: this.payment.money.currency})
+            axios.post(process.env.VUE_APP_BACKEND_URL + '/api/v1/payment/iban', {amount: this.payment.money.amount, currency: this.payment.money.currency})
                 .then(response => (
                     console.log(response.data),
                     this.stripeRequestIBAN(response.data.client_secret)

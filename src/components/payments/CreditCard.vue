@@ -36,7 +36,7 @@ const options = {
     style
 };
 
-let stripe = window.Stripe('pk_test_Se23Zwa0HzMj8OPt3ijaxz8X'),
+let stripe = window.Stripe(process.env.VUE_APP_STRIPE_PUBLIC_KEY),
     elements = stripe.elements(),
     element = elements.create('card', options);
 
@@ -73,7 +73,7 @@ export default {
         },
         purchase () {
             if (this.valid.$invalid === false) {
-                axios.post('http://localhost:1323/api/v1/payment/card', 
+                axios.post(process.env.VUE_APP_BACKEND_URL + '/api/v1/payment/card', 
                     { 
                         amount: this.payment.money.amount,
                         currency: this.payment.money.currency

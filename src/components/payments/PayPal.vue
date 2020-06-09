@@ -39,8 +39,8 @@ export default {
     data () {
         return {
             credentials: {
-                sandbox: 'AcZoPYe27lkRTq651m-q_3XFdv_kph3PEDpOUzdWZ3QNj7sBMi7dovF0N8fxQ69-G46kRqHPz4ThRo4V',
-                production: '<production client id>'
+                sandbox: process.env.VUE_PAYPAL_PUBLIC_KEY_SANDBOX,
+                production: process.env.VUE_PAYPAL_PUBLIC_KEY_PRDOUCTION
             },
             myItems: [
                 {
