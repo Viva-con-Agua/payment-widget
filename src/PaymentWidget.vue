@@ -75,7 +75,7 @@ export default {
         success(e) {
             console.log("Will send data to iRobert:")
             console.log(JSON.stringify(e))
-            axios.post('http://localhost:1323/api/v1/payment/success', e)
+            axios.post(process.env.VUE_APP_BACKEND_URL + '/api/v1/payment/success', e)
                 .then(response => (
                     console.log(response.data)
                 ))

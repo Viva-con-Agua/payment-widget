@@ -1,21 +1,48 @@
 <template>
-    <div>
-        <div ref="card"></div>
-        <button type="button" v-on:click.prevent="purchase"> Donate </button>
+    <div class="stripe-payment-container">
+        <div class="vca-input-border"><div ref="card" class="stripe-payment"></div></div>
+        <button type="button" v-on:click.prevent="purchase" class="stripe-donation-button"> {{ label }} </button>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
+const style = {
+    base: {
+        color: '#32325d',
+        '::placeholder': {
+            color: '#aab7c4'
+        },
+        ':-webkit-autofill': {
+            color: '#32325d',
+        },
+    },
+    invalid: {
+        color: '#dc3545',
+        iconColor: '#dc3545',
+        ':-webkit-autofill': {
+            color: '#dc3545',
+        },
+    },
+    empty: {
+        color: '#0a6b91',
+        iconColor: '#0a6b91',
+        ':-webkit-autofill': {
+            color: '#0a6b91',
+        },
+    },
+};
+const options = {
+    style
+};
 
-
-let stripe = window.Stripe('pk_test_Se23Zwa0HzMj8OPt3ijaxz8X'),
+let stripe = window.Stripe(process.env.VUE_APP_STRIPE_PUBLIC_KEY),
     elements = stripe.elements(),
-    element = elements.create('card');
+    element = elements.create('card', options);
 
 export default {
     name: 'CreditCard',
-    props: ['payment', 'valid'],
+    props: ['payment', 'valid', 'label'],
     mounted () {
         element.mount(this.$refs.card)
     },
@@ -46,7 +73,7 @@ export default {
         },
         purchase () {
             if (this.valid.$invalid === false) {
-                axios.post('http://localhost:1323/api/v1/payment/card', 
+                axios.post(process.env.VUE_APP_BACKEND_URL + '/api/v1/payment/card', 
                     { 
                         amount: this.payment.money.amount,
                         currency: this.payment.money.currency
@@ -66,4 +93,4 @@ export default {
 
 
 }
-</script> 
+</script>
