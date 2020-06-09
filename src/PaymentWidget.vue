@@ -1,10 +1,10 @@
 <template>
     <div id=payment-widget class="payment-widget">
         <div class="widget">
-            <CupSlide @amount="setAmount"/>
+            <CupSlide ref="amount_widget" @amount="setAmount"/>
         </div>
         <div v-if="donation">
-            <DonationForm ref="donation_form" v-on:success="success" :currency="currency" :campaign="campaign" :country="country"/>
+            <DonationForm ref="donation_form" v-on:success="success" :currency="currency" :campaign="campaign" :country="country" @replyAmount="replyAmount"/>
         </div>
         <div v-if="membership">
             <MembershipForm v-on:success="success"/>
@@ -81,7 +81,10 @@ export default {
                 ))
         },
         setAmount(value) {
-            this.$refs.donation_form.setAmount(value*100)
+            this.$refs.donation_form.setAmount(value)
+        },
+        replyAmount(value) {
+            this.$refs.amount_widget.replyAmount(value)
         }
     }
 }

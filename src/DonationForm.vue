@@ -4,7 +4,9 @@
             <div class="vca">
                 <vca-form>
                     <vca-field label="Betrag" >
-                        <vca-money-input ref="money" v-model="payment.money" :currency="currencies" :money="payment.money" :rules="$v.payment.money" errorMsg="Bitte wähle mindestens 1 Cent"/>
+                    <vca-field-row>
+                        <label class="vca-label"> {{ amountString}}  €</label>
+                        <vca-money-input ref="money" v-model="payment.money" :currency="currencies" :money="payment.money" :rules="$v.payment.money" errorMsg="Bitte wähle mindestens 1 Cent"  @change="replyAmount"/>
                     </vca-field>
                     <vca-field label="Kontaktinformationen">
                         <vca-input 
@@ -32,7 +34,6 @@
                         </vca-input>
                         </vca-field-row>
                     </vca-field>
-
                     <Payment v-on:success="success" :payment="payment" :label="getLabel" :country="country" :valid="$v.payment" @notValid="validate"/>
                 </vca-form>
             </div>
@@ -47,6 +48,7 @@
 <script>
 import { required, email, minValue } from 'vuelidate/lib/validators'
 import Payment from './components/Payment'
+import Money from './utils/Money'
 
 export default {
     name: 'DonationForm',
@@ -106,6 +108,11 @@ export default {
             ]
         }
     },
+    computed: {
+        amountString () {
+                return Money.getInputString(this.payment.money.amount, this.payment.money.currency)
+        }
+    },
     validations: {
         payment: {
             supporter: {
@@ -143,6 +150,9 @@ export default {
     methods: {
         setAmount (value) {
             this.payment.money.amount = value
+        },
+        replyAmount () {
+            this.$emit("replyAmount", this.payment.money.amount)
         },
         setLastName (value){
             this.donation.lastName = value
@@ -208,6 +218,7 @@ export default {
     margin: 0 0 1em;
 }
 
+
 .vca-input input {
     width: 100%;
     border: 1px solid #ccc;
@@ -225,6 +236,13 @@ export default {
     width: 100%;
     color: #dc3545;
 }
+
+.vca-label {
+    width: 100%;
+    box-shadow: none;
+    margin: 0 0 1em;
+}
+
 
 .vca-form form .vca-field .vca-money-input {
     width: 100%;
@@ -288,6 +306,7 @@ export default {
     width: 100%;
     padding-left: 5px;
     border: 1px solid #ccc;
+
     margin-bottom: -1px;
     border-top: none;
     border-left: none;
@@ -308,6 +327,7 @@ ul li {
     border-top: 1px solid #dddddd;
     border-right: 1px solid #dddddd;
     border-left: 1px solid #dddddd;
+
     outline: none;
     cursor: pointer;
     padding: 14px 16px;
@@ -322,6 +342,7 @@ ul li {
 
 /* Create an active/current tablink class */
 .vca-tabs li.is-active {
+
     background-color: #0070ba;
     border-color: #0070ba #0070ba #0070ba;
 }
