@@ -3,14 +3,17 @@
         <div class="images">
         <div class="images">
             <div  v-for="index in full" :key="index" class="images_empty">
-                <img src="../../assets/Logo_1.png"/>
+                <img src="../../assets/volles_Glas.svg"/>
             </div>
         </div>
         <div class="images">
             <div  v-for="index in empty" :key="index" class="images_empty">
-                <img src="../../assets/Logo_2.png"/>
+                <img src="../../assets/leeres_Glas.svg"/>
             </div>
         </div>
+    </div>
+    <div class="count">
+    <img class="count" src="../../assets/Einheiten.svg"/>
     </div>
     <input type="range" min="0" max="1000" :value="value" step="100" @input="setAmount">
     </div>
@@ -62,6 +65,10 @@ export default {
     position: static;
     padding: 5px;
     width: 50px;
+}
+.count img {
+    width: 100%;
+    padding: 5px;
 }
 
 

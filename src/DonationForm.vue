@@ -7,6 +7,7 @@
                     <vca-field-row>
                         <label class="vca-label"> {{ amountString}}  €</label>
                         <vca-money-input ref="money" v-model="payment.money" :currency="currencies" :money="payment.money" :rules="$v.payment.money" errorMsg="Bitte wähle mindestens 1 Cent"  @change="replyAmount"/>
+                    </vca-field-row>
                     </vca-field>
                     <vca-field label="Kontaktinformationen">
                         <vca-input 
@@ -108,11 +109,6 @@ export default {
             ]
         }
     },
-    computed: {
-        amountString () {
-                return Money.getInputString(this.payment.money.amount, this.payment.money.currency)
-        }
-    },
     validations: {
         payment: {
             supporter: {
@@ -141,6 +137,9 @@ export default {
                 return "Spenden"
             }
             return "Donate"
+        },
+        amountString () {
+                return Money.getInputString(this.payment.money.amount, this.payment.money.currency)
         }
     },
     mounted() {
