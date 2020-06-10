@@ -5,11 +5,11 @@
                 <vca-form>
                     <vca-field label="Betrag" >
                     <vca-field-row>
-                        <label class="vca-label"> {{ amountString}}  €</label>
-                        <vca-money-input ref="money" v-model="payment.money" :currency="currencies" :money="payment.money" :rules="$v.payment.money" errorMsg="Bitte wähle mindestens 1 Cent"  @change="replyAmount"/>
+                        <label class="vca-label"> {{ amountString}}  {{ currency }}</label>
+                        <vca-money-input v-if="!isCH" ref="money" v-model="payment.money" :currency="currencies" :money="payment.money" :rules="$v.payment.money" errorMsg="Bitte wähle mindestens 1 Cent"  @change="replyAmount"/>
                     </vca-field-row>
                     </vca-field>
-                    <vca-field label="Kontaktinformationen">
+                    <vca-field v-if="!isCH" label="Kontaktinformationen">
                         <vca-input 
                             ref="email"
                             errorMsg="Bitte E-Mail Adresse eintragen"
@@ -35,7 +35,7 @@
                         </vca-input>
                         </vca-field-row>
                     </vca-field>
-                    <Payment v-on:success="success" :payment="payment" :label="getLabel" :country="country" :valid="$v.payment" @notValid="validate"/>
+                    <Payment v-if="!isCH" v-on:success="success" :payment="payment" :label="getLabel" :country="country" :valid="$v.payment" @notValid="validate"/>
                 </vca-form>
             </div>
         </div>
@@ -132,6 +132,12 @@ export default {
         }
     },
     computed: {
+        isCH() {
+            return this.country == 'CH'
+        },
+        isDE() {
+            return this.country == 'DE'
+        },
         getLabel() {
             if (this.country == 'DE' || this.country == 'CH' || this.country == 'AT') {
                 return "Spenden"

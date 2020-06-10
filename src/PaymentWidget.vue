@@ -3,7 +3,7 @@
         <div class="widget">
             <CupSlide ref="amount_widget" @amount="setAmount"/>
         </div>
-        <div v-if="donation && !isCH">
+        <div v-if="donation">
             <DonationForm ref="donation_form" v-on:success="success" :currency="currency" :campaign="campaign" :country="country" @replyAmount="replyAmount"/>
         </div>
         <div v-if="membership">
@@ -56,12 +56,6 @@ export default {
         }
     },
     computed: {
-        isCH() {
-            return this.country == 'CH'
-        },
-        isDE() {
-            return this.country == 'DE'
-        },
         donation () {
             if (this.type === 'donation') {
                 return true
