@@ -176,6 +176,8 @@ export default {
     font-family: Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     width: 500px;
     position: center;
+    font-size: 15px;
+    line-height: 15px;
 }
 .vca-form {
     width: 100%;
