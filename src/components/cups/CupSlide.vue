@@ -3,17 +3,17 @@
         <div class="images">
         <div class="images">
             <div  v-for="index in full" :key="index" class="images_empty">
-                <img src="../../assets/volles_Glas.svg"/>
+                <img src="@/assets/volles_Glas.svg"/>
             </div>
         </div>
         <div class="images">
             <div  v-for="index in empty" :key="index" class="images_empty">
-                <img src="../../assets/leeres_Glas.svg"/>
+                <img src="@/assets/leeres_Glas.svg"/>
             </div>
         </div>
     </div>
     <div class="count">
-    <img class="count" src="../../assets/Einheiten.svg"/>
+    <img class="count" src="@/assets/Einheiten.svg"/>
     </div>
     <input type="range" min="0" max="1000" :value="value" step="100" @input="setAmount">
     </div>
