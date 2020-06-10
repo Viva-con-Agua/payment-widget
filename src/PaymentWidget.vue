@@ -3,7 +3,7 @@
         <div class="widget">
             <CupSlide ref="amount_widget" @amount="setAmount"/>
         </div>
-        <div v-if="donation">
+        <div v-if="donation && !isCH">
             <DonationForm ref="donation_form" v-on:success="success" :currency="currency" :campaign="campaign" :country="country" @replyAmount="replyAmount"/>
         </div>
         <div v-if="membership">
@@ -56,6 +56,12 @@ export default {
         }
     },
     computed: {
+        isCH() {
+            return this.country == 'CH'
+        },
+        isDE() {
+            return this.country == 'DE'
+        },
         donation () {
             if (this.type === 'donation') {
                 return true
@@ -75,9 +81,15 @@ export default {
         success(e) {
             console.log("Will send data to iRobert:")
             console.log(JSON.stringify(e))
-            axios.post(process.env.VUE_APP_BACKEND_URL + '/api/v1/payment/success', e)
+           /* axios.post(process.env.VUE_APP_BACKEND_URL + '/api/v1/payment/success', e)
                 .then(response => (
                     console.log(response.data)
+                ))*/
+
+
+            axios.post('https://irobertstage.vivaconagua.org/ADM_ContributionImport_V01', JSON.stringify(e))
+                .then(response => (
+                    console.log(response)
                 ))
         },
         setAmount(value) {

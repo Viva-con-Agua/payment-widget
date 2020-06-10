@@ -14,7 +14,7 @@
                             ref="email"
                             errorMsg="Bitte E-Mail Adresse eintragen"
                             placeholder="E-Mail Adresse"
-                            v-model="payment.supporter.email" 
+                            v-model.trim="payment.supporter.email" 
                             :rules="$v.payment.supporter.email"/>
                         <vca-field-row>
                         <vca-input 
@@ -22,7 +22,7 @@
                             first
                             errorMsg="Bitte Vornamen eintragen"
                             placeholder="Vorname"
-                            v-model="payment.supporter.first_name" 
+                            v-model.trim="payment.supporter.first_name" 
                             :rules="$v.payment.supporter.first_name">
                         </vca-input>
                         <vca-input
@@ -30,7 +30,7 @@
                             last
                             errorMsg="Bitte Nachnamen eintragen"
                             placeholder="Nachname"
-                            v-model="payment.supporter.last_name" 
+                            v-model.trim="payment.supporter.last_name" 
                             :rules="$v.payment.supporter.last_name">
                         </vca-input>
                         </vca-field-row>
