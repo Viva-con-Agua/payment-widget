@@ -13,7 +13,7 @@ module.exports = {
         },
     },
     publicPath: process.env.NODE_ENV === 'production'
-        ? '/widget/payment-widget/'
+        ? '/widget/payment-widget/default'
         : '/'
 
 }
