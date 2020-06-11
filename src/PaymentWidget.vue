@@ -73,7 +73,7 @@ export default {
     },
     methods: {
         success(e) {
-            axios.post(process.env.VUE_APP_IROBERT_URL, e)
+            axios.post(process.env.VUE_APP_IROBERT_URL, JSON.stringify(e))
                 .then(response => (
                     console.log(response.data)
                 ))
