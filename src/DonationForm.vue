@@ -6,17 +6,17 @@
                     <vca-field label="Betrag" >
                     <vca-field-row>
                         <div class="vca-label">
-                        <label> Spende:   {{ amountString}}  €</label>
+                            <label>{{ amountString}}  {{ currency }}</label>
                         </div>
-                        <vca-money-input ref="money" v-model="payment.money" :currency="currencies" :money="payment.money" :rules="$v.payment.money" errorMsg="Bitte wähle mindestens 1 Cent"  @change="replyAmount" topText="anderer Betrag?"/>
+                        <vca-money-input v-if="!isCH" ref="money" v-model="payment.money" :currency="currencies" :money="payment.money" :rules="$v.payment.money" errorMsg="Bitte wähle mindestens 1 Cent"  @change="replyAmount" topText="anderer Betrag?"/>
                     </vca-field-row>
                     </vca-field>
-                    <vca-field label="Kontaktinformationen">
+                    <vca-field v-if="!isCH" label="Kontaktinformationen">
                         <vca-input 
                             ref="email"
                             errorMsg="Bitte E-Mail Adresse eintragen"
                             placeholder="E-Mail Adresse"
-                            v-model="payment.supporter.email" 
+                            v-model.trim="payment.supporter.email" 
                             :rules="$v.payment.supporter.email"/>
                         <vca-field-row>
                         <vca-input 
@@ -24,7 +24,7 @@
                             first
                             errorMsg="Bitte Vornamen eintragen"
                             placeholder="Vorname"
-                            v-model="payment.supporter.first_name" 
+                            v-model.trim="payment.supporter.first_name" 
                             :rules="$v.payment.supporter.first_name">
                         </vca-input>
                         <vca-input
@@ -32,12 +32,12 @@
                             last
                             errorMsg="Bitte Nachnamen eintragen"
                             placeholder="Nachname"
-                            v-model="payment.supporter.last_name" 
+                            v-model.trim="payment.supporter.last_name" 
                             :rules="$v.payment.supporter.last_name">
                         </vca-input>
                         </vca-field-row>
                     </vca-field>
-                    <Payment v-on:success="success" :payment="payment" :label="getLabel" :country="country" :valid="$v.payment" @notValid="validate"/>
+                    <Payment v-if="!isCH" v-on:success="success" :payment="payment" :label="getLabel" :country="country" :valid="$v.payment" @notValid="validate"/>
                 </vca-form>
             </div>
         </div>
@@ -134,6 +134,12 @@ export default {
         }
     },
     computed: {
+        isCH() {
+            return this.country == 'CH'
+        },
+        isDE() {
+            return this.country == 'DE'
+        },
         getLabel() {
             if (this.country == 'DE' || this.country == 'CH' || this.country == 'AT') {
                 return "Spenden"
