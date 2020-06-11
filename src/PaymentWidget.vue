@@ -73,7 +73,7 @@ export default {
     },
     methods: {
         success(e) {
-            axios.post(process.env.VUE_APP_BACKEND_URL + '/api/v1/payment/success', e)
+            axios.post(process.env.VUE_APP_IROBERT_URL, e)
                 .then(response => (
                     console.log(response.data)
                 ))
