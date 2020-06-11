@@ -10,6 +10,10 @@ module.exports = {
         },
         output: {
             filename: 'payment-widget.js'
-        }
-    }
+        },
+    },
+    publicPath: process.env.NODE_ENV === 'production'
+        ? '/widget/payment-widget/default'
+        : '/'
+
 }

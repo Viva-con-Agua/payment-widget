@@ -5,8 +5,10 @@
                 <vca-form>
                     <vca-field label="Betrag" >
                     <vca-field-row>
-                        <label class="vca-label"> {{ amountString}}  {{ currency }}</label>
-                        <vca-money-input v-if="!isCH" ref="money" v-model="payment.money" :currency="currencies" :money="payment.money" :rules="$v.payment.money" errorMsg="Bitte wähle mindestens 1 Cent"  @change="replyAmount"/>
+                        <div class="vca-label">
+                            <label>{{ amountString}}  {{ currency }}</label>
+                        </div>
+                        <vca-money-input v-if="!isCH" ref="money" v-model="payment.money" :currency="currencies" :money="payment.money" :rules="$v.payment.money" errorMsg="Bitte wähle mindestens 1 Cent"  @change="replyAmount" topText="anderer Betrag?"/>
                     </vca-field-row>
                     </vca-field>
                     <vca-field v-if="!isCH" label="Kontaktinformationen">
@@ -182,6 +184,8 @@ export default {
     font-family: Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     width: 500px;
     position: center;
+    font-size: 15px;
+    line-height: 15px;
 }
 .vca-form {
     width: 100%;
@@ -244,8 +248,21 @@ export default {
 
 .vca-label {
     width: 100%;
-    box-shadow: none;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    border: none;
+    border-left: none;
+    border-top-left-radius: 0em;
+    border-bottom-left-radius: 0em;
     margin: 0 0 1em;
+}
+.vca-label label {
+    font-size: 22px;
+    font-weight: 900;
+    width: 100%;
+    color:  #0070ba;
+
 }
 
 
@@ -256,8 +273,12 @@ export default {
     border: 0em;
 }
 
-.vca-form form .vca-field .vca-money-input input {
+.vca-money-container {
     width: 80%;
+
+}
+.vca-input-container input {
+    width: 100%;
     border-radius: 0em;
     border-radius: 0.2rem;
     padding: 0.6em 1em;
@@ -266,8 +287,22 @@ export default {
     border-top-right-radius: 0em;
     border-bottom-right-radius: 0em;
     outline-color: #008fc2;
+    text-align: right;
 
 }
+.vca-input-container label{
+    position: absolute;
+    padding-left: 0.4em;
+    font-size: 10px;
+    font-weight: 600;
+    
+}
+
+.focus label {
+    color: #0070ba;
+    
+}
+
 
 .currency-select {
     width: 20%;

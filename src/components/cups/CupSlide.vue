@@ -1,19 +1,15 @@
 <template>
     <div class="cupslide">
+        <div class="images-container">
         <div class="images">
-        <div class="images">
-            <div  v-for="index in full" :key="index" class="images_empty">
-                <img src="../../assets/volles_Glas.svg"/>
-            </div>
-        </div>
-        <div class="images">
-            <div  v-for="index in empty" :key="index" class="images_empty">
-                <img src="../../assets/leeres_Glas.svg"/>
+            <div  v-for="index in all" :key="index" class="images_empty">
+                <img v-if="index > full" src="@/assets/leeres_Glas.svg"/>
+                <img v-if="index <= full" src="@/assets/volles_Glas.svg"/>
             </div>
         </div>
     </div>
     <div class="count">
-    <img class="count" src="../../assets/Einheiten.svg"/>
+    <img class="count" src="@/assets/Einheiten.svg"/>
     </div>
     <input type="range" min="0" max="1000" :value="value" step="100" @input="setAmount">
     </div>
@@ -25,6 +21,7 @@ export default {
         return {
             value: 0,
             empty: 10,
+            all: 10,
             full: 0
         }
     },
@@ -54,17 +51,25 @@ export default {
     box-shadow: none;
 }
 .images {
-    display: flex;
-    flex-direction: row;
+    /*display: flex;
+    flex-direction: row;*/
+    white-space: nowrap;
+    width: 100%;
+    display: table;
 }
+.images_empty, .images_full {
+    display: table-cell;
+}
+
 .images_full img {
     padding: 5px;
-    width: 50px;
+    width: 100%;
+    min-width: 50px;
 }
 .images_empty img {
-    position: static;
     padding: 5px;
-    width: 50px;
+    width: 100%;
+    min-width: 50px;
 }
 .count img {
     width: 100%;
