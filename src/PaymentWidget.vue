@@ -73,9 +73,9 @@ export default {
     },
     methods: {
         success(e) {
-            axios.post('https://irobertstage.vivaconagua.org/ADM_ContributionImport_V01', JSON.stringify(e))
+            axios.post(process.env.VUE_APP_BACKEND_URL + '/api/v1/payment/success', e)
                 .then(response => (
-                    console.log(response)
+                    console.log(response.data)
                 ))
         },
         setAmount(value) {
