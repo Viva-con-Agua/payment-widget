@@ -182,7 +182,7 @@ export default {
 <style>
 .simple-donation {
     font-family: Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    width: 500px;
+    width: 100%;
     position: center;
     font-size: 15px;
     line-height: 15px;
@@ -208,7 +208,8 @@ export default {
 .vca-field-row {
     width: 100%;
     box-shadow: none;
-    display: inline-flex;
+    display: flex;
+    flex-wrap: wrap;
 }
 .vca-field-row .first {
     width: 100%;
@@ -225,6 +226,10 @@ export default {
     width: 100%;
     box-shadow: none;
     margin: 0 0 1em;
+
+    flex-basis: 50px;
+    flex-grow: 1;
+    flex-shrink: 1; 
 }
 
 
@@ -256,6 +261,12 @@ export default {
     border-top-left-radius: 0em;
     border-bottom-left-radius: 0em;
     margin: 0 0 1em;
+
+
+    flex-basis: 180px;
+    flex-grow: 1;
+    flex-shrink: 1; 
+
 }
 .vca-label label {
     font-size: 22px;

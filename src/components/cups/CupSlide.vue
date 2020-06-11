@@ -10,8 +10,8 @@
     </div>
     <div class="count">
     <img class="count" src="@/assets/Einheiten.svg"/>
-    </div>
     <input type="range" min="0" max="1000" :value="value" step="100" @input="setAmount">
+    </div>
     </div>
 </template>
 <script>
@@ -69,6 +69,11 @@ export default {
     padding: 5px;
     width: 100%;
 }
+.count {
+    width: 95%;
+    margin: 0 auto;
+}
+
 .count img {
     width: 100%;
     padding: 5px;
