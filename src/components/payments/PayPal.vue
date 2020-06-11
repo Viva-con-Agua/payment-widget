@@ -9,8 +9,7 @@
             :disabled="this.valid.$invalid"
             @payment_authorized="purchase"
             @payment-completed="success"
-            @payment-validation-error="validationError"
-            env="sandbox">
+            @payment-validation-error="validationError">
         </PayPal>
     </div>
 </template>
