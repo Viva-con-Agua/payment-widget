@@ -227,7 +227,7 @@ export default {
     box-shadow: none;
     margin: 0 0 1em;
 
-    flex-basis: 50px;
+    flex-basis: 180px;
     flex-grow: 1;
     flex-shrink: 1; 
 }
