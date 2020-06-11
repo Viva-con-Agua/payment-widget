@@ -3,7 +3,7 @@
         <div class="widget">
             <CupSlide ref="amount_widget" @amount="setAmount"/>
         </div>
-        <div v-if="donation">
+        <div style="display: flex" v-if="donation">
             <DonationForm ref="donation_form" v-on:success="success" :currency="currency" :campaign="campaign" :country="country" @replyAmount="replyAmount"/>
         </div>
         <div v-if="membership">
@@ -91,7 +91,8 @@ export default {
 .payment-widget {
 
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    width: 500px;
+    width: auto;
+    max-width: 500px;
     position: center;
 
 }

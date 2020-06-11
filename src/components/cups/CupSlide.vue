@@ -64,12 +64,10 @@ export default {
 .images_full img {
     padding: 5px;
     width: 100%;
-    min-width: 50px;
 }
 .images_empty img {
     padding: 5px;
     width: 100%;
-    min-width: 50px;
 }
 .count img {
     width: 100%;
