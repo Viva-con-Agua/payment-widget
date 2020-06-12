@@ -30,7 +30,7 @@ export default {
             var mask = parseInt(e.target.value /100)
             this.full = mask
             this.empty = 10 - mask
-            this.$emit("amount", e.target.value)
+            this.$emit("amount", parseInt(e.target.value))
         },
         replyAmount (value) {
             this.value = value
