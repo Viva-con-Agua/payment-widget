@@ -180,6 +180,9 @@ export default {
 }
 </script>
 <style>
+body {
+    min-width: auto;
+}
 .simple-donation {
     font-family: Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     width: 100%;
@@ -227,7 +230,7 @@ export default {
     box-shadow: none;
     margin: 0 0 1em;
 
-    flex-basis: 180px;
+    flex-basis: 150px;
     flex-grow: 1;
     flex-shrink: 1; 
 }
@@ -263,7 +266,7 @@ export default {
     margin: 0 0 1em;
 
 
-    flex-basis: 180px;
+    flex-basis: 150px;
     flex-grow: 1;
     flex-shrink: 1; 
 
@@ -313,7 +316,6 @@ export default {
     color: #0070ba;
     
 }
-
 
 .currency-select {
     width: 20%;
@@ -371,7 +373,7 @@ ul li {
 /* Style the buttons inside the tab */
 .vca-tabs li {
     background-color: inherit;
-    display: table-cell;
+    display: inline-flex;
     margin: 0 2px;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
