@@ -36,6 +36,8 @@
                             :rules="$v.payment.supporter.last_name">
                         </vca-input>
                         </vca-field-row>
+                        <input type="checkbox" v-model="payment.offset.newsletter">
+                        <label for="vehicle1"> Newsletter?</label><br>
                     </vca-field>
                     <Payment v-if="!isCH" v-on:success="success" :payment="payment" :label="getLabel" :country="country" :valid="$v.payment" @notValid="validate"/>
                 </vca-form>
