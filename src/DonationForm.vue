@@ -180,7 +180,7 @@ export default {
         },
         getLocation() {
             var that = this
-            axios.get("https://ipinfo.io/json?token=d153fb492f6dfa")
+            axios.get("https://ipinfo.io/json?token=" + process.env.VUE_APP_IPINFO_TOKEN)
                 .then(response => (
                     that.payment.supporter.country = response.data.country
                 ))
