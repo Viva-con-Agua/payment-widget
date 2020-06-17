@@ -54,7 +54,8 @@ Send Json to crm service.
     "supporter":{
         "email":"",
         "first_name":"",
-        "last_name":""
+        "last_name":"",
+        "country":""
     },
     "money":{
         "amount":12000,
