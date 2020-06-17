@@ -182,7 +182,7 @@ export default {
             var that = this
             axios.get("https://ipinfo.io/json?token=d153fb492f6dfa")
                 .then(response => (
-                    that.payment.supporter.country = response.country
+                    that.payment.supporter.country = response.data.country
                 ))
                 .catch(function (error) {
                     if (error.response) {
