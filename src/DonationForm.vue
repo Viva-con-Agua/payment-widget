@@ -36,8 +36,10 @@
                             :rules="$v.payment.supporter.last_name">
                         </vca-input>
                         </vca-field-row>
-                        <input type="checkbox" v-model="payment.offset.newsletter">
-                        <label for="vehicle1"> Newsletter?</label><br>
+                        <div v-if="reqNewsletter" class="newsletter">
+                            <input type="checkbox" v-model="payment.offset.newsletter">
+                            <label> Newsletter?</label><br>
+                        </div>
                     </vca-field>
                     <Payment v-if="!isCH" v-on:success="success" :payment="payment" :label="getLabel" :country="country" :valid="$v.payment" @notValid="validate"/>
                 </vca-form>
@@ -76,6 +78,10 @@ export default {
             default() {
                 return {}
             }
+        },
+        reqNewsletter: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
