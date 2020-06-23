@@ -66,10 +66,10 @@ export default {
         membership () {
             if (this.type === 'membership') {
                 return true
-            }else{
+            } else {
                 return false
             }
-        },
+        }
     },
     methods: {
         success(e) {
