@@ -49,6 +49,8 @@
 </template>
 
 <script>
+
+import axios from 'axios'
 import { required, email, minValue } from 'vuelidate/lib/validators'
 import Payment from './components/Payment'
 import Money from './utils/Money'
@@ -93,7 +95,8 @@ export default {
                 supporter: {
                     email: '',
                     first_name: '',
-                    last_name: ''
+                    last_name: '',
+                    country: 'DE'
                 },
                 money: {
                     amount: 0,
@@ -153,6 +156,7 @@ export default {
     mounted() {
         this.payment.campaign = this.campaign
         this.payment.money.currency = this.currency
+        this.getLocation()
     },
     methods: {
         setAmount (value) {
@@ -174,7 +178,18 @@ export default {
             this.$refs.last_name.validate()
             this.$refs.money.validate()
         },
-
+        getLocation() {
+            var that = this
+            axios.get("https://ipinfo.io/json?token=" + process.env.VUE_APP_IPINFO_TOKEN)
+                .then(response => (
+                    that.payment.supporter.country = response.data.country
+                ))
+                .catch(function (error) {
+                    if (error.response) {
+                      console.log(error.response.data.error.message);
+                    }
+                })
+        }
     }
 
 }
