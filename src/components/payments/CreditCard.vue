@@ -48,7 +48,6 @@ export default {
     },
     methods: {
         stripeRequestCard(client_secret) {
-            console.log(client_secret)
             stripe.confirmCardPayment(client_secret, {
                 payment_method: {
                     card: element,
@@ -65,7 +64,7 @@ export default {
                     // The payment has been processed!
                     if (result.paymentIntent.status === 'succeeded') {
                         this.payment.transaction.id = result.paymentIntent.id,
-                            this.payment.transaction.provider = "stripe"
+                        this.payment.transaction.provider = "stripe"
                         this.$emit('success', this.payment)
                     }
                 }
@@ -76,7 +75,10 @@ export default {
                 axios.post(process.env.VUE_APP_BACKEND_URL + '/api/v1/payment/card', 
                     { 
                         amount: this.payment.money.amount,
-                        currency: this.payment.money.currency
+                        currency: this.payment.money.currency,
+                        name: this.payment.supporter.first_name + ' ' + this.payment.supporter.last_name,
+                        email: this.payment.supporter.email,
+                        locale: this.payment.supporter.country
                     })
                     .then(response => (
                         console.log(response.data),
