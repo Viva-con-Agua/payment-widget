@@ -62,8 +62,8 @@ export default {
                         billing_details: {
                             name: this.payment.supporter.first_name + ' ' + this.payment.supporter.last_name,
                             email: this.payment.supporter.email
-                        },
-                    },
+                        }
+                    }
                 }).then(result => {
                     if (result.error) {
                         // Show error to your customer (e.g., insufficient funds)
@@ -80,9 +80,16 @@ export default {
         },
         purchase () {
             if (this.valid.$invalid === false ) {
-            axios.post(process.env.VUE_APP_BACKEND_URL + '/api/v1/payment/iban', {amount: this.payment.money.amount, currency: this.payment.money.currency})
+            axios.post(process.env.VUE_APP_BACKEND_URL + '/api/v1/payment/iban',
+                   {
+                        amount: this.payment.money.amount,
+                        currency: this.payment.money.currency,
+                        name: this.payment.supporter.first_name + ' ' + this.payment.supporter.last_name,
+                        email: this.payment.supporter.email,
+                        locale: this.payment.supporter.country
+                    }
+                )
                 .then(response => (
-                    console.log(response.data),
                     this.stripeRequestIBAN(response.data.client_secret)
                 ))
             } else {
