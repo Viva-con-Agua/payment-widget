@@ -1,6 +1,6 @@
 <template>
     <div id=payment-widget class="payment-widget">
-        <div class="widget">
+        <div class="widget" v-if="donation">
             <CupSlide ref="amount_widget" @amount="setAmount"/>
         </div>
         <div style="display: flex" v-if="donation">
