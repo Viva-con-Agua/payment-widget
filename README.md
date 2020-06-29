@@ -40,7 +40,7 @@ The parameter describes the country in which the form is used. Depending on this
 ```
 
 
-### Success
+### Success for Donation
 
 Send Json to crm service.
 ```
@@ -70,6 +70,47 @@ Send Json to crm service.
     }
 }
 ```
+
+### Success for Membership
+
+Send Json to crm service.
+```
+{
+    campaign: {
+        id: '',
+        name: '',
+        description: ''
+    },
+    transaction: {
+        id: '',
+        provider: '',
+        abo: false,
+        interval: ''
+    },
+    loop: 'single',
+    supporter: {
+        email: '',
+        first_name: '',
+        last_name: '',
+        street: '',
+        zip: '',
+        city: '',
+        country: 'DE',                          // We need the country code for seperating AT CH and DE Payments.(Other payment Provider)
+        country_name: 'Deutschland',            // Country fullname for correct addresses. ? country code part of the supporter model ?
+        companey_name: ''
+    },
+    money: {
+        amount: 0,
+        currency: 'EUR'
+    },
+    offset: {
+        companey: false,
+        data_privacy: false,
+        newsletter: false
+    }
+}
+```
+
 
 ## Develop
 

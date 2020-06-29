@@ -48,8 +48,8 @@
                             ref="email"
                             errorMsg="Bitte E-Mail Adresse eintragen"
                             placeholder="Name des Unternehmens"
-                            v-model.trim="payment.supporter.companey" 
-                            :rules="$v.payment.supporter.companey"/>
+                            v-model.trim="payment.supporter.companey_name" 
+                            :rules="$v.payment.supporter.companey_name"/>
                         <vca-input 
                             ref="email"
                             errorMsg="Bitte E-Mail Adresse eintragen"
@@ -74,6 +74,12 @@
                             :rules="$v.payment.supporter.city">
                         </vca-input>
                         </vca-field-row>
+                        <vca-input 
+                            ref="email"
+                            errorMsg="Bitte E-Mail Adresse eintragen"
+                            placeholder="Land"
+                            v-model.trim="payment.supporter.country_name" 
+                            :rules="$v.payment.supporter.country_name"/>
                         <div class="vca-input-checkbox">
                             <label class="container">
                                 <input type="checkbox" v-model="payment.offset.data_privacy">
@@ -155,7 +161,7 @@ export default {
                     zip: '',
                     city: '',
                     country: 'DE',
-                    companey: ''
+                    companey_name: ''
                 },
                 money: {
                     amount: 0,
