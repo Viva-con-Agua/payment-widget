@@ -11,7 +11,7 @@
                              <StepTwo @submit="submitStepTwo"/>
                         </vca-tab>                       
                         <vca-tab title="Zahlungsart">
-                            <StepThree/>
+                            <StepThree :payment="payment" :country="country" :valid="$v.payment"/>
                         </vca-tab>
                         <vca-tab title="Danke!">
                             <StepThanks/>
@@ -72,7 +72,6 @@ export default {
                     abo: false,
                     interval: ''
                 },
-                loop: 'single',
                 supporter: {
                     email: '',
                     first_name: '',
@@ -90,7 +89,8 @@ export default {
                 offset: {
                     company: false,
                     data_privacy: false,
-                    newsletter: false
+                    newsletter: false,
+                    known_from: ""
                 }
             },
             currencies: [

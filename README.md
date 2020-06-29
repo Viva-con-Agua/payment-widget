@@ -84,10 +84,9 @@ Send Json to crm service.
     transaction: {
         id: '',
         provider: '',
-        abo: false,
+        abo: true,
         interval: ''
     },
-    loop: 'single',
     supporter: {
         email: '',
         first_name: '',
@@ -106,7 +105,8 @@ Send Json to crm service.
     offset: {
         company: false,
         data_privacy: false,
-        newsletter: false
+        newsletter: false,
+        known_from: ""            
     }
 }
 ```

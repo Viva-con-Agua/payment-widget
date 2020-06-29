@@ -84,6 +84,12 @@
                                 Ich würde mich gerne zusätzlich zur Viva con Agua Flaschenpost eintragen.
                             </label>
                         </div>
+                        <div class="selectknown">
+                            <label>So bin ich auf euch aufmerksam geworden</label>
+                            <select v-model="offset.known_from" name="known">
+                                <option value="facebook">Facebook</option>
+                            </select>
+                        </div>
         </vca-field>
         <button class="submit" @click.prevent="submit"> Weiter zu Schritt 3 </button>
     </div>
@@ -100,7 +106,8 @@ export default {
             offset: {
                 company: false,
                 data_privacy: false,
-                newsletter: false
+                newsletter: false,
+                known_from: ""
             },
             supporter: {
                 email: '',
