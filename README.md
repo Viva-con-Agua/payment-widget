@@ -97,14 +97,14 @@ Send Json to crm service.
         city: '',
         country: 'DE',                          // We need the country code for seperating AT CH and DE Payments.(Other payment Provider)
         country_name: 'Deutschland',            // Country fullname for correct addresses. ? country code part of the supporter model ?
-        companey_name: ''
+        company_name: ''
     },
     money: {
         amount: 0,
         currency: 'EUR'
     },
     offset: {
-        companey: false,
+        company: false,
         data_privacy: false,
         newsletter: false
     }
