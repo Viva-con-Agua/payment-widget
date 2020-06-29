@@ -98,6 +98,9 @@ export default {
     width: auto;
     max-width: 600px;
     position: center;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;   
 
 }
 </style>

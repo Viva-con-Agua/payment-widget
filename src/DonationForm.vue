@@ -36,9 +36,12 @@
                             :rules="$v.payment.supporter.last_name">
                         </vca-input>
                         </vca-field-row>
-                        <div v-if="reqNewsletter" class="newsletter">
-                            <input type="checkbox" v-model="payment.offset.newsletter">
-                            <label> Newsletter?</label><br>
+                        <div v-if="reqNewsletter" class="vca-input-checkbox">
+                            <label class="container">
+                                <input type="checkbox" v-model="payment.offset.newsletter">
+                                <span class="checkmark"></span>
+                                 Ich würde mich gerne zusätzlich zur Viva con Agua Flaschenpost eintragen.
+                            </label>
                         </div>
                     </vca-field>
                     <Payment v-if="!isCH" v-on:success="success" :payment="payment" :label="getLabel" :country="country" :valid="$v.payment" @notValid="validate"/>
@@ -202,6 +205,9 @@ body {
     width: 100%;
     max-width: 100%;
     padding: 0.6em 0.6em;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;   
 }
 .vca-field {
     display: flex;
@@ -246,6 +252,17 @@ body {
 
 .vca-input input {
     width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 0.2rem;
+    padding: 0.6em 1em;
+    box-shadow: none;
+    outline-color: #008fc2;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;   
+}
+
+.vca-input input[type=checkbox] {
     border: 1px solid #ccc;
     border-radius: 0.2rem;
     padding: 0.6em 1em;
@@ -446,5 +463,10 @@ ul li {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
     -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
     -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.newsletter input[type=checkbox] {
+    border: none;
+    color: #ccc;
 }
 </style>
