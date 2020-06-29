@@ -4,7 +4,7 @@
             <CupSlide ref="amount_widget" @amount="setAmount"/>
         </div>
         <div style="display: flex" v-if="donation">
-            <DonationForm ref="donation_form" v-on:success="success" :currency="currency" :campaign="campaign" :country="country" @replyAmount="replyAmount"/>
+            <DonationForm ref="donation_form" v-on:success="success" :currency="currency" :campaign="campaign" :country="country" @replyAmount="replyAmount" :reqNewsletter="req_newsletter"/>
         </div>
         <div v-if="membership">
             <MembershipForm v-on:success="success"/>
@@ -44,6 +44,10 @@ export default {
         currency: {
             type: String,
             default: 'EUR'
+        },
+        req_newsletter: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
