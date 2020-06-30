@@ -85,7 +85,7 @@ Send Json to crm service.
         id: '',
         provider: '',
         abo: true,
-        interval: ''
+        interval: ''   // 'month' or 'year'
     },
     supporter: {
         email: '',
