@@ -7,7 +7,12 @@
             </div>
         </vca-field>
         <vca-field label="Wähle deinen Spendenbetrag">
+            <div class="paymentsteps">
+                <button class="selectbutton" @click.prevent="selectAmount(event, 6000)">60 €</button>
+                <button class="selectbutton" @click.prevent="selectAmount(event, 12000)">120 €</button>
+                <button class="selectbutton" @click.prevent="selectAmount(event, 24000)">240 €</button>
 
+            </div>
 
         </vca-field>
         <vca-field label="Du willst einen anderen Betrag spenden? Kein Problem! (ab 60 Euro)">
@@ -52,6 +57,9 @@ export default {
     methods: {
         selectInterval(e, interval) {
             this.interval = interval
+        },
+        selectAmount(e, amount) {
+            this.money.amount = amount
         },
         submit() {
             this.$emit("submit", this.interval, this.money )
