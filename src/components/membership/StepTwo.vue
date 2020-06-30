@@ -70,20 +70,19 @@
                             placeholder="Land"
                             v-model.trim="supporter.country_name" 
                             :rules="$v.supporter.country_name"/>
-                        <div class="vca-input-checkbox">
-                            <label class="container">
-                                <input type="checkbox" v-model="offset.data_privacy">
-                                <span class="checkmark"></span>
+
+                    <CheckBox
+                        ref="data_privacy"
+                        v-model="offset.data_privacy" 
+                        errorMsg="Datenschutzerklärung" 
+                        :rules="$v.offset.data_privacy" >
                                 Ich habe die <a href="https://www.vivaconagua.org/datenschutzerklaerung" target="_blank">Datenschutzerklärung</a> und die <a href="https://www.vivaconagua.org/agb" target="_blank">AGB</a> gelesen.
-                            </label>
-                        </div>
-                        <div class="vca-input-checkbox">
-                            <label class="container">
-                                <input type="checkbox" v-model="offset.newsletter">
-                                <span class="checkmark"></span>
-                                Ich würde mich gerne zusätzlich zur Viva con Agua Flaschenpost eintragen.
-                            </label>
-                        </div>
+                    </CheckBox>
+                    <CheckBox
+                        v-model="offset.data_privacy" 
+                        errorMsg="Datenschutzerklärung" >
+                                 Ich würde mich gerne zusätzlich zur Viva con Agua Flaschenpost eintragen.
+                    </CheckBox>
                         <div class="selectknown">
                             <label>So bin ich auf euch aufmerksam geworden</label>
                             <select v-model="offset.known_from" name="known">
@@ -98,12 +97,20 @@
 <script>
 
 import { required, email} from 'vuelidate/lib/validators'
+import CheckBox from '../utils/CheckBox'
 export default {
     name: 'StepTwo',
+    components: {
+        CheckBox
+    },
     props: {
     },
     data () {
         return {
+            label: {
+                data_privacy: 'Ich habe die <a href="https://www.vivaconagua.org/datenschutzerklaerung" target="_blank">Datenschutzerklärung</a> und die <a href="https://www.vivaconagua.org/agb" target="_blank">AGB</a> gelesen.'
+
+            },
             offset: {
                 company: false,
                 data_privacy: false,
@@ -151,7 +158,11 @@ export default {
                     company_name: {
                         required
                     }
-
+                },
+                offset: {
+                    data_privacy: {
+                        required
+                    }
                 }
             }
         } else {
@@ -178,8 +189,15 @@ export default {
                     },
                     street: {
                         required
+                    },
+                    data_privacy: {
+                        required
                     }
 
+                },
+                offset: {
+                    data_privacy: {
+                        checked: value => value === true                    }
                 }
             }
         }
@@ -199,8 +217,8 @@ export default {
             this.$refs.street.validate()
             this.$refs.zip.validate()
             this.$refs.city.validate()
-            this.$refs.company.validate()
             this.$refs.country_name.validate()
+            this.$refs.data_privacy.validate()
             if (this.offset.company) {
                 this.$refs.company.validate()
             }
