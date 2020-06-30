@@ -2,8 +2,8 @@
     <div class="stepone">
         <vca-field label="Wähle deinen Spendenturnus">
             <div class="interval">
-                <button class="selectbutton"  @click.prevent="selectInterval('year')">Jahresbeitrag</button>
-                <button class="selectbutton" @click.prevent="selectInterval('month')">Monatsbeitrag</button>
+                <button class="selectbutton simple-button"  @click.prevent="selectInterval('year')">Jahresbeitrag</button>
+                <button class="selectbutton simple-button" @click.prevent="selectInterval('month')">Monatsbeitrag</button>
             </div>
         </vca-field>
         <vca-field label="Wähle deinen Spendenbetrag">
@@ -32,7 +32,7 @@
                    topText="anderer Betrag?"/>
             </vca-field-row>
         </vca-field>
-        <button class="submit" @click.prevent="submit"> Weiter zu Schritt 2 </button>
+        <button class="submit membership-button" @click.prevent="submit"> Weiter zu Schritt 2 </button>
     </div>
 
 </template>

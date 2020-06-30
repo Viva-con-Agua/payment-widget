@@ -93,11 +93,33 @@ export default {
 </script>
 <style>
 .payment-widget {
-
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     width: auto;
     max-width: 600px;
     position: center;
 
+}
+.simple-button:hover {
+    background-color: #006ab1;
+}
+.simple-button {
+    cursor: pointer;
+    margin: 1em 5px;
+    padding: 0 10px !important;
+    height: 35px;
+    background-color: #0070ba;
+    color: #FFFFFF;
+    width: auto;
+    padding: 0.5em 0;
+    border: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }
 </style>

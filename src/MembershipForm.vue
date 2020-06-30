@@ -11,7 +11,7 @@
                              <StepTwo @submit="submitStepTwo"/>
                         </vca-tab>                       
                         <vca-tab title="Zahlungsart">
-                            <StepThree :payment="payment" :country="country" :valid="$v.payment"/>
+                            <StepThree :payment="payment" :label="getLabel" :country="country" :valid="$v.payment"/>
                         </vca-tab>
                         <vca-tab title="Danke!">
                             <StepThanks/>
@@ -132,9 +132,9 @@ export default {
         },
         getLabel() {
             if (this.country == 'DE' || this.country == 'CH' || this.country == 'AT') {
-                return "Spenden"
+                return "Zahlung durchführen"
             }
-            return "Donate"
+            return "Pay now"
         }
     },
     methods: {
@@ -156,3 +156,30 @@ export default {
     }
 }
 </script>
+
+<style>
+.membership-button:hover {
+    background-color: #006ab1;
+}
+.membership-button {
+    cursor: pointer;
+    margin-top: 1em;
+    font-size: 1.3em;
+    margin-bottom: 1em;
+    height: 45px;
+    width: 100%;
+    background-color: #0070ba;
+    color: #FFFFFF;
+    padding: 0.5em 0;
+    border: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+</style>
