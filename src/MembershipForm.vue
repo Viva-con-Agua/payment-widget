@@ -5,18 +5,19 @@
                 <vca-form>
                     <vca-tabs>
                         <vca-tab title="Meine Spende">
-                            <StepOne @submit="submitStepOne"/>
                         </vca-tab>
-                         <vca-tab title="Meine Kontaktdaten">
-                             <StepTwo @submit="submitStepTwo"/>
+                         <vca-tab  title="Meine Kontaktdaten">
                         </vca-tab>                       
                         <vca-tab title="Zahlungsart">
-                            <StepThree :payment="payment" :country="country" :valid="$v.payment"/>
                         </vca-tab>
                         <vca-tab title="Danke!">
-                            <StepThanks/>
+                            
                         </vca-tab>
-                    </vca-tabs>                       
+                    </vca-tabs>   
+                    <StepOne v-if="step === 'one'" @submit="submitStepOne"/>
+                    <StepTwo v-if="step === 'two'" @submit="submitStepTwo" @back="backStepOne"/>
+                    <StepThree v-if="step === 'three'" :payment="payment" :country="country" :valid="$v.payment" @back="backStepTwo"/>
+                    <StepThanks v-if="step === 'thanks'"/>
                 </vca-form>
             </div>
         </div>
@@ -58,6 +59,7 @@ export default {
     },
     data() {
         return {
+            step: 'one',
             companey: false,
             successView: false,
             payment: {
@@ -148,10 +150,18 @@ export default {
         submitStepOne(interval, money) {
             this.payment.transaction.interval = interval
             this.payment.money = money
+            this.step = 'two'
+        },
+        backStepOne() {
+            this.step = 'one'
+        },
+        backStepTwo() {
+            this.step = 'two'
         },
         submitStepTwo(supporter, offset) {
             this.payment.supporter = supporter
             this.payment.offset = offset
+            this.step = 'three'
         }
     }
 }
