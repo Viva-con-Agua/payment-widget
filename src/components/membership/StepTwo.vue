@@ -1,10 +1,11 @@
 <template>
     <div class="steptwo">
         <vca-field label="Ich spende als">
-            <div class="interval">
-                <button class="selectbutton"  @click.prevent="selectCompany(false)">Privatperson</button>
-                <button class="selectbutton" @click.prevent="selectCompany(true)">Unternehmen</button>
-            </div>
+                <div class="interval">
+                    <button class="selectbutton simple-button"  @click.prevent="selectCompany(false)">Privatperson</button>
+                    <button class="selectbutton simple-button" @click.prevent="selectCompany(true)">Unternehmen</button>
+                </div>
+
         </vca-field>
         <vca-field label="Kontaktinformationen">
             <vca-input 
@@ -90,8 +91,8 @@
                             </select>
                         </div>
         </vca-field>
-        <button class="submit" @click.prevent="back"> Zurück zu Schritt 1 </button>
-        <button class="submit" @click.prevent="submit"> Weiter zu Schritt 3 </button>
+        <button class="submit membership-button" @click.prevent="back"> Zurück zu Schritt 1 </button>
+        <button class="submit membership-button" @click.prevent="submit"> Weiter zu Schritt 3 </button>
     </div>
 </template>
 <script>
