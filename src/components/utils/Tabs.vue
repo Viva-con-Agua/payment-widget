@@ -40,7 +40,6 @@ export default {
   border: 1px solid #ccc;
   background-color: #f1f1f1;
 }
-
 ul li {
     list-style: none;
 }

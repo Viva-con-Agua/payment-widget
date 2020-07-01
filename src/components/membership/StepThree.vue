@@ -1,5 +1,7 @@
 <template>
-    <Payment v-on:success="success" :payment="payment" :label="label" :country="country" :valid="valid" @notValid="notValid"/>
+    <vca-field label="Ich spende via">
+        <Payment v-on:success="success" :payment="payment" :label="label" :country="country" :valid="valid" @notValid="notValid"/>
+    </vca-field>
 </template>
 <script>
 import Payment from '../Payment'

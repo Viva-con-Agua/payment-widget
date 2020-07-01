@@ -99,19 +99,30 @@ export default {
     position: center;
 
 }
-.simple-button:hover {
-    background-color: #006ab1;
+.tabs-details {
+  padding: 15px;
 }
-.simple-button {
-    cursor: pointer;
-    margin: 1em 5px;
-    padding: 0 10px !important;
-    height: 35px;
+.vca-field-label {
+    background-image: url("~@/assets/blue_pixel.jpg");
+    background-repeat: repeat-x;
+    background-position: center;
+}
+.vca-field-label label {
+    background-color: white;
+    padding-right: 10px;
+}
+.selectbutton:hover {
     background-color: #0070ba;
-    color: #FFFFFF;
+}
+.selectbutton {
+    cursor: pointer;
+    margin: 1em 2em;
+    padding: 20px 25px 35px 25px;
+    height: 35px;
+    background-color: #008fc3;
+    color: #fff;
     width: auto;
-    padding: 0.5em 0;
-    border: 0;
+    border: solid thin transparent;
     text-transform: uppercase;
     font-weight: bold;
     text-decoration: none;

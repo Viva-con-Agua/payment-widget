@@ -132,7 +132,7 @@ export default {
         },
         getLabel() {
             if (this.country == 'DE' || this.country == 'CH' || this.country == 'AT') {
-                return "Zahlung durchführen"
+                return "Jetzt absenden"
             }
             return "Pay now"
         }
@@ -158,19 +158,40 @@ export default {
 </script>
 
 <style>
-.membership-button:hover {
-    background-color: #006ab1;
+.btn_deselected {
+    background: #fff  !important;
+    color: #008fc3 !important;
+    //box-shadow: none !important;
+    //-moz-box-shadow: none !important;
+    //-webkit-box-shadow: none !important;
+    border: solid thin transparent !important;
 }
+.btn_deselected:hover {
+    color: #008fc3 !important;
+    border: solid thin #008fc3 !important;
+}
+.membership-button:hover {
+    background-color: #0070ba;
+}
+
+.membership-button:disabled {
+    background: #fff;
+    color: #008fc3;
+    opacity: 0.3;
+    cursor: default;
+}
+
 .membership-button {
     cursor: pointer;
     margin-top: 1em;
     font-size: 1.3em;
     margin-bottom: 1em;
-    height: 45px;
-    width: 100%;
-    background-color: #0070ba;
-    color: #FFFFFF;
-    padding: 0.5em 0;
+    height: auto;
+    width: auto;
+    background-color: #008fc3;
+    color: #fff;
+    padding: 0.5em 1.2em;
+    float: right;
     border: 0;
     text-transform: uppercase;
     font-weight: bold;

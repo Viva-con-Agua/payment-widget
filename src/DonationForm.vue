@@ -258,7 +258,6 @@ body {
     flex-shrink: 1; 
 }
 
-
 .vca-input input {
     width: 100%;
     border: 1px solid #ccc;
@@ -298,8 +297,7 @@ body {
     font-size: 22px;
     font-weight: 900;
     width: 100%;
-    color:  #0070ba;
-
+    color:  #008fc3;
 }
 
 
@@ -336,8 +334,7 @@ body {
 }
 
 .focus label {
-    color: #0070ba;
-    
+    color: #008fc3;
 }
 
 .currency-select {
@@ -419,8 +416,8 @@ ul li {
 /* Create an active/current tablink class */
 .vca-tabs li.is-active {
 
-    background-color: #0070ba;
-    border-color: #0070ba #0070ba #0070ba;
+    background-color: #008fc3;
+    border-color: #008fc3 #008fc3 #008fc3;
 }
 
 .vca-tabs li.is-active a {
@@ -439,7 +436,7 @@ ul li {
     outline-color: #008fc2;
 }
 .stripe-donation-button:hover, .vca-tabs li.is-active:hover {
-    background-color: #006ab1;
+    background-color: #0070ba;
 }
 .stripe-donation-button {
     cursor: pointer;
@@ -448,7 +445,7 @@ ul li {
     margin-bottom: 1em;
     height: 45px;
     width: 100%;
-    background-color: #0070ba;
+    background-color: #008fc3;
     color: #FFFFFF;
     padding: 0.5em 0;
     border: 0;
