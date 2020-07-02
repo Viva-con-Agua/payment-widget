@@ -193,10 +193,16 @@ export default {
 .selectknown {
     display: inline-flex;
     width: 100%;
+    margin-top: 15px;
 }
 
 .selectknown label {
     padding-top: .6em;
     margin-right: .6em;
 }
+
+.selectknown select {
+    min-width: 170px;
+}
+
 </style>

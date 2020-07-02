@@ -9,6 +9,7 @@
                         </vca-tab>
                          <vca-tab title="Meine Kontaktdaten">
                              <StepTwo @submit="submitStepTwo"/>
+                             <PaymentFooter :money="payment.money" :interval="payment.interval" />
                         </vca-tab>                       
                         <vca-tab title="Zahlungsart">
                             <StepThree :payment="payment" :label="getLabel" :country="country" :valid="$v.payment"/>
@@ -29,9 +30,10 @@ import StepOne from './components/membership/StepOne'
 import StepTwo from './components/membership/StepTwo'
 import StepThree from './components/membership/StepThree'
 import StepThanks from './components/membership/StepThanks'
+import PaymentFooter from './components/PaymentFooter'
 export default {
     name: 'MembershipForm',
-    components: {StepOne, StepTwo, StepThree, StepThanks},
+    components: {StepOne, StepTwo, StepThree, StepThanks, PaymentFooter},
     props: {
         description: {
             type: String,

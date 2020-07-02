@@ -1,15 +1,15 @@
 <template>
     <vca-field label="Ich spende via">
-        <Payment v-on:success="success" :payment="payment" :label="label" :country="country" :valid="valid" @notValid="notValid"/>
+        <PaymentButtons v-on:success="success" :payment="payment" :label="label" :country="country" :valid="valid" @notValid="notValid"/>
     </vca-field>
 </template>
 <script>
-import Payment from '../Payment'
+import PaymentButtons from '../PaymentButtons'
 export default {
     name: 'StepThree',
 
     props: ['payment', 'country', 'valid', 'label'],
-    components: {Payment},
+    components: {PaymentButtons},
     methods: {
         success() {
             this.$emit("success")
@@ -17,7 +17,6 @@ export default {
         notValid() {
             this.$emit("notValid")
         }
-
     }
 
 }

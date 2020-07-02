@@ -2,24 +2,46 @@
     <div class="stepone">
         <vca-field label="Wähle deinen Spendenturnus">
             <div class="interval">
-                <button id="interval-year" :class="getIntervalClass('year')" class="selectbutton" @click.prevent="selectInterval('year')">Jahresbeitrag</button>
                 <button id="interval-month" :class="getIntervalClass('month')" class="selectbutton" @click.prevent="selectInterval('month')">Monatsbeitrag</button>
+                <button id="interval-year" :class="getIntervalClass('year')" class="selectbutton" @click.prevent="selectInterval('year')">Jahresbeitrag</button>
             </div>
         </vca-field>
         <vca-field label="Wähle deinen Spendenbetrag">
             <div v-if="interval === 'month'" class="paymentsteps">
-                <button class="selectbutton" :class="getAmountClass(500)" @click.prevent="selectAmount(500)">5 €</button>
-                <button class="selectbutton" :class="getAmountClass(1000)" @click.prevent="selectAmount(1000)">10 €</button>
-                <button class="selectbutton" :class="getAmountClass(2000)" @click.prevent="selectAmount(2000)">20 €</button>
-
+                <button class="amountButton" :class="getAmountClass(500)" @click.prevent="selectAmount(500)">
+                    <img v-if="money.amount != 500" src="~@/assets/icon_vca.png"/>
+                    <img v-else src="~@/assets/icon_vca_white.png"/><br/>
+                    <span class="amountAmount">5 EURO</span><br/><span class="amountType">TROPFEN Fördermitglied</span><br/><span class="amountDesc">Du bist der Tropfen, der den Brunnen füllt</span>
+                </button>
+                <button class="amountButton" :class="getAmountClass(1000)" @click.prevent="selectAmount(1000)">
+                    <img v-if="money.amount != 1000" src="~@/assets/icon_well.png"/>
+                    <img v-else src="~@/assets/icon_well_white.png"/><br/>
+                    <span class="amountAmount">10 EURO</span><br/><span class="amountType">BRUNNEN Fördermitglied</span><br/><span class="amountDesc">Du bist der Brunnen, der das Wasser liefert</span>
+                </button>
+                <button class="amountButton" :class="getAmountClass(2000)" @click.prevent="selectAmount(2000)">
+                    <img v-if="money.amount != 2000" src="~@/assets/icon_fountain.png"/>
+                    <img v-else src="~@/assets/icon_fountain_white.png"/><br/>
+                    <span class="amountAmount">20 EURO</span><br/><span class="amountType">QUELLEN Fördermitglied</span><br/><span class="amountDesc">Du bist die Quelle unserer Wasserversorgung</span>
+                </button>
             </div>
+
             <div v-if="interval === 'year'" class="paymentsteps">
-                <button class="selectbutton" :class="getAmountClass(6000)" @click.prevent="selectAmount(6000)">60 €</button>
-                <button class="selectbutton" :class="getAmountClass(12000)" @click.prevent="selectAmount(12000)">120 €</button>
-                <button class="selectbutton" :class="getAmountClass(24000)" @click.prevent="selectAmount(24000)">240 €</button>
-
+                <button class="amountButton" :class="getAmountClass(6000)" @click.prevent="selectAmount(6000)">
+                    <img v-if="money.amount != 6000" src="~@/assets/icon_vca.png"/>
+                    <img v-else src="~@/assets/icon_vca_white.png"/><br/>
+                    <span class="amountAmount">60 EURO</span><br/><span class="amountType">TROPFEN Fördermitglied</span><br/><span class="amountDesc">Du bist der Tropfen, der den Brunnen füllt</span>
+                </button>
+                <button class="amountButton" :class="getAmountClass(12000)" @click.prevent="selectAmount(12000)">
+                    <img v-if="money.amount != 12000" src="~@/assets/icon_well.png"/>
+                    <img v-else src="~@/assets/icon_well_white.png"/><br/>
+                    <span class="amountAmount">120 EURO</span><br/><span class="amountType">BRUNNEN Fördermitglied</span><br/><span class="amountDesc">Du bist der Brunnen, der das Wasser liefert</span>
+                </button>
+                <button class="amountButton" :class="getAmountClass(24000)" @click.prevent="selectAmount(24000)">
+                    <img v-if="money.amount != 24000" src="~@/assets/icon_fountain.png"/>
+                    <img v-else src="~@/assets/icon_fountain_white.png"/><br/>
+                    <span class="amountAmount">240 EURO</span><br/><span class="amountType">QUELLEN Fördermitglied</span><br/><span class="amountDesc">Du bist die Quelle unserer Wasserversorgung</span>
+                </button>
             </div>
-
         </vca-field>
         <vca-field :label="customPaymentMin">
             <vca-field-row>
@@ -45,7 +67,7 @@ export default {
     },
     data () {
         return {
-            interval: "year",
+            interval: "month",
             money: {
                 amount: 0,
                 currency: "EUR"
@@ -83,7 +105,7 @@ export default {
             return (this.interval == val) ? 'btn_selected' : 'btn_deselected'
         },
         getAmountClass(val) {
-            return (this.money.amount == val) ? 'btn_selected' : 'btn_deselected'
+            return (this.money.amount == val) ? 'btn_selected_amount' : 'btn_deselected_amount'
         },
         selectInterval(interval) {
             this.interval = interval
@@ -97,3 +119,72 @@ export default {
     }
 }
 </script>
+<style type="text/css">
+.amountButton {
+    cursor: pointer;
+    background-image: url("~@/assets/icon_drop.png");
+    background-size: contain;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: auto;
+    min-width: 170px;
+    min-height: 200px;
+    height: 100%;
+    color: #fff;
+    border: solid thin transparent;
+    font-weight: bold;
+    text-decoration: none;
+    vertical-align: middle;
+    flex: auto;
+    flex-basis: 100%;
+    margin: 0 auto;
+}
+.amountButton:hover {
+    
+}
+.btn_deselected_amount:hover {
+    color: #008fc3 !important;
+    background-image: url("~@/assets/icon_drop_white_outline.png");
+}
+.btn_deselected_amount {
+    color: #008fc2;
+    background-image: none;
+}
+
+.amountButton img {
+    width: 40px;
+    position: relative;
+    bottom: 10px;
+}
+
+.amountAmount {
+    font-size: 20px;
+}
+.amountType {
+    font-size: 14px;
+}
+.amountDesc {
+    display: none;
+    font-size: 10px;
+    color: black;
+}
+.paymentsteps {
+    display: flex;
+}
+
+@media only screen and (max-width: 600px) {
+    .amountButton {
+        max-width: 170px;
+    }
+    .paymentsteps {
+        flex-wrap: wrap;
+    }
+    .amountType {
+        font-size: 12px;
+    }
+    .amountAmount {
+        font-size: 14px;
+    }
+}
+
+</style>

@@ -248,6 +248,13 @@ body {
     box-shadow: none;
     padding-left: 0.6em;
 }
+
+@media only screen and (max-width: 347px) {
+    .vca-field-row .last, .vca-field-row .first {
+        padding: 0px;
+    }
+}
+
 .vca-input {
     width: 100%;
     box-shadow: none;
