@@ -1,6 +1,10 @@
 <template>
     <vca-field label="Ich spende via">
-        <PaymentButtons v-on:success="success" :payment="payment" :label="label" :country="country" :valid="valid" @notValid="notValid"/>
+        <div class="paymentview">
+            <PaymentButtons v-on:success="success" :payment="payment" :label="label" :country="country" :valid="valid" @notValid="notValid"/>
+    
+            <button class="submit" @click.prevent="back"> Zurück zu Schritt 2 </button>
+        </div>
     </vca-field>
 </template>
 <script>
@@ -16,6 +20,9 @@ export default {
         },
         notValid() {
             this.$emit("notValid")
+        },
+        back() {
+            this.$emit("back")
         }
     }
 

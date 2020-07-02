@@ -5,6 +5,7 @@
                     <button :class="getTypeClass('private')" class="selectbutton"  @click.prevent="selectCompany(false)">Privatperson</button>
                     <button :class="getTypeClass('company')" class="selectbutton" @click.prevent="selectCompany(true)">Unternehmen</button>
                 </div>
+
         </vca-field>
         <vca-field label="Persönliche Angaben">
             <vca-input 
@@ -33,30 +34,30 @@
                 </vca-field-row>
             <vca-input 
                    v-if="offset.company"
-                   ref="email"
-                   errorMsg="Bitte E-Mail Adresse eintragen"
+                   ref="company"
+                   errorMsg="Bitte gib deinen Firmennamen an"
                    placeholder="Name des Unternehmens"
                    v-model.trim="supporter.company_name" 
                    :rules="$v.supporter.company_name"/>
                 <vca-input 
-                   ref="email"
-                   errorMsg="Bitte E-Mail Adresse eintragen"
+                   ref="street"
+                   errorMsg="Bitte gib Straße und Hausnummer an"
                    placeholder="Straße und Hausnummer"
                    v-model.trim="supporter.street" 
                    :rules="$v.supporter.street"/>
                     <vca-field-row>
                         <vca-input 
-                   ref="first_name"
+                   ref="zip"
                    first
-                   errorMsg="Bitte Vornamen eintragen"
+                   errorMsg="Bitte gib deine Postleitzahl an"
                    placeholder="Plz"
                    v-model.trim="supporter.zip" 
                    :rules="$v.supporter.zip">
                         </vca-input>
                         <vca-input
-                            ref="last_name"
+                            ref="city"
                             last
-                            errorMsg="Bitte Nachnamen eintragen"
+                            errorMsg="Bitte gib deine Wohnort an"
                             placeholder="Ort"
                             v-model.trim="supporter.city" 
                             :rules="$v.supporter.city">
@@ -65,22 +66,18 @@
                         <div class="vca-input">
                             <country-select v-model="supporter.country" :country="supporter.country" topCountry="DE" />
                         </div>
-                    </vca-field>
-                    <vca-field label="Weitere Angaben">
-                        <div class="vca-input-checkbox">
-                            <label class="container">
-                                <input type="checkbox" v-model="offset.data_privacy">
-                                <span class="checkmark"></span>
-                                Ich habe die <a href="https://www.vivaconagua.org/datenschutzerklaerung" target="_blank">Datenschutzerklärung</a> und die <a href="https://www.vivaconagua.org/agb" target="_blank">AGB</a> gelesen.
-                            </label>
-                        </div>
-                        <div class="vca-input-checkbox">
-                            <label class="container">
-                                <input type="checkbox" v-model="offset.newsletter">
-                                <span class="checkmark"></span>
-                                Ich würde mich gerne zusätzlich zur Viva con Agua Flaschenpost eintragen.
-                            </label>
-                        </div>
+                        <CheckBox
+                            ref="data_privacy"
+                            v-model="offset.data_privacy" 
+                            errorMsg="Datenschutzerklärung" 
+                            :rules="$v.offset.data_privacy" >
+                                    Ich habe die <a href="https://www.vivaconagua.org/datenschutzerklaerung" target="_blank">Datenschutzerklärung</a> und die <a href="https://www.vivaconagua.org/agb" target="_blank">AGB</a> gelesen.
+                        </CheckBox>
+                    <CheckBox
+                        v-model="offset.data_privacy" 
+                        errorMsg="Datenschutzerklärung" >
+                                 Ich würde mich gerne zusätzlich zur Viva con Agua Flaschenpost eintragen.
+                    </CheckBox>
                         <div class="selectknown">
                             <label>So bin ich auf euch aufmerksam geworden</label>
                             <div class="vca-input">
@@ -91,18 +88,27 @@
                             </div>
                         </div>
         </vca-field>
+        <button class="submit membership-button" @click.prevent="back"> Zurück zu Schritt 1 </button>
         <button class="submit membership-button" @click.prevent="submit"> Weiter zu Schritt 3 </button>
     </div>
 </template>
 <script>
 
-import { required, email } from 'vuelidate/lib/validators'
+import { required, email} from 'vuelidate/lib/validators'
+import CheckBox from '../utils/CheckBox'
 export default {
     name: 'StepTwo',
+    components: {
+        CheckBox
+    },
     props: {
     },
     data () {
         return {
+            label: {
+                data_privacy: 'Ich habe die <a href="https://www.vivaconagua.org/datenschutzerklaerung" target="_blank">Datenschutzerklärung</a> und die <a href="https://www.vivaconagua.org/agb" target="_blank">AGB</a> gelesen.'
+
+            },
             offset: {
                 company: false,
                 data_privacy: false,
@@ -121,29 +127,78 @@ export default {
             }
         }
     },
-    validations: {
-        supporter: {
-            email: {
-                required,
-                email
-            },
-            first_name: {
-                required
-            },
-            last_name: {
-                required
-            },
-            country_name: {
-                required
-            },
-            city: {
-                required
-            },
-            zip: {
-                required
-            },
+    validations() {
+        if (this.offset.company) {
+            return {
+                supporter: {
+                    email: {
+                        required,
+                        email
+                    },
+                    first_name: {
+                        required
+                    },
+                    last_name: {
+                        required
+                    },
+                    country_name: {
+                        required
+                    },
+                    city: {
+                        required
+                    },
+                    zip: {
+                        required
+                    },
+                    street: {
+                        required
+                    },
+                    company_name: {
+                        required
+                    }
+                },
+                offset: {
+                    data_privacy: {
+                        required
+                    }
+                }
+            }
+        } else {
+            return {
+                supporter: {
+                    email: {
+                        required,
+                        email
+                    },
+                    first_name: {
+                        required
+                    },
+                    last_name: {
+                        required
+                    },
+                    country_name: {
+                        required
+                    },
+                    city: {
+                        required
+                    },
+                    zip: {
+                        required
+                    },
+                    street: {
+                        required
+                    },
+                    data_privacy: {
+                        required
+                    }
 
-        },
+                },
+                offset: {
+                    data_privacy: {
+                        checked: value => value === true                    }
+                }
+            }
+        }
     },
     methods: {
         selectCompany(company) {
@@ -157,8 +212,28 @@ export default {
                 return (val != 'company') ? 'btn_selected' : 'btn_deselected';
             }
         },
+        back() {
+            this.$emit("back")
+        },
+        validate() {
+            this.$refs.email.validate()
+            this.$refs.last_name.validate()
+            this.$refs.first_name.validate()
+            this.$refs.street.validate()
+            this.$refs.zip.validate()
+            this.$refs.city.validate()
+            this.$refs.country_name.validate()
+            this.$refs.data_privacy.validate()
+            if (this.offset.company) {
+                this.$refs.company.validate()
+            }
+        },
         submit() {
-            this.$emit("submit", this.supporter, this.offset)
+            if (!this.$v.$invalid) {
+                this.$emit("submit", this.supporter, this.offset)
+            } else {
+                this.validate()
+            }
         }
 
     }

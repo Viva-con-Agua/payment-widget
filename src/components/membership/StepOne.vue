@@ -46,12 +46,12 @@
         <vca-field :label="customPaymentMin">
             <vca-field-row>
                 <vca-money-input 
-                   ref="money" 
-                   v-model="money" 
-                   :money="money"
-                   :rules="$v.money" 
-                   errorMsg="Bitte wähle mindestens 60 Euro"  
-                   topText="anderer Betrag?"/>
+                        ref="money" 
+                        v-model="money" 
+                        :money="money"
+                        :rules="$v.money" 
+                        errorMsg="Bitte wähle mindestens 60 Euro"  
+                        topText="anderer Betrag?"/>
             </vca-field-row>
         </vca-field>
         <button class="submit membership-button" @click.prevent="submit"> Weiter zu Schritt 2 </button>
@@ -76,12 +76,12 @@ export default {
     },
     validations() {
         return {
-        money: {
-            amount: {
-                required,
-                minValue: this.paymentMin
+            money: {
+                amount: {
+                    required,
+                    minValue: this.paymentMin
+                }
             }
-        }
         }
     },
     computed: {
@@ -114,7 +114,11 @@ export default {
             this.money.amount = amount
         },
         submit() {
-            this.$emit("submit", this.interval, this.money )
+            if (!this.$v.$invalid) {
+                this.$emit("submit", this.interval, this.money )
+            } else {
+                this.$refs.money.validate()
+            }
         }
     }
 }
