@@ -66,20 +66,20 @@ export default {
                     console.log(result)
                     if (result.setupIntent.status === 'succeeded') {
                         axios.post(process.env.VUE_APP_BACKEND_URL + '/api/v1/payment/subscription',
-                    { 
-                        amount: this.payment.money.amount,
-                        currency: this.payment.money.currency,
-                        name: this.payment.supporter.first_name + ' ' + this.payment.supporter.last_name,
-                        email: this.payment.supporter.email,
-                        interval: this.payment.transaction.interval,
-                        locale: this.payment.supporter.country,
-                        type: 'card'
-                    })
-                    .then(
-                        this.payment.transaction.id = result.paymentIntent.id,
-                        this.payment.transaction.provider = "stripe",
-                        this.$emit('success', this.payment)
-                    )
+                            { 
+                                amount: this.payment.money.amount,
+                                currency: this.payment.money.currency,
+                                name: this.payment.supporter.first_name + ' ' + this.payment.supporter.last_name,
+                                email: this.payment.supporter.email,
+                                interval: this.payment.transaction.interval,
+                                locale: this.payment.supporter.country,
+                                type: 'card'
+                            })
+                            .then(response => (
+                                console.log(response.data),
+                                this.payment.transaction.provider = "stripe",
+                                this.success()
+                            ))
                     }
                 }
             });
@@ -103,6 +103,9 @@ export default {
             }else {
                 this.$emit('notValid')
             }
+        },
+        success () {
+            this.$emit('success')
         },
         validate () {
             this.$emit('validate') 
