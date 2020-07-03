@@ -13,6 +13,7 @@
                    errorMsg="Bitte E-Mail Adresse eintragen"
                    placeholder="E-Mail Adresse"
                    v-model.trim="supporter.email" 
+                   :value="supporter.email"
                    :rules="$v.supporter.email"/>
                 <vca-field-row>
                     <vca-input 
@@ -74,7 +75,7 @@
                                     Ich habe die <a href="https://www.vivaconagua.org/datenschutzerklaerung" target="_blank">Datenschutzerklärung</a> und die <a href="https://www.vivaconagua.org/agb" target="_blank">AGB</a> gelesen.
                         </CheckBox>
                     <CheckBox
-                        v-model="offset.data_privacy" 
+                        v-model="offset.newsletter" 
                         errorMsg="Datenschutzerklärung" >
                                  Ich würde mich gerne zusätzlich zur Viva con Agua Flaschenpost eintragen.
                     </CheckBox>
@@ -101,8 +102,7 @@ export default {
     components: {
         CheckBox
     },
-    props: {
-    },
+    props: ['supp', 'off'],
     data () {
         return {
             label: {
@@ -122,10 +122,13 @@ export default {
                 street: '',
                 zip: '',
                 city: '',
-                country: 'DE',
-                company_name: ''
+                country: 'DE'
             }
         }
+    },
+    mounted () {
+        this.supporter = this.supp
+        this.offset = this.off
     },
     validations() {
         if (this.offset.company) {
@@ -141,7 +144,7 @@ export default {
                     last_name: {
                         required
                     },
-                    country_name: {
+                    country: {
                         required
                     },
                     city: {
@@ -176,7 +179,7 @@ export default {
                     last_name: {
                         required
                     },
-                    country_name: {
+                    country: {
                         required
                     },
                     city: {
@@ -187,15 +190,12 @@ export default {
                     },
                     street: {
                         required
-                    },
-                    data_privacy: {
-                        required
                     }
 
                 },
                 offset: {
                     data_privacy: {
-                        checked: value => value === true                    }
+                        watcher: value => value === true                    }
                 }
             }
         }

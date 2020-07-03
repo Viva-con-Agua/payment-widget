@@ -17,8 +17,8 @@
                         </vca-tab>
                     </vca-tabs>   
                     <StepOne v-if="step === 'one'" @submit="submitStepOne"/>
-                    <StepTwo v-if="step === 'two'" @submit="submitStepTwo" @back="backStepOne"/>
-                    <StepThree v-if="step === 'three'" :payment="payment" :country="country" :valid="$v.payment" @back="backStepTwo"/>
+                    <StepTwo v-if="step === 'two'" @submit="submitStepTwo" @back="backStepOne" :supp="payment.supporter" :off="payment.offset"/>
+                    <StepThree v-if="step === 'three'" :payment="payment" :country="country" :valid="$v.payment" @back="backStepTwo" @success="success"/>
                     <StepThanks v-if="step === 'thanks'"/>
                 </vca-form>
             </div>
@@ -165,6 +165,9 @@ export default {
             this.payment.supporter = supporter
             this.payment.offset = offset
             this.step = 'three'
+        },
+        success() {
+            this.step = 'thanks'
         }
     }
 }

@@ -1,7 +1,7 @@
 <template>
     <div class="vca-input-checkbox">
         <label class="container">
-            <input type="checkbox" :value="value">
+            <input type="checkbox" v-model="value" @input="input">
             <span class="checkmark"></span>
             <slot></slot>
         </label>
@@ -40,8 +40,8 @@ export default {
         }
     },
     methods: {
-        input (e) {
-            this.$emit('input', e.target.value)
+        input () {
+            this.$emit('input', true)
         },
         // validate form via vuelidate
         validate () {

@@ -13,9 +13,9 @@
     </div>
 </template>
 <script>
-import SEPA from './payments/SEPA'
+import SEPA from './payments/subscription/SEPA'
 import PayPalButton from './payments/PayPal'
-import CreditCard from './payments/CreditCard'
+import CreditCard from './payments/subscription/CreditCard'
 export default {
     name: 'PaymentButtons',
     components: {SEPA, CreditCard, PayPalButton}, 
