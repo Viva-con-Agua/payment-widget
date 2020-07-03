@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import vueCustomElement from 'vue-custom-element'
-import 'semantic-ui-css/semantic.min.css'
 import VcaUi from 'vca-ui'
 import VueCountryRegionSelect from 'vue-country-region-select'
 

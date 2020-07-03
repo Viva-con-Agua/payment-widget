@@ -59,25 +59,43 @@ export default {
 }
 .images_empty, .images_full {
     display: table-cell;
+
 }
 
 .images_full img {
     padding: 5px;
     width: 100%;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;   
+
+
 }
 .images_empty img {
     padding: 5px;
     width: 100%;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;   
+
+
 }
 .count {
-    width: 95%;
-    margin: 0 auto;
+    width: 100%;
 }
 
 .count img {
     width: 100%;
     padding: 5px;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;   
 }
+.count input[type=range] {
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;   
+} 
 
 
 
