@@ -17,6 +17,7 @@
     "vca-ui": "0.0.7",
     "vee-validate": "^2.2.15",
     "vue": "^2.6.11",
+    "vue-country-region-select": "^2.0.14",
     "vue-custom-element": "^3.2.14",
     "vue-paypal-checkout": "^3.2.0",
     "vue-stripe-checkout": "^3.3.1",
