@@ -5,8 +5,8 @@
                 <vca-form>
                     <HeaderSteps :currentStep=step :steps=steps />
                     <StepOne v-if="step === 1" @submit="submitStepOne"/>
-                    <StepTwo v-if="step === 2" @submit="submitStepTwo" @back="backStepOne"/>
-                    <StepThree v-if="step === 3" :payment="payment" :country="country" :valid="$v.payment" @back="backStepTwo"/>
+                    <StepTwo v-if="step === 2" @submit="submitStepTwo" @back="backStepOne" :supp="payment.supporter" :off="payment.offset"/>
+                    <StepThree v-if="step === 3" :payment="payment" :country="country" :valid="$v.payment" @back="backStepTwo" @success="success"/>
                     <StepThanks v-if="step === 4"/>
                      <PaymentFooter v-if="step === 3 || step === 2" :money="payment.money" :interval="payment.interval" />
                 </vca-form>
@@ -162,6 +162,9 @@ export default {
             this.payment.supporter = supporter
             this.payment.offset = offset
             this.step = 3
+        },
+        success() {
+            this.step = 4
         }
     }
 }
