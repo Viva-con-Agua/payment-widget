@@ -63,8 +63,7 @@ import { required, minValue } from 'vuelidate/lib/validators'
 
 export default {
     name: 'StepOne',
-    props: {
-    },
+    props: ["moneyprop"],
     data () {
         return {
             interval: "month",
@@ -73,6 +72,9 @@ export default {
                 currency: "EUR"
             }
         }
+    },
+    mounted () {
+        this.money = this.moneyprop
     },
     validations() {
         return {
