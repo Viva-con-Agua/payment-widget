@@ -3,23 +3,12 @@
         <div class="membership-form" v-if="!successView">
             <div class="vca">
                 <vca-form>
-                    <vca-tabs>
-                        <vca-tab title="Meine Spende">
-                        </vca-tab>
-                         <vca-tab title="Meine Kontaktdaten">
-                             <StepTwo @submit="submitStepTwo"/>
-                             <PaymentFooter :money="payment.money" :interval="payment.interval" />
-                        </vca-tab>                       
-                        <vca-tab title="Zahlungsart">
-                        </vca-tab>
-                        <vca-tab title="Danke!">
-                            
-                        </vca-tab>
-                    </vca-tabs>   
-                    <StepOne v-if="step === 'one'" @submit="submitStepOne"/>
-                    <StepTwo v-if="step === 'two'" @submit="submitStepTwo" @back="backStepOne"/>
-                    <StepThree v-if="step === 'three'" :payment="payment" :country="country" :valid="$v.payment" @back="backStepTwo"/>
-                    <StepThanks v-if="step === 'thanks'"/>
+                    <HeaderSteps :currentStep=step :steps=steps />
+                    <StepOne v-if="step === 1" @submit="submitStepOne"/>
+                    <StepTwo v-if="step === 2" @submit="submitStepTwo" @back="backStepOne"/>
+                    <StepThree v-if="step === 3" :payment="payment" :country="country" :valid="$v.payment" @back="backStepTwo"/>
+                    <StepThanks v-if="step === 4"/>
+                     <PaymentFooter v-if="step === 3 || step === 2" :money="payment.money" :interval="payment.interval" />
                 </vca-form>
             </div>
         </div>
@@ -33,9 +22,10 @@ import StepTwo from './components/membership/StepTwo'
 import StepThree from './components/membership/StepThree'
 import StepThanks from './components/membership/StepThanks'
 import PaymentFooter from './components/PaymentFooter'
+import HeaderSteps from './components/HeaderSteps'
 export default {
     name: 'MembershipForm',
-    components: {StepOne, StepTwo, StepThree, StepThanks, PaymentFooter},
+    components: {StepOne, StepTwo, StepThree, StepThanks, PaymentFooter, HeaderSteps },
     props: {
         description: {
             type: String,
@@ -62,7 +52,14 @@ export default {
     },
     data() {
         return {
-            step: 'one',
+            step: 1,
+            steps: 
+            [
+                {id: 1, label: 'Meine Spende' },
+                {id: 2, label: 'Meine Kontaktdaten' },
+                {id: 3, label: 'Zahlungsart' },
+                {id: 4, label: 'Danke!' }
+            ],
             companey: false,
             successView: false,
             payment: {
@@ -153,52 +150,90 @@ export default {
         submitStepOne(interval, money) {
             this.payment.transaction.interval = interval
             this.payment.money = money
-            this.step = 'two'
+            this.step = 2
         },
         backStepOne() {
-            this.step = 'one'
+            this.step = 1
         },
         backStepTwo() {
-            this.step = 'two'
+            this.step = 2
         },
         submitStepTwo(supporter, offset) {
             this.payment.supporter = supporter
             this.payment.offset = offset
-            this.step = 'three'
+            this.step = 3
         }
     }
 }
 </script>
 
 <style>
+
+/*
+    CSS SELECTION BUTTON
+*/
+
 .btn_deselected {
     background: #fff  !important;
     color: #008fc3 !important;
-    //box-shadow: none !important;
-    //-moz-box-shadow: none !important;
-    //-webkit-box-shadow: none !important;
     border: solid thin transparent !important;
+    box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
 }
+
 .btn_deselected:hover {
     color: #008fc3 !important;
     border: solid thin #008fc3 !important;
 }
-.membership-button:hover {
-    background-color: #0070ba;
-}
 
-.membership-button:disabled {
-    background: #fff;
-    color: #008fc3;
-    opacity: 0.3;
-    cursor: default;
-}
-
-.membership-button {
+/*
+    CSS DROP BUTTON
+*/
+.btn_drop {
     cursor: pointer;
-    margin-top: 1em;
+    background-image: url("~@/assets/icon_drop.png");
+    background-size: contain;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-width: 170px;
+    min-height: 200px;
+    height: 100%;
+    color: #fff;
+    border: solid thin transparent;
+    font-weight: bold;
+    text-decoration: none;
+    vertical-align: middle;
+    flex: auto;
+    flex-basis: 100%;
+    margin: 0 auto;
+}
+
+.btn_drop_deselected:hover {
+    color: #008fc3 !important;
+    background-image: url("~@/assets/icon_drop_white_outline.png");
+}
+.btn_drop_deselected {
+    color: #008fc2;
+    background-image: none;
+}
+
+.btn_drop img {
+    width: 40px;
+    position: relative;
+    bottom: 10px;
+}
+
+/*
+    CSS NAVIGATION BUTTON
+*/
+
+.btn_nav,
+.btn_nav_back {
+    cursor: pointer;
+    margin: 1em 5px;
     font-size: 1.3em;
-    margin-bottom: 1em;
     height: auto;
     width: auto;
     background-color: #008fc3;
@@ -216,4 +251,55 @@ export default {
     -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
     -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }
+
+.btn_nav:hover,
+.btn_nav-back:hover {
+    background-color: #0070ba;
+}
+
+.btn_nav:disabled,
+.btn_nav_back:disabled {
+    background: #fff;
+    color: #008fc3;
+    opacity: 0.3;
+    cursor: default;
+}
+
+.btn_nav_back {
+    float: left;
+}
+
+
+@media only screen and (max-width: 600px) {
+
+    /*
+        CSS SELECTION BUTTON
+    */
+    .btn_deselected {
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19) !important;
+        -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19) !important;
+        -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19) !important;
+    }
+
+    /*
+        CSS DROP BUTTON
+    */
+    .btn_drop {
+        max-width: 170px;
+    }
+    .btn_drop_deselected {
+        background-image: url("~@/assets/icon_drop_white_outline.png");
+    }
+
+    /*
+        CSS NAVIGATION BUTTON
+    */
+    .btn_nav,
+    .btn_nav_back {
+        font-size: 12px;
+    }
+
+
+}
+
 </style>

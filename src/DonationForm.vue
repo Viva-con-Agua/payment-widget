@@ -274,7 +274,9 @@ body {
     outline-color: #008fc2;
 }
 
-.vca-input .error {
+.vca-input .error,
+.vca-checkbox .error,
+.vca-country-select .error select {
     border-color: #dc3545;
 }
 
@@ -309,10 +311,12 @@ body {
 
 
 .vca-form form .vca-field .vca-money-input {
-    width: 100%;
     display: inline-flex;
     border-radius: 0em;
     border: 0em;
+    float: right;
+    margin-right: 5px;
+    width: auto;
 }
 
 .vca-money-container {

@@ -64,7 +64,13 @@
                         </vca-input>
                     </vca-field-row>
                         <div class="vca-input">
-                            <country-select v-model="supporter.country" :country="supporter.country" topCountry="DE" />
+                            <VcACountrySelect 
+                                ref="country_name" 
+                                :rules="$v.supporter.country_name" 
+                                v-model="supporter.country_name" 
+                                :country="supporter.country" 
+                                errorMsg="Bitte wähle ein Land aus" 
+                            />
                         </div>
                         <CheckBox
                             ref="data_privacy"
@@ -88,18 +94,19 @@
                             </div>
                         </div>
         </vca-field>
-        <button class="submit membership-button" @click.prevent="back"> Zurück zu Schritt 1 </button>
-        <button class="submit membership-button" @click.prevent="submit"> Weiter zu Schritt 3 </button>
+        <button class="submit btn_nav_back" @click.prevent="back"> Zurück zu Schritt 1 </button>
+        <button class="submit btn_nav" @click.prevent="submit" > Weiter zu Schritt 3 </button>
     </div>
 </template>
 <script>
 
 import { required, email} from 'vuelidate/lib/validators'
 import CheckBox from '../utils/CheckBox'
+import VcACountrySelect from '../utils/VcACountrySelect'
 export default {
     name: 'StepTwo',
     components: {
-        CheckBox
+        CheckBox, VcACountrySelect
     },
     props: {
     },
@@ -267,6 +274,7 @@ export default {
 
 .selectknown {
     display: inline-flex;
+    flex-wrap: wrap;
     width: 100%;
     margin-top: 15px;
 }

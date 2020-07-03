@@ -1,7 +1,7 @@
 <template>
     <div class="payment-footer" stlye="clear: both;">
-        <div class="payment-footer-text">Danke, dass du unsere Projekte für sauberes Trinkwasser mit {{ money.amount }} {{ money.currency }} {{ getInterval }} unterstützen möchtest!</div>
-        <div class="payment-footer-image"><img src="~@/assets/icon_vca_white.png" /></div>
+        <div class="payment-footer-text">Danke, dass du unsere Projekte für sauberes Trinkwasser mit {{ getAmount }} {{ getCurrency }} {{ getInterval }} unterstützen möchtest!</div>
+        <div class="payment-footer-image"><img src="~@/assets/thank_you_small.png" /></div>
     </div>
 
 </template>
@@ -27,6 +27,12 @@ export default {
     computed: {
         getInterval() {
             return (this.interval == 'month') ? 'monatlich' : 'jährlich'
+        },
+        getAmount() {
+            return this.money.amount / 100
+        },
+        getCurrency() {
+            return this.money.currency
         }
     }
 }
@@ -49,23 +55,36 @@ export default {
     position: relative;
     line-height: 1.3;
     flex-basis: 80%;
+    margin: auto 0;
 }
+
+.payment-footer-image img {
+    margin: 0 10px;
+}
+
 .payment-footer-image {
     flex-grow: 1;
+    display: flex;
 }
 @media only screen and (max-width: 600px) {
-    .amountButton {
-        max-width: 170px;
-    }
-    .paymentsteps {
+
+    .payment-footer {
         flex-wrap: wrap;
     }
-    .amountType {
-        font-size: 12px;
-    }
-    .amountAmount {
+    .payment-footer-text {
         font-size: 14px;
+        text-align: center;
+        margin-bottom: 10px;
     }
+
+    .payment-footer-image {
+        width: 100%;
+    }
+
+    .payment-footer-image img {
+        margin: 0 auto !important;
+    }
+
 }
 
 </style>
