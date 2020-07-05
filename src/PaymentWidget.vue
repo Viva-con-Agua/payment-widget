@@ -103,41 +103,29 @@ export default {
     box-sizing: border-box;
 }
 .tabs-details {
-  padding: 15px;
+    padding: 1em;
 }
-.vca-field-label {
-    background-image: url("~@/assets/blue_pixel.jpg");
-    background-repeat: repeat-x;
-    background-position: center;
-    margin-left: 15px;
-    margin-right: 15px;
-}
-.vca-field-label label {
-    background-color: white;
-    padding-right: 15px;
-    font-size: 16px;
-}
+
 .selectbutton:hover {
     background-color: #0070ba;
 }
 .selectbutton {
-    cursor: pointer;
-    margin: 1em 2em;
-    padding: 20px 25px 35px 25px;
-    height: 35px;
-    background-color: #008fc3;
     color: #fff;
-    width: auto;
-    border: solid thin transparent;
+    cursor: pointer;
+    background-color: #008fc3;
     text-transform: uppercase;
     font-weight: bold;
     text-decoration: none;
+    
+    border: solid thin transparent;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
-    -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
-    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    
+    
+    width: auto;
+    margin: 1em 2em;
+    padding: 1.5em 2em;
 }
 
 @media only screen and (max-width: 600px) {
@@ -146,13 +134,10 @@ export default {
         -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
         -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 
-        font-size: 14px;
-        padding: 10px;
-        margin: .5em 1em;
-    }
+        font-size: .9em;
+        margin: 1em;
 
-    .vca-field-label label {
-        font-size: 14px;
+        padding: 1em 1.3em;
     }
 }
 </style>

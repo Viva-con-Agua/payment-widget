@@ -54,7 +54,7 @@ export default {
     },
     data() {
         return {
-            step: 1,
+            step: 2,
             steps: 
             [
                 {id: 1, label: 'Meine Spende' },
@@ -310,7 +310,7 @@ export default {
     .btn_nav,
     .btn_nav_back {
         white-space: nowrap;
-        font-size: 12px;
+        font-size: .7em;
     }
 
     .btn_nav_back {

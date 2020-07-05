@@ -95,7 +95,7 @@ export default {
     position: relative;
     padding: 14px 16px;
     transition: 0.3s;
-    font-size: 17px;
+    font-size: 1.1em;
 }
 
 .steps li div.step-content .step-label {    
@@ -125,7 +125,7 @@ export default {
 .steps li.is-active div.step-content .step-id {
     color: #008fc3;
     font-weight: bold;
-    font-size: 36px;
+    font-size: 2.2em;
     text-align: center;
     
     background-image: url("~@/assets/icon_drop_white.png");
@@ -142,7 +142,7 @@ export default {
 
 .steps li.is-active div.step-content .step-label {
     color: white;
-    font-size: 24px;
+    font-size: 1.6em;
     text-align: left;
     white-space: break-spaces;
     
@@ -203,7 +203,7 @@ export default {
     background-size: contain;
     background-position: center center; 
     background-repeat: no-repeat;
-    font-size: 20px;
+    font-size: 1.1em;
 
     margin: 5px auto;
     display: table-row;
@@ -212,6 +212,7 @@ export default {
 
 .steps li.is-inactive div.step-content .step-id div {
     padding-top: 10px;
+    padding-left: 1px;
 }
 
 .steps li.is-inactive div.step-content .step-label div {
@@ -225,7 +226,7 @@ export default {
 @media only screen and (max-width: 1120px) {
 
     .steps li.is-active div.step-content div.step-label {
-        font-size: 22px;
+        font-size: 1.3em;
     }
 
 }
@@ -237,20 +238,24 @@ export default {
 @media only screen and (max-width: 1000px) {
 
     .steps li.is-active div.step-content div.step-label {
-        font-size: 17px;
+        font-size: 1.1em;
     }
 
     .steps li.is-inactive div.step-content .step-label {    
-        font-size: 14px;
+        font-size: .9em;
         white-space: normal;
     }
 
     .steps li.is-active div.step-content div.step-id {
-        font-size: 24px;
+        font-size: 1.5em;
     }
 
     .steps li.is-inactive div.step-content div.step-id {
-        font-size: 18px;
+        font-size: 1em;
+    }
+
+    .steps li.is-inactive div.step-content div.step-id div {
+        padding-top: 12px;
     }
 
 }
@@ -262,15 +267,48 @@ export default {
 @media only screen and (max-width: 800px) {
 
     .step-background {
+        width: 40%;
+    }
+
+    .steps li.is-active div.step-content div.step-label {
+        font-size: .9em;
+    }
+
+    .steps li.is-inactive div.step-content div.step-label {
+        font-size: .8em;
+    }
+
+}
+
+/*********************
+*** SCREEN 700 PX ***
+**********************/
+
+@media only screen and (max-width: 700px) {
+
+    .step-background {
         width: 35%;
     }
 
     .steps li.is-active div.step-content div.step-label {
-        font-size: 15px;
+        font-size: .7em;
+        font-weight: bold;
+    }
+
+    .steps li.is-active div.step-content div.step-id {
+        font-size: 1.1em;
+    }
+
+    .steps li.is-active div.step-content div.step-id div {
+        padding-left: 3px;
     }
 
     .steps li.is-inactive div.step-content div.step-label {
-        font-size: 14px;
+        font-size: .6em;
+    }
+
+    .steps li.is-inactive div.step-content div.step-id {
+        font-size: .9em;
     }
 
 }
@@ -297,13 +335,16 @@ export default {
         width: 100%;
     }
 
+    .steps li.is-active div.step-content div.step-id div {
+        font-size: 1.6em;
+    }
+
     .steps li.is-inactive div.step-content {
         display: block;
         min-height: 75px;
         width: 100%;
         padding: 0px;
         position: relative;
-
     }
 
     .steps li.is-inactive div.step-content .step-id {
@@ -315,10 +356,10 @@ export default {
     }
 
     .steps li.is-inactive div.step-content .step-id div {
-        font-size: 16px;
+        font-size: 1.5em;
         display: table-cell;
         vertical-align: middle;
-        padding-top: 5px;
+        padding-top: 5px !important;
     }
 
 }

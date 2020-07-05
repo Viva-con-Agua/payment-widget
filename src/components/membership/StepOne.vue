@@ -125,18 +125,13 @@ export default {
 </script>
 <style type="text/css">
 .amountAmount {
-    font-size: 20px;
+    font-size: 1.4em;
 }
 .amountType {
     max-width: 180px;
     margin: 0 auto;
     text-align: center;
-    font-size: 14px;
-}
-.amountDesc {
-    display: none;
-    font-size: 10px;
-    color: black;
+    font-size: .9em;
 }
 .paymentsteps {
     display: flex;
@@ -147,10 +142,10 @@ export default {
         flex-wrap: wrap;
     }
     .amountType {
-        font-size: 12px;
+        font-size: .8em;
     }
     .amountAmount {
-        font-size: 14px;
+        font-size: .9em;
     }
 }
 

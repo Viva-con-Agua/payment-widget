@@ -230,8 +230,14 @@ body {
     margin: 0 0 1em;
 }
 .vca-field-label {
-    font-size: 1rem;
-    margin-bottom: 1em;
+    background-image: url("~@/assets/blue_pixel.jpg");
+    background-repeat: repeat-x;
+    background-position: center;
+    margin: 1em;
+}
+.vca-field-label label {
+    background-color: white;
+    padding-right: 2em;
 }
 .vca-field-content{
     flex-direction: column;
@@ -246,19 +252,39 @@ body {
 .vca-field-row .first {
     width: 100%;
     box-shadow: none;
-    padding-right: 0.6em;
 }
 
+.vca-field-row .first input,
+.vca-field-row .last input {
+    width: 95%;
+}
 .vca-field-row .last {
     width: 100%;
     box-shadow: none;
-    padding-left: 0.6em;
+    text-align: right;
 }
 
-@media only screen and (max-width: 340px) {
-    .vca-field-row .last, .vca-field-row .first {
-        padding: 0px;
+
+@media only screen and (max-width: 600px) {
+
+    .stripe-donation-button {
+        font-size: .9rem !important;
     }
+    .vca-input select,
+    .vca-input input,
+    .error span,
+    .vca-field-label label {
+        font-size: .8em;
+    }
+}
+
+@media only screen and (max-width: 359px) {
+    
+        .vca-field-row .first input,
+        .vca-field-row .last input {
+            width: 100%;
+        }
+
 }
 
 .vca-input {
@@ -456,7 +482,6 @@ ul li {
     padding-top: 10px;
 }
 .vca-input-border {
-    width: 100%;
     border: 1px solid #ccc;
     border-radius: 0.2rem;
     padding: 0.6em 1em;

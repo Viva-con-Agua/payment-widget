@@ -48,7 +48,7 @@ export default {
 }
 
 .payment-footer-text {
-    font-size: 26px;
+    font-size: 1.6em;
     font-weight: bold;
     text-transform: uppercase;
     line-height: 1.3;
@@ -74,7 +74,7 @@ export default {
 @media only screen and (max-width: 1000px) {
 
     .payment-footer-text {
-        font-size: 22px;
+        font-size: 1.4em;
     }
 
 }
@@ -86,7 +86,7 @@ export default {
 @media only screen and (max-width: 800px) {
 
     .payment-footer-text {
-        font-size: 18px;
+        font-size: 1.1em;
     }
 
 }
@@ -101,7 +101,7 @@ export default {
         flex-wrap: wrap;
     }
     .payment-footer-text {
-        font-size: 14px;
+        font-size: 1em;
         text-align: center;
         margin: 10px;
         padding: 0;

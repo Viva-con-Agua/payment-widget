@@ -42,12 +42,9 @@ export default {
 </script>
 <style type="text/css">
     .next-steps {
-        padding: 35px 75px;
+        padding: 2em 7em;
         flex-grow: 2; 
         text-align: left;
-    }
-    .next-steps strong {
-        font-size: 17px;
     }
     .next-steps ul {
         list-style: none;
@@ -55,20 +52,11 @@ export default {
     .next-steps ul li:before {
       content: '✓';
     }
-    .share {
-        display: none;
-        flex-grow: 1; 
-        background-color: blue;
-        padding: 10px;
-    }
-    .share div {
-
-    }
     .thank-you {
         width: 100%;
     }
     .thank-you-text {
-        margin: 20px 0;
+        margin: 1em 0;
         font-size: 3em;
         font-weight: bold;
         text-transform: uppercase;
@@ -77,6 +65,7 @@ export default {
         line-height: 1em;
     }
     .thank-you-text-sub {
+        font-size: 1.2em;
         text-align: center; 
     }
     .thank-you-next {
@@ -85,8 +74,18 @@ export default {
     }
 
 @media only screen and (max-width: 600px) {
+
+    .next-steps strong {
+        font-size: .9em;
+    }
+
     .thank-you-text {
-        font-size: 16px;
+        font-size: 1rem;
+    }
+
+    .next-steps ul,
+    .thank-you-text-sub {
+        font-size: .8em;
     }
     .next-steps {
         padding: 0px;

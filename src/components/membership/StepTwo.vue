@@ -258,41 +258,34 @@ export default {
     box-shadow: none;
     outline-color: #008fc2;  
     background-color:white;
-    background-position: right;
-    background-repeat: no-repeat;
 }
 
 .vca-input select option {
-  background:#222;
+  background:white;
   border-top:1px solid #444;
   padding:.3em 1em .3em 1em;
-}
-
-.vca-input-checkbox {
-    margin-bottom: .3em;
-    font-size: 17px;
 }
 
 .selectknown {
     display: inline-flex;
     flex-wrap: wrap;
     width: 100%;
-    margin-top: 15px;
+    margin-top: 1em;
 }
 
 .selectknown label {
     padding-top: .6em;
     margin-right: .6em;
+    margin-bottom: .6em;
 }
 
 .selectknown select {
     min-width: 170px;
 }
 
-
 @media only screen and (max-width: 600px) {
-    .vca-input-checkbox {
-        font-size: 14px;
+    .selectknown label {
+        font-size: .8em;
     }
 }
 
