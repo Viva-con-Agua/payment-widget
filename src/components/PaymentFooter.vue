@@ -32,7 +32,12 @@ export default {
             return this.money.amount / 100
         },
         getCurrency() {
-            return this.money.currency
+            switch(this.money.currency) {
+                case 'CHF':
+                    return 'Schweizer Franken'
+                default:
+                    return 'Euro'
+            }
         }
     }
 }

@@ -215,6 +215,7 @@ body {
     position: center;
     font-size: 15px;
     line-height: 15px;
+    padding: 10px;
 }
 .vca-form {
     width: 100%;
@@ -278,36 +279,6 @@ body {
   background:white;
   border-top:1px solid #444;
   padding:.3em 1em .3em 1em;
-}
-
-/*********************
-*** SCREEN 600 PX ***
-**********************/
-
-@media only screen and (max-width: 600px) {
-
-    .stripe-donation-button {
-        font-size: .9rem !important;
-    }
-    .vca-input select,
-    .vca-input input,
-    .error span,
-    .vca-field-label label {
-        font-size: .8em;
-    }
-}
-
-/*********************
-*** SCREEN 359 PX ***
-**********************/
-
-@media only screen and (max-width: 359px) {
-    
-        .vca-field-row .first input,
-        .vca-field-row .last input {
-            width: 100%;
-        }
-
 }
 
 .vca-input {
@@ -452,9 +423,8 @@ body {
 .vca-tabs ul {
     border-spacing: 5px 0;
     overflow: hidden;
-    display: table;
-    width: 100%;
-    padding-left: 5px;
+    display: flex;
+    padding: 0;
     border: 1px solid #ccc;
 
     margin-bottom: -1px;
@@ -470,13 +440,14 @@ ul li {
 /* Style the buttons inside the tab */
 .vca-tabs li {
     background-color: inherit;
-    display: inline-flex;
-    margin: 0 2px;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
     border-top: 1px solid #dddddd;
     border-right: 1px solid #dddddd;
     border-left: 1px solid #dddddd;
+
+    flex: auto;
+    flex-basis: 100%;
 
     outline: none;
     cursor: pointer;
@@ -540,4 +511,39 @@ ul li {
     border: none;
     color: #ccc;
 }
+
+/*********************
+*** SCREEN 600 PX ***
+**********************/
+
+@media only screen and (max-width: 600px) {
+
+    .stripe-donation-button {
+        font-size: .9rem !important;
+    }
+    .vca-input select,
+    .vca-input input,
+    .error span,
+    .vca-field-label label {
+        font-size: .8em;
+    }
+}
+
+/*********************
+*** SCREEN 359 PX ***
+**********************/
+
+@media only screen and (max-width: 359px) {
+
+    .vca-tabs ul {
+        flex-wrap: wrap;
+    }
+
+    .vca-field-row .first input,
+    .vca-field-row .last input {
+        width: 100%;
+    }
+
+}
+
 </style>
