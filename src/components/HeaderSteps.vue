@@ -37,10 +37,6 @@ export default {
         currentStep: {
             type: Number,
             default: 1
-        },
-        currentLabel: {
-            type: String,
-            default: ''
         }
     }
 }

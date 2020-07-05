@@ -2,8 +2,8 @@
     <div class="steptwo">
         <vca-field label="Ich spende als">
                 <div class="btn-center-container">
-                    <button :class="getTypeClass('private')" class="selection-button"  @click.prevent="selectCompany(false)">Privatperson</button>
-                    <button :class="getTypeClass('company')" class="selection-button" @click.prevent="selectCompany(true)">Unternehmen</button>
+                    <button :class="btnSelected('private')" class="selection-button"  @click.prevent="selectCompany(false)">Privatperson</button>
+                    <button :class="btnSelected('company')" class="selection-button" @click.prevent="selectCompany(true)">Unternehmen</button>
                 </div>
         </vca-field>
         <vca-field label="Persönliche Angaben">
@@ -214,10 +214,9 @@ export default {
     },
     methods: {
         selectCompany(company) {
-            console.log(company)
             this.offset.company = company
         },
-        getTypeClass(val) {
+        btnSelected(val) {
             if (this.offset.company) {
                 return (val == 'company') ? 'selected' : '';
             } else {

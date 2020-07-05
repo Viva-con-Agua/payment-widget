@@ -128,12 +128,6 @@ export default {
         }
     },
     computed: {
-        isCH() {
-            return this.country == 'CH'
-        },
-        isDE() {
-            return this.country == 'DE'
-        },
         getLabel() {
             if (this.country == 'DE' || this.country == 'CH' || this.country == 'AT') {
                 return "Jetzt absenden"
