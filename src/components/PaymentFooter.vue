@@ -1,5 +1,5 @@
 <template>
-    <div class="payment-footer" stlye="clear: both;">
+    <div class="payment-footer">
         <div class="payment-footer-text">Danke, dass du unsere Projekte für sauberes Trinkwasser mit {{ getAmount }} {{ getCurrency }} {{ getInterval }} unterstützen möchtest!</div>
         <div class="payment-footer-image"><img src="~@/assets/thank_you_small.png" /></div>
     </div>
@@ -38,34 +38,63 @@ export default {
 }
 </script>
 <style type="text/css">
+
 .payment-footer {
-    background-color: #008fc2;
-    margin: 0;
     color: white;
-    padding: 1em;
+    background-color: #008fc2;
+
     vertical-align: middle;
     display: flex;
-    width: 100%;
 }
+
 .payment-footer-text {
-    flex-grow: 2;
-    font-size: 20px;
+    font-size: 26px;
     font-weight: bold;
     text-transform: uppercase;
-    position: relative;
     line-height: 1.3;
-    flex-basis: 80%;
-    margin: auto 0;
+
+    margin: auto 20px auto 50px;
+    padding: 10px 0;
 }
 
 .payment-footer-image img {
-    margin: 0 10px;
+    margin: auto;
+    width: inherit;
 }
 
 .payment-footer-image {
-    flex-grow: 1;
     display: flex;
+    margin-right: 50px;
 }
+
+/*********************
+*** SCREEN 1000 PX ***
+**********************/
+
+@media only screen and (max-width: 1000px) {
+
+    .payment-footer-text {
+        font-size: 22px;
+    }
+
+}
+
+/*********************
+*** SCREEN 800 PX ***
+**********************/
+
+@media only screen and (max-width: 800px) {
+
+    .payment-footer-text {
+        font-size: 18px;
+    }
+
+}
+
+/*********************
+*** SCREEN 600 PX ***
+**********************/
+
 @media only screen and (max-width: 600px) {
 
     .payment-footer {
@@ -74,11 +103,13 @@ export default {
     .payment-footer-text {
         font-size: 14px;
         text-align: center;
-        margin-bottom: 10px;
+        margin: 10px;
+        padding: 0;
     }
 
     .payment-footer-image {
         width: 100%;
+        margin: 0 0 10px 0;
     }
 
     .payment-footer-image img {

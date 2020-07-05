@@ -279,7 +279,7 @@ export default {
 
 .btn_nav_back {
         position: absolute;
-        margin-top:-49px;
+        margin-top:-54px;
 }
 
 

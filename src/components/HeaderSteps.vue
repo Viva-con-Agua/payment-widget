@@ -11,7 +11,7 @@
                  }">
                     <div class="step-content">
                         <div class="step-id"><div>{{ step.id }}.</div></div>
-                        <div class="step-label">{{ step.label }}</div>
+                        <div class="step-label"><div>{{ step.label }}</div></div>
                     </div>
                     <div v-if="step.id != currentStep" class="step-background"></div>
                 </li>
@@ -47,67 +47,6 @@ export default {
 </script>
 <style type="text/css">
 
-.step-background {
-    background-image: url("~@/assets/blue_pixel.jpg");
-    background-repeat: repeat-x;
-    background-position: center 35%;
-
-    opacity: 0.5;
-    height: 100%;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 50%;
-    z-index: 0;
-
-}
-
-/*
-    Default CSS
-*/
-
-.steps ul {
-    border-spacing: 5px 0;
-    overflow: hidden;
-    margin-bottom: 0px;
-    display: table;
-    width: 100%;
-    padding: 0;
-    border-left: 1px solid #ccc;
-    border-top: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    background-color: #fff;
-
-/*
-    background-image: url("~@/assets/blue_pixel.jpg");
-    background-repeat: repeat-x;
-    background-position: center 90%;
-*/
-}
-
-ul li {
-    list-style: none;
-}
-/* Style the buttons inside the step */
-.steps li {
-    background-color: inherit;
-    display: table-cell;
-    outline: none;
-    position: relative;
-    padding: 14px 16px;
-    transition: 0.3s;
-    font-size: 17px;
-}
-
-
-.steps li div.step-content .step-label {    
-    white-space: nowrap;
-}
-
 .first {
     margin-left: 0px;
 }
@@ -116,8 +55,51 @@ ul li {
     margin-right: 0px;
 }
 
-.behind {
+.behind .step-content {
+    right: 0;
+    left: unset !important;
+}
 
+.behind .step-background {
+    left: 0;
+}
+
+.step-background {
+    background-image: url("~@/assets/blue_pixel.jpg");
+    background-repeat: repeat-x;
+    background-position: center 35%;
+
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+}
+
+/*
+    Default CSS
+*/
+
+.steps ul {
+    overflow: hidden;
+    display: table;
+    margin-bottom: 0px;
+    padding: 0;
+    width: 100%;
+}
+
+/* Style the buttons inside the step */
+.steps li {
+    list-style: none;
+    display: table-cell;
+    position: relative;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.steps li div.step-content .step-label {    
+    white-space: nowrap;
 }
 
 /* 
@@ -126,50 +108,65 @@ ul li {
 .steps li.is-active {
     background-color: #008fc3;
     border-color: #008fc3 #008fc3 #008fc3;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px 5px 0 0;
 }
 
 .steps li.is-active div.step-content {
     width: 100%;
     min-height: 75px;
     height: 100%;
-    margin: auto auto;
     text-decoration: none;
-    display: inline-flex;
-
-}
-
-.steps li.is-active div.step-content div.step-label,
-.steps li.is-active div.step-content div.step-id {
-    width: 0;
+    position: relative;
 }
 
 .steps li.is-active div.step-content .step-id {
     color: #008fc3;
     font-weight: bold;
+    font-size: 36px;
+    text-align: center;
+    
     background-image: url("~@/assets/icon_drop_white.png");
     background-size: contain;
     background-position: center center; 
     background-repeat: no-repeat;
-    display: flex;
-    font-size: 12px;
-    justify-content: center;
-    align-items: center; 
-    flex-grow: 1;
-    font-size: 2em;    
+    
+    display: table;
+    position: absolute;
+    left: 0;
+    width: 30%;
+    height: 100%;
 }
 
-.steps li.is-active div.step-content .step-label {    
+.steps li.is-active div.step-content .step-label {
     color: white;
-    flex-grow: 2;
-    margin: auto 0;
+    font-size: 24px;
     text-align: left;
-    padding-left: 10px;
-    font-size: 1.5em;
+    white-space: break-spaces;
+    
+    display: table;
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 30%;
+    height: 100%;
+}
+
+.steps li.is-active div.step-content .step-label div,
+.steps li.is-active div.step-content .step-id div {
+    vertical-align: middle;
+    display: table-cell;
+    padding-top: 5px;
 }
 
 .steps li.is-active div.step-content .step-id div {
-    margin-left: 5px;
-    margin-top: 5px;
+    padding-left: 5px;
+}
+
+.steps li.is-active div.step-content .step-label div {
+    padding-left: 10px;
 }
 
 /*
@@ -177,32 +174,27 @@ ul li {
 */
 
 .steps li.is-inactive {
-/*    background-image: url("~@/assets/blue_pixel.jpg");
-    background-repeat: repeat-x;
-    background-position: center 90%;*/
     vertical-align: middle;
+    opacity: 0.5;
 }
 
 .steps li.is-inactive div.step-content {
-    opacity: 0.5;
-    width: 0;
-    min-height: 75px;
-    height: 100%;
+    text-align: center;
+    text-decoration: none;
+
+    display: table;
+    padding-top: 20px;
+    padding-left: 5px;
     position: absolute;
     left: 0;
     top: 0;
     width: 50%;
-    padding-top: 15px;
-    text-align: center;
-    text-decoration: none;
-}
-
-.steps li.is-inactive div.step-content div.step-label,
-.steps li.is-inactive div.step-content div.step-id {
+    height: auto;
 }
 
 .steps li.is-inactive div.step-content .step-label {    
     color: #008fc3; 
+    display: table-row;
 }
 
 .steps li.is-inactive div.step-content .step-id {
@@ -211,34 +203,81 @@ ul li {
     background-size: contain;
     background-position: center center; 
     background-repeat: no-repeat;
-    font-size: 1.2em;
+    font-size: 20px;
 
     margin: 5px auto;
-    display: block;
+    display: table-row;
     height: 40px;
-    width: 70px;
 }
 
 .steps li.is-inactive div.step-content .step-id div {
-  text-align: center;
-  position: relative;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
+    padding-top: 10px;
 }
 
-@media only screen and (max-width: 950px) {
+.steps li.is-inactive div.step-content .step-label div {
+    padding-top: 5px;
+}
+
+/*********************
+*** SCREEN 1120 PX ***
+**********************/
+
+@media only screen and (max-width: 1120px) {
+
+    .steps li.is-active div.step-content div.step-label {
+        font-size: 22px;
+    }
+
+}
+
+/*********************
+*** SCREEN 1000 PX ***
+**********************/
+
+@media only screen and (max-width: 1000px) {
 
     .steps li.is-active div.step-content div.step-label {
         font-size: 17px;
     }
 
-    .steps li div.step-content .step-label {    
+    .steps li.is-inactive div.step-content .step-label {    
+        font-size: 14px;
+        white-space: normal;
+    }
+
+    .steps li.is-active div.step-content div.step-id {
+        font-size: 24px;
+    }
+
+    .steps li.is-inactive div.step-content div.step-id {
+        font-size: 18px;
+    }
+
+}
+
+/*********************
+*** SCREEN 800 PX ***
+**********************/
+
+@media only screen and (max-width: 800px) {
+
+    .step-background {
+        width: 35%;
+    }
+
+    .steps li.is-active div.step-content div.step-label {
+        font-size: 15px;
+    }
+
+    .steps li.is-inactive div.step-content div.step-label {
         font-size: 14px;
     }
 
 }
+
+/*********************
+*** SCREEN 600 PX ***
+**********************/
 
 @media only screen and (max-width: 600px) {
 
@@ -247,41 +286,39 @@ ul li {
     }
 
     .steps li div.step-content .step-label {    
-        display: none;
+        display: none !important;
     }
 
-    .steps li.is-active {
+    .steps li {
         padding: 7px 8px;
     }
 
     .steps li.is-active div.step-content div.step-id {
-        width: auto;
-    }
-
-    .steps li.is-active div.step-content .step-id div {
-        font-size: 1em;
-    }
-
-    .steps li.is-inactive {
-        padding: 7px 8px;
-        background: none;
+        width: 100%;
     }
 
     .steps li.is-inactive div.step-content {
-        opacity: 0.5;
-        width: 100%;
+        display: block;
         min-height: 75px;
-        display: flex;
-        justify-content: center;
+        width: 100%;
+        padding: 0px;
+        position: relative;
+
     }
 
     .steps li.is-inactive div.step-content .step-id {
+        height: 80%;
         width: 100%;
-        height: auto;        
+        display: table;
+        position: absolute;
+        margin-top: 10px;
     }
 
     .steps li.is-inactive div.step-content .step-id div {
         font-size: 16px;
+        display: table-cell;
+        vertical-align: middle;
+        padding-top: 5px;
     }
 
 }
