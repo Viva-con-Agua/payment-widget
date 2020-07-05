@@ -98,7 +98,9 @@ export default {
     max-width: 1600px;
     position: center;
     margin: 0 auto;
-
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;
 }
 .tabs-details {
   padding: 15px;
