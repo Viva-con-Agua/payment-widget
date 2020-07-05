@@ -12,8 +12,11 @@
                         <strong>Hinweis:</strong> Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrags verlangen. Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen.
             </CheckBox>
         </vca-field>
-        <div class="clear-button"/>
-        <button class="submit btn_nav_back" @click.prevent="back"> Zurück zu Schritt 2 </button>
+        <div class="nav-btn-container">
+            <div class="nav-back">
+                <button class="submit nav-btn-back>" @click.prevent="back"> Zurück zu Schritt 2 </button>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -46,9 +49,3 @@ export default {
 
 }
 </script>
-<style type="text/css">
-    .clear-button {
-        clear: both;
-        height: 40px;
-    }
-</style>

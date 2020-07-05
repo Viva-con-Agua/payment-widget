@@ -41,37 +41,49 @@ export default {
 }
 </script>
 <style type="text/css">
-    .next-steps {
-        padding: 2em 7em;
-        flex-grow: 2; 
-        text-align: left;
-    }
-    .next-steps ul {
-        list-style: none;
-    }
-    .next-steps ul li:before {
-      content: '✓';
-    }
-    .thank-you {
-        width: 100%;
-    }
-    .thank-you-text {
-        margin: 1em 0;
-        font-size: 3em;
-        font-weight: bold;
-        text-transform: uppercase;
-        color: #008fc2;
-        text-align: center; 
-        line-height: 1em;
-    }
-    .thank-you-text-sub {
-        font-size: 1.2em;
-        text-align: center; 
-    }
-    .thank-you-next {
-        display: flex; 
-        flex-direction: row;
-    }
+.next-steps {
+    text-align: left;
+
+    flex-grow: 2; 
+    padding: 2em 7em;
+}
+
+.next-steps ul {
+    list-style: none;
+}
+
+.next-steps ul li:before {
+    content: '✓';
+}
+
+.thank-you {
+    width: 100%;
+}
+
+.thank-you-text {
+    color: #008fc2;
+    font-size: 3em;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1em;
+    text-align: center; 
+    
+    margin: 1em 0;
+}
+
+.thank-you-text-sub {
+    font-size: 1.2em;
+    text-align: center; 
+}
+
+.thank-you-next {
+    display: flex; 
+    flex-direction: row;
+}
+
+/*********************
+*** SCREEN 600 PX ***
+**********************/
 
 @media only screen and (max-width: 600px) {
 
@@ -98,6 +110,4 @@ export default {
     }
 }
 
-
 </style>
-

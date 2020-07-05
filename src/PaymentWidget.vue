@@ -106,38 +106,4 @@ export default {
     padding: 1em;
 }
 
-.selectbutton:hover {
-    background-color: #0070ba;
-}
-.selectbutton {
-    color: #fff;
-    cursor: pointer;
-    background-color: #008fc3;
-    text-transform: uppercase;
-    font-weight: bold;
-    text-decoration: none;
-    
-    border: solid thin transparent;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    
-    
-    width: auto;
-    margin: 1em 2em;
-    padding: 1.5em 2em;
-}
-
-@media only screen and (max-width: 600px) {
-    .selectbutton {        
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
-        -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
-        -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
-
-        font-size: .9em;
-        margin: 1em;
-
-        padding: 1em 1.3em;
-    }
-}
 </style>

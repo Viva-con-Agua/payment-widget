@@ -54,7 +54,7 @@ export default {
     },
     data() {
         return {
-            step: 2,
+            step: 3,
             steps: 
             [
                 {id: 1, label: 'Meine Spende' },
@@ -179,57 +179,84 @@ export default {
     border: solid 2px #008fc3;
 }
 
+.btn-center-container {
+    text-align: center;
+}
+
+.btn-flex-container {
+    display: flex;
+}
+
+.btn-flex-box {
+    flex: auto;
+    flex-basis: 100%;
+}
+
+.btn-center-container .selected {
+    color: #fff;
+    background-color: #008fc3;
+}
+
+.btn-center-container .selected:hover {
+    background-color: #0070ba;
+}
+
 /*
     CSS SELECTION BUTTON
 */
+.selection-button {
+    background-color: #fff;
+    color: #008fc3;
 
-.btn_deselected {
-    background: #fff  !important;
-    color: #008fc3 !important;
-    border: solid thin transparent !important;
-    box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    
+    border: solid thin transparent;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    
+    
+    width: auto;
+    margin: 1em 2em;
+    padding: 1.5em 2em;
 }
 
-.btn_deselected:hover {
-    color: #008fc3 !important;
-    border: solid thin #008fc3 !important;
+.selection-button:hover {
+    border: solid thin #008fc3;
 }
 
 /*
     CSS DROP BUTTON
 */
-.btn_drop {
+.btn-drop {
     cursor: pointer;
-    background-image: url("~@/assets/icon_drop.png");
+    background-image: none;
     background-size: contain;
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: center;
-    min-width: 170px;
-    min-height: 200px;
-    height: 100%;
-    color: #fff;
     border: solid thin transparent;
     font-weight: bold;
     text-decoration: none;
     vertical-align: middle;
-    flex: auto;
-    flex-basis: 100%;
+    color: #008fc2;
+    min-height: 200px;
     margin: 0 auto;
 }
 
-.btn_drop_deselected:hover {
-    color: #008fc3 !important;
+.btn-drop:hover {
     background-image: url("~@/assets/icon_drop_white_outline.png");
 }
-.btn_drop_deselected {
-    color: #008fc2;
-    background-image: none;
+.btn-drop-selected,
+.btn-drop-selected:hover {
+    color: #fff;
+    background-image: url("~@/assets/icon_drop.png");
 }
 
-.btn_drop img {
+.btn-drop img {
     width: 40px;
     position: relative;
     bottom: 10px;
@@ -238,20 +265,47 @@ export default {
 /*
     CSS NAVIGATION BUTTON
 */
+.nav-btn-container {
+    display: flex;
+}
 
-.btn_nav,
-.btn_nav_back {
+.nav-btn-container .nav-next,
+.nav-btn-container .nav-back {
+    flex: auto;
+    flex-basis: 100%;
+    margin-bottom: 1em;
+}
+
+.nav-btn-container .nav-next {
+    text-align: right;
+}
+
+.nav-btn-container .nav-back {
+    text-align: left;
+}
+
+.nav-btn-container .nav-next button:hover,
+.nav-btn-container .nav-back button:hover {
+    background-color: #0070ba;
+}
+
+.nav-btn-container .nav-next button:disabled,
+.nav-btn-container .nav-back button:disabled {
+    background: #fff;
+    color: #008fc3;
+    opacity: 0.3;
+    cursor: default;
+}
+
+.nav-btn-container .nav-next button,
+.nav-btn-container .nav-back button {
     cursor: pointer;
-    font-size: 1.3em;
+    font-size: 1.2em;
     height: auto;
     width: auto;
     background-color: #008fc3;
     color: #fff;
     padding: 0.5em 1.2em;
-    margin-left:auto; 
-    margin-right:0;
-    display: block;
-    margin-bottom: 10px;
     border: 0;
     text-transform: uppercase;
     font-weight: bold;
@@ -264,75 +318,62 @@ export default {
     -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }
 
-.btn_nav:hover,
-.btn_nav-back:hover {
-    background-color: #0070ba;
-}
-
-.btn_nav:disabled,
-.btn_nav_back:disabled {
-    background: #fff;
-    color: #008fc3;
-    opacity: 0.3;
-    cursor: default;
-}
-
-.btn_nav_back {
-        position: absolute;
-        margin-top:-54px;
-}
-
+/*********************
+*** SCREEN 600 PX ***
+**********************/
 
 @media only screen and (max-width: 600px) {
+
+    .btn-flex-container {
+        flex-wrap: wrap;
+    }
+    
+    /*
+        CSS NAVIGATION BUTTON
+    */
+    .nav-btn-container .nav-next button,
+    .nav-btn-container .nav-back button {
+        white-space: nowrap;
+        font-size: .7em;
+    }
 
     /*
         CSS SELECTION BUTTON
     */
-    .btn_deselected {
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19) !important;
-        -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19) !important;
-        -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19) !important;
+    .selection-button {
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+        -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+        -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+
+        font-size: .9em;
+        margin: 1em;
+        padding: 1em 1.3em;
     }
 
     /*
         CSS DROP BUTTON
     */
-    .btn_drop {
+    .btn-drop {
         max-width: 170px;
-    }
-    .btn_drop_deselected {
         background-image: url("~@/assets/icon_drop_white_outline.png");
     }
 
-    /*
-        CSS NAVIGATION BUTTON
-    */
-    .btn_nav,
-    .btn_nav_back {
-        white-space: nowrap;
-        font-size: .7em;
+    .btn-drop-selected {
+        background-image: url("~@/assets/icon_drop.png");
     }
-
-    .btn_nav_back {
-        position: relative;
-        margin-right: auto;
-        margin-top: -36px;
-        float: none;
-        margin-left: 0;
-    }
-
 
 }
 
+/*********************
+*** SCREEN 400 PX ***
+**********************/
 
 @media only screen and (max-width: 400px) {
-    .btn_nav_back {
-        float: none;
-        margin-right:auto; 
-        margin-left:0;
-        position: unset;
-        margin-top: 0px;
+
+    .nav-btn-container {
+        flex-wrap: wrap-reverse;
     }
+
 }
 
 </style>

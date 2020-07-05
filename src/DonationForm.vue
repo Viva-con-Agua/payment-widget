@@ -264,6 +264,25 @@ body {
     text-align: right;
 }
 
+.vca-input select {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 0.2rem;
+    padding: 0.6em 1em;
+    box-shadow: none;
+    outline-color: #008fc2;  
+    background-color:white;
+}
+
+.vca-input select option {
+  background:white;
+  border-top:1px solid #444;
+  padding:.3em 1em .3em 1em;
+}
+
+/*********************
+*** SCREEN 600 PX ***
+**********************/
 
 @media only screen and (max-width: 600px) {
 
@@ -277,6 +296,10 @@ body {
         font-size: .8em;
     }
 }
+
+/*********************
+*** SCREEN 359 PX ***
+**********************/
 
 @media only screen and (max-width: 359px) {
     

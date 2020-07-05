@@ -61,8 +61,11 @@ export default {
 
 .vca-input-checkbox {
     margin-bottom: .3em;
-    font-size: 1em;
 }
+
+/*********************
+*** SCREEN 600 PX ***
+**********************/
 
 @media only screen and (max-width: 600px) {
 

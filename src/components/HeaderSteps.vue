@@ -122,6 +122,14 @@ export default {
     position: relative;
 }
 
+
+.steps li.is-active div.step-content .step-id,
+.steps li.is-active div.step-content .label {
+    display: table;
+    position: absolute;
+    height: 100%;
+}
+
 .steps li.is-active div.step-content .step-id {
     color: #008fc3;
     font-weight: bold;
@@ -130,14 +138,11 @@ export default {
     
     background-image: url("~@/assets/icon_drop_white.png");
     background-size: contain;
-    background-position: center center; 
+    background-position: center; 
     background-repeat: no-repeat;
     
-    display: table;
-    position: absolute;
     left: 0;
     width: 30%;
-    height: 100%;
 }
 
 .steps li.is-active div.step-content .step-label {
@@ -151,7 +156,6 @@ export default {
     right: 0;
     top: 0;
     left: 30%;
-    height: 100%;
 }
 
 .steps li.is-active div.step-content .step-label div,

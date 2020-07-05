@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="payment-buttons">
-            <button v-if="isDE" :class="{ 'btn_selected': getPaymnetType('sepa'), 'btn_deselected': !getPaymnetType('sepa')}" class="selectbutton"  @click.prevent="setPaymentType('sepa')">SEPA</button>
-            <button v-if="isDE" :class="{ 'btn_selected': getPaymnetType('card'), 'btn_deselected': !getPaymnetType('card')}" class="selectbutton"  @click.prevent="setPaymentType('card')">Kreditkarte</button>
-            <button v-if="isDE" :class="{ 'btn_selected': getPaymnetType('paypal'), 'btn_deselected': !getPaymnetType('paypal')}" class="selectbutton"  @click.prevent="setPaymentType('paypal')">Paypal</button>
+        <div class="btn-center-container">
+            <button v-if="isDE" :class="{ 'selected': getPaymnetType('sepa')}" class="selection-button"  @click.prevent="setPaymentType('sepa')">SEPA</button>
+            <button v-if="isDE" :class="{ 'selected': getPaymnetType('card')}" class="selection-button"  @click.prevent="setPaymentType('card')">Kreditkarte</button>
+            <button v-if="isDE" :class="{ 'selected': getPaymnetType('paypal')}" class="selection-button"  @click.prevent="setPaymentType('paypal')">Paypal</button>
         </div>
         <div class="payment-type">
             <SEPA v-if="getPaymnetType('sepa')" v-on:success="success" :payment="payment" :label="label" :valid="valid" @notValid="notValid"/>
@@ -53,9 +53,3 @@ export default {
     },
 };
 </script>
-<style>
-.payment-buttons {
-    text-align: center;
-}
-
-</style>
