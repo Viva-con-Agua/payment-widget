@@ -54,7 +54,7 @@ export default {
     },
     data() {
         return {
-            step: 3,
+            step: 1,
             steps: 
             [
                 {id: 1, label: 'Meine Spende' },
@@ -220,7 +220,7 @@ export default {
     
     
     width: auto;
-    margin: 1em 2em;
+    margin: 1em 3em;
     padding: 1.5em 2em;
 }
 

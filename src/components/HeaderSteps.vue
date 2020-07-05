@@ -98,7 +98,7 @@ export default {
     font-size: 1.1em;
 }
 
-.steps li div.step-content .step-label {    
+.steps li div.step-content div.step-label {
     white-space: nowrap;
 }
 
@@ -123,17 +123,17 @@ export default {
 }
 
 
-.steps li.is-active div.step-content .step-id,
-.steps li.is-active div.step-content .label {
+.steps li.is-active div.step-content div.step-id,
+.steps li.is-active div.step-content div.step-label {
     display: table;
     position: absolute;
     height: 100%;
 }
 
-.steps li.is-active div.step-content .step-id {
+.steps li.is-active div.step-content div.step-id {
     color: #008fc3;
     font-weight: bold;
-    font-size: 2.2em;
+    font-size: 2.2vw;
     text-align: center;
     
     background-image: url("~@/assets/icon_drop_white.png");
@@ -145,9 +145,9 @@ export default {
     width: 30%;
 }
 
-.steps li.is-active div.step-content .step-label {
+.steps li.is-active div.step-content div.step-label {
     color: white;
-    font-size: 1.6em;
+    font-size: 1.6vw;
     text-align: left;
     white-space: break-spaces;
     
@@ -158,18 +158,18 @@ export default {
     left: 30%;
 }
 
-.steps li.is-active div.step-content .step-label div,
-.steps li.is-active div.step-content .step-id div {
+.steps li.is-active div.step-content div.step-label div,
+.steps li.is-active div.step-content div.step-id div {
     vertical-align: middle;
     display: table-cell;
     padding-top: 5px;
 }
 
-.steps li.is-active div.step-content .step-id div {
+.steps li.is-active div.step-content div.step-id div {
     padding-left: 5px;
 }
 
-.steps li.is-active div.step-content .step-label div {
+.steps li.is-active div.step-content div.step-label div {
     padding-left: 10px;
 }
 
@@ -196,12 +196,12 @@ export default {
     height: auto;
 }
 
-.steps li.is-inactive div.step-content .step-label {    
+.steps li.is-inactive div.step-content div.step-label {
     color: #008fc3; 
     display: table-row;
 }
 
-.steps li.is-inactive div.step-content .step-id {
+.steps li.is-inactive div.step-content div.step-id {
     color: white;
     background-image: url("~@/assets/icon_drop.png");
     background-size: contain;
@@ -214,25 +214,13 @@ export default {
     height: 40px;
 }
 
-.steps li.is-inactive div.step-content .step-id div {
+.steps li.is-inactive div.step-content div.step-id div {
     padding-top: 10px;
     padding-left: 1px;
 }
 
-.steps li.is-inactive div.step-content .step-label div {
+.steps li.is-inactive div.step-content div.step-label div {
     padding-top: 5px;
-}
-
-/*********************
-*** SCREEN 1120 PX ***
-**********************/
-
-@media only screen and (max-width: 1120px) {
-
-    .steps li.is-active div.step-content div.step-label {
-        font-size: 1.3em;
-    }
-
 }
 
 /*********************
@@ -241,21 +229,13 @@ export default {
 
 @media only screen and (max-width: 1000px) {
 
-    .steps li.is-active div.step-content div.step-label {
-        font-size: 1.1em;
-    }
-
-    .steps li.is-inactive div.step-content .step-label {    
-        font-size: .9em;
+    .steps li.is-inactive div.step-content div.step-label {
+        font-size: 1.3vw;
         white-space: normal;
     }
 
-    .steps li.is-active div.step-content div.step-id {
-        font-size: 1.5em;
-    }
-
     .steps li.is-inactive div.step-content div.step-id {
-        font-size: 1em;
+        font-size: 1.5vw;
     }
 
     .steps li.is-inactive div.step-content div.step-id div {
@@ -274,13 +254,30 @@ export default {
         width: 40%;
     }
 
+    .steps li.is-active div.step-content div.step-id {
+        width: 40%;
+    }
+
     .steps li.is-active div.step-content div.step-label {
-        font-size: .9em;
+        left: 40%;
+    }
+
+    .steps li.is-active div.step-content div.step-label div {
+        word-wrap: anywhere;
+    }
+
+    .steps li.is-active div.step-content div.step-label {
+        font-size: 2.1vw;
     }
 
     .steps li.is-inactive div.step-content div.step-label {
-        font-size: .8em;
+        font-size: 1.7vw;
     }
+
+    .steps li.is-active div.step-content div.step-label div {
+        word-wrap: anywhere;
+    }
+
 
 }
 
@@ -327,7 +324,7 @@ export default {
         display: none;
     }
 
-    .steps li div.step-content .step-label {    
+    .steps li div.step-content div.step-label {
         display: none !important;
     }
 
@@ -340,7 +337,7 @@ export default {
     }
 
     .steps li.is-active div.step-content div.step-id div {
-        font-size: 1.6em;
+        font-size: 7vw;
     }
 
     .steps li.is-inactive div.step-content {
@@ -351,7 +348,7 @@ export default {
         position: relative;
     }
 
-    .steps li.is-inactive div.step-content .step-id {
+    .steps li.is-inactive div.step-content div.step-id {
         height: 80%;
         width: 100%;
         display: table;
@@ -359,8 +356,8 @@ export default {
         margin-top: 10px;
     }
 
-    .steps li.is-inactive div.step-content .step-id div {
-        font-size: 1.5em;
+    .steps li.is-inactive div.step-content div.step-id div {
+        font-size: 6vw;
         display: table-cell;
         vertical-align: middle;
         padding-top: 5px !important;
