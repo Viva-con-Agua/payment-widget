@@ -4,11 +4,13 @@
             <div class="vca">
                 <vca-form>
                     <HeaderSteps :currentStep=step :steps=steps />
-                    <StepOne v-if="step === 1" @submit="submitStepOne"/>
-                    <StepTwo v-if="step === 2" @submit="submitStepTwo" @back="backStepOne" :supp="payment.supporter" :off="payment.offset"/>
-                    <StepThree v-if="step === 3" :payment="payment" :country="country" :valid="$v.payment" @back="backStepTwo" @success="success"/>
-                    <StepThanks v-if="step === 4"/>
-                     <PaymentFooter v-if="step === 3 || step === 2" :money="payment.money" :interval="payment.interval" />
+                    <div class="membership-form-content">
+                        <StepOne v-if="step === 1" @submit="submitStepOne"/>
+                        <StepTwo v-if="step === 2" @submit="submitStepTwo" @back="backStepOne" :supp="payment.supporter" :off="payment.offset"/>
+                        <StepThree v-if="step === 3" :payment="payment" :country="country" :label="getLabel" :valid="$v.payment" @back="backStepTwo" @success="success"/>
+                        <StepThanks v-if="step === 4" :payment="payment"/>
+                    </div>
+                    <PaymentFooter v-if="step === 3 || step === 2" :money="payment.money" :interval="payment.interval" />
                 </vca-form>
             </div>
         </div>
@@ -172,6 +174,11 @@ export default {
 
 <style>
 
+.membership-form-content {
+    padding: 10px;
+    border: solid 2px #008fc3;
+}
+
 /*
     CSS SELECTION BUTTON
 */
@@ -235,14 +242,16 @@ export default {
 .btn_nav,
 .btn_nav_back {
     cursor: pointer;
-    margin: 1em 5px;
     font-size: 1.3em;
     height: auto;
     width: auto;
     background-color: #008fc3;
     color: #fff;
     padding: 0.5em 1.2em;
-    float: right;
+    margin-left:auto; 
+    margin-right:0;
+    display: block;
+    margin-bottom: 10px;
     border: 0;
     text-transform: uppercase;
     font-weight: bold;
@@ -269,7 +278,8 @@ export default {
 }
 
 .btn_nav_back {
-    float: left;
+        position: absolute;
+        margin-top:-49px;
 }
 
 
@@ -299,10 +309,30 @@ export default {
     */
     .btn_nav,
     .btn_nav_back {
+        white-space: nowrap;
         font-size: 12px;
     }
 
+    .btn_nav_back {
+        position: relative;
+        margin-right: auto;
+        margin-top: -36px;
+        float: none;
+        margin-left: 0;
+    }
 
+
+}
+
+
+@media only screen and (max-width: 400px) {
+    .btn_nav_back {
+        float: none;
+        margin-right:auto; 
+        margin-left:0;
+        position: unset;
+        margin-top: 0px;
+    }
 }
 
 </style>

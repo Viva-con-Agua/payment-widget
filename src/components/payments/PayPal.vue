@@ -74,4 +74,9 @@ export default {
 
     }
 }
-</script> 
+</script>
+<style>
+    .paypal-payment-container {
+        text-align: center;
+    }
+</style>

@@ -95,8 +95,8 @@
                             </div>
                         </div>
         </vca-field>
-        <button class="submit btn_nav_back" @click.prevent="back"> Zurück zu Schritt 1 </button>
         <button class="submit btn_nav" @click.prevent="submit" > Weiter zu Schritt 3 </button>
+        <button class="submit btn_nav_back" @click.prevent="back"> Zurück zu Schritt 1 </button>
     </div>
 </template>
 <script>
@@ -270,6 +270,7 @@ export default {
 
 .vca-input-checkbox {
     margin-bottom: .3em;
+    font-size: 17px;
 }
 
 .selectknown {
@@ -286,6 +287,13 @@ export default {
 
 .selectknown select {
     min-width: 170px;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .vca-input-checkbox {
+        font-size: 14px;
+    }
 }
 
 </style>

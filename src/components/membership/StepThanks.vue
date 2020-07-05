@@ -1,13 +1,104 @@
 <template>
      <div class="success-view">
-            <h2> Danke für deine Spende </h2>
-            
-        </div>
+
+        <vca-field>
+            <img class="thank-you" src="@/assets/thank_you.png"/><br/>
+
+            <div class="thank-you-text">
+                Danke, dass du unsere <br/>Projektarbeit unterstützt!
+            </div>
+            <div class="thank-you-text-sub">
+                Mit deinem Mitgliedsbeitrag von {{ getAmount }} {{ getCurrency }} hilfst du uns dabei, Menschen weltweit den Zugang<br/>zu sauberem Trinkwasser und sanitärer Grundversorgung zu ermöglichen.
+            </div>
+        </vca-field>            
+
+        <vca-field label="So geht es weiter">
+            <div class="thank-you-next">
+                <div class="next-steps">
+                    <strong>Du bekommst von uns automatisch:</strong>
+                    <ul>
+                        <li>Eine Bestätigung deiner Mitgliedschaft per E-Mail</li>
+                        <li>Eine Spendenbescheinigung im Monat Januar des Folgejahres</li>
+                    </ul>
+                </div>
+            </div>
+        </vca-field>
+    </div>
  </template> 
 
 <script>
 export default {
-    name: 'StepThanks'
+    name: 'StepThanks',
+    props: ['payment'],
+    computed: {
+        getAmount() {
+            return this.payment.money.amount / 100
+        },
+        getCurrency() {
+            return this.payment.    money.currency
+        }
+    }
 }
 </script>
+<style type="text/css">
+    .next-steps {
+        padding: 35px 75px;
+        flex-grow: 2; 
+        text-align: left;
+    }
+    .next-steps strong {
+        font-size: 17px;
+    }
+    .next-steps ul {
+        list-style: none;
+    }
+    .next-steps ul li:before {
+      content: '✓';
+    }
+    .share {
+        display: none;
+        flex-grow: 1; 
+        background-color: blue;
+        padding: 10px;
+    }
+    .share div {
+
+    }
+    .thank-you {
+        width: 100%;
+    }
+    .thank-you-text {
+        margin: 20px 0;
+        font-size: 3em;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #008fc2;
+        text-align: center; 
+        line-height: 1em;
+    }
+    .thank-you-text-sub {
+        text-align: center; 
+    }
+    .thank-you-next {
+        display: flex; 
+        flex-direction: row;
+    }
+
+@media only screen and (max-width: 600px) {
+    .thank-you-text {
+        font-size: 16px;
+    }
+    .next-steps {
+        padding: 0px;
+        text-align: center;
+    }
+
+    .next-steps ul {
+        text-align: left;
+        padding-left: 5px;
+    }
+}
+
+
+</style>
 

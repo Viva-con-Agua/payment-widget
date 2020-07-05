@@ -249,7 +249,7 @@ body {
     padding-left: 0.6em;
 }
 
-@media only screen and (max-width: 347px) {
+@media only screen and (max-width: 340px) {
     .vca-field-row .last, .vca-field-row .first {
         padding: 0px;
     }

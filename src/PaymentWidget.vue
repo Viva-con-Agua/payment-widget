@@ -107,10 +107,13 @@ export default {
     background-image: url("~@/assets/blue_pixel.jpg");
     background-repeat: repeat-x;
     background-position: center;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 .vca-field-label label {
     background-color: white;
-    padding-right: 10px;
+    padding-right: 15px;
+    font-size: 16px;
 }
 .selectbutton:hover {
     background-color: #0070ba;
@@ -140,6 +143,14 @@ export default {
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
         -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
         -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+
+        font-size: 14px;
+        padding: 10px;
+        margin: .5em 1em;
+    }
+
+    .vca-field-label label {
+        font-size: 14px;
     }
 }
 
