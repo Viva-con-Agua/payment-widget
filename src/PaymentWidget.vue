@@ -7,7 +7,7 @@
             <DonationForm ref="donation_form" v-on:success="success" :currency="currency" :campaign="campaign" :country="country" @replyAmount="replyAmount" :reqNewsletter="req_newsletter"/>
         </div>
         <div v-if="membership">
-            <MembershipForm v-on:success="success"/>
+            <MembershipForm v-on:success="success" :product="product"/>
         </div>
     </div>
 </template>
@@ -48,6 +48,10 @@ export default {
         req_newsletter: {
             type: Boolean,
             default: false
+        },
+        product: {
+            type: String,
+            default: ""
         }
     },
     data() {

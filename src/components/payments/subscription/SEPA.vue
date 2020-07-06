@@ -60,7 +60,7 @@ let stripe = window.Stripe(process.env.VUE_APP_STRIPE_PUBLIC_KEY),
 
 export default {
     name: 'SEPA',
-    props: ['payment', 'valid', 'label'],
+    props: ['payment', 'valid', 'label', 'product'],
     components: {CheckBox},
     data() {
         return {
@@ -104,7 +104,8 @@ export default {
                         email: this.payment.supporter.email,
                         interval: this.payment.transaction.interval,
                         locale: this.payment.supporter.country,
-                        type: 'sepa_debit'
+                        type: 'sepa_debit',
+                        product: this.product
                     })
                     .then(
                         this.payment.transaction.id = result.paymentIntent.id,

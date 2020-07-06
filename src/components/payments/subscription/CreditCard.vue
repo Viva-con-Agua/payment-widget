@@ -42,7 +42,7 @@ let stripe = window.Stripe(process.env.VUE_APP_STRIPE_PUBLIC_KEY),
 
 export default {
     name: 'CreditCard',
-    props: ['payment', 'valid', 'label'],
+    props: ['payment', 'valid', 'label', 'product'],
     mounted () {
         element.mount(this.$refs.card)
     },
@@ -73,7 +73,8 @@ export default {
                                 email: this.payment.supporter.email,
                                 interval: this.payment.transaction.interval,
                                 locale: this.payment.supporter.country,
-                                type: 'card'
+                                type: 'card',
+                                product: this.product
                             })
                             .then(response => (
                                 console.log(response.data),
