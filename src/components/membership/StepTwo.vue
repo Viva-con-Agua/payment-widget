@@ -1,11 +1,10 @@
 <template>
     <div class="steptwo">
         <vca-field label="Ich spende als">
-                <div class="interval">
-                    <button :class="getTypeClass('private')" class="selectbutton"  @click.prevent="selectCompany(false)">Privatperson</button>
-                    <button :class="getTypeClass('company')" class="selectbutton" @click.prevent="selectCompany(true)">Unternehmen</button>
+                <div class="btn-center-container">
+                    <button :class="btnSelected('private')" class="selection-button"  @click.prevent="selectCompany(false)">Privatperson</button>
+                    <button :class="btnSelected('company')" class="selection-button" @click.prevent="selectCompany(true)">Unternehmen</button>
                 </div>
-
         </vca-field>
         <vca-field label="Persönliche Angaben">
             <vca-input 
@@ -85,7 +84,7 @@
                         errorMsg="Datenschutzerklärung" >
                                  Ich würde mich gerne zusätzlich zur Viva con Agua Flaschenpost eintragen.
                     </CheckBox>
-                        <div class="selectknown">
+                        <div class="select-known">
                             <label>So bin ich auf euch aufmerksam geworden</label>
                             <div class="vca-input">
                                 <select v-model="offset.known_from" name="known">
@@ -95,8 +94,14 @@
                             </div>
                         </div>
         </vca-field>
-        <button class="submit btn_nav_back" @click.prevent="back"> Zurück zu Schritt 1 </button>
-        <button class="submit btn_nav" @click.prevent="submit" > Weiter zu Schritt 3 </button>
+        <div class="nav-btn-container">
+            <div class="nav-back">
+                <button class="submit nav-btn-back>" @click.prevent="back"> Zurück zu Schritt 1 </button>
+            </div>
+            <div class="nav-next">
+                <button class="submit nav-btn" @click.prevent="submit"  :disabled="$v.$invalid"> Weiter zu Schritt 3 </button>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -210,14 +215,13 @@ export default {
     },
     methods: {
         selectCompany(company) {
-            console.log(company)
             this.offset.company = company
         },
-        getTypeClass(val) {
+        btnSelected(val) {
             if (this.offset.company) {
-                return (val == 'company') ? 'btn_selected' : 'btn_deselected';
+                return (val == 'company') ? 'selected' : '';
             } else {
-                return (val != 'company') ? 'btn_selected' : 'btn_deselected';
+                return (val != 'company') ? 'selected' : '';
             }
         },
         back() {
@@ -248,45 +252,32 @@ export default {
 }
 </script>
 <style>
-.interval {
-    text-align: center;
-}
-.vca-input select {
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 0.2rem;
-    padding: 0.6em 1em;
-    box-shadow: none;
-    outline-color: #008fc2;  
-    background-color:white;
-    background-position: right;
-    background-repeat: no-repeat;
-}
 
-.vca-input select option {
-  background:#222;
-  border-top:1px solid #444;
-  padding:.3em 1em .3em 1em;
-}
-
-.vca-input-checkbox {
-    margin-bottom: .3em;
-}
-
-.selectknown {
+.select-known {
     display: inline-flex;
     flex-wrap: wrap;
     width: 100%;
-    margin-top: 15px;
+    margin-top: 1em;
 }
 
-.selectknown label {
+.select-known label {
     padding-top: .6em;
     margin-right: .6em;
+    margin-bottom: .6em;
 }
 
-.selectknown select {
+.select-known select {
     min-width: 170px;
+}
+
+/*********************
+*** SCREEN 600 PX ***
+**********************/
+
+@media only screen and (max-width: 600px) {
+    .select-known label {
+        font-size: .8em;
+    }
 }
 
 </style>

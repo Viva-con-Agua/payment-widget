@@ -61,3 +61,21 @@ export default {
     }
 }
 </script>
+<style type="text/css">
+
+.vca-input-checkbox {
+    margin-bottom: .3em;
+}
+
+/*********************
+*** SCREEN 600 PX ***
+**********************/
+
+@media only screen and (max-width: 600px) {
+
+    .vca-input-checkbox {
+        font-size: 0.8em;
+    }
+}
+
+</style>

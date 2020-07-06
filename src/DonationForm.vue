@@ -215,6 +215,7 @@ body {
     position: center;
     font-size: 15px;
     line-height: 15px;
+    padding: 10px;
 }
 .vca-form {
     width: 100%;
@@ -230,8 +231,14 @@ body {
     margin: 0 0 1em;
 }
 .vca-field-label {
-    font-size: 1rem;
-    margin-bottom: 1em;
+    background-image: url("~@/assets/blue_pixel.jpg");
+    background-repeat: repeat-x;
+    background-position: center;
+    margin: 1em;
+}
+.vca-field-label label {
+    background-color: white;
+    padding-right: 2em;
 }
 .vca-field-content{
     flex-direction: column;
@@ -246,19 +253,32 @@ body {
 .vca-field-row .first {
     width: 100%;
     box-shadow: none;
-    padding-right: 0.6em;
 }
 
+.vca-field-row .first input,
+.vca-field-row .last input {
+    width: 95%;
+}
 .vca-field-row .last {
     width: 100%;
     box-shadow: none;
-    padding-left: 0.6em;
+    text-align: right;
 }
 
-@media only screen and (max-width: 347px) {
-    .vca-field-row .last, .vca-field-row .first {
-        padding: 0px;
-    }
+.vca-input select {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 0.2rem;
+    padding: 0.6em 1em;
+    box-shadow: none;
+    outline-color: #008fc2;  
+    background-color:white;
+}
+
+.vca-input select option {
+  background:white;
+  border-top:1px solid #444;
+  padding:.3em 1em .3em 1em;
 }
 
 .vca-input {
@@ -403,9 +423,8 @@ body {
 .vca-tabs ul {
     border-spacing: 5px 0;
     overflow: hidden;
-    display: table;
-    width: 100%;
-    padding-left: 5px;
+    display: flex;
+    padding: 0;
     border: 1px solid #ccc;
 
     margin-bottom: -1px;
@@ -421,13 +440,14 @@ ul li {
 /* Style the buttons inside the tab */
 .vca-tabs li {
     background-color: inherit;
-    display: inline-flex;
-    margin: 0 2px;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
     border-top: 1px solid #dddddd;
     border-right: 1px solid #dddddd;
     border-left: 1px solid #dddddd;
+
+    flex: auto;
+    flex-basis: 100%;
 
     outline: none;
     cursor: pointer;
@@ -456,7 +476,6 @@ ul li {
     padding-top: 10px;
 }
 .vca-input-border {
-    width: 100%;
     border: 1px solid #ccc;
     border-radius: 0.2rem;
     padding: 0.6em 1em;
@@ -492,4 +511,39 @@ ul li {
     border: none;
     color: #ccc;
 }
+
+/*********************
+*** SCREEN 600 PX ***
+**********************/
+
+@media only screen and (max-width: 600px) {
+
+    .stripe-donation-button {
+        font-size: .9rem !important;
+    }
+    .vca-input select,
+    .vca-input input,
+    .error span,
+    .vca-field-label label {
+        font-size: .8em;
+    }
+}
+
+/*********************
+*** SCREEN 359 PX ***
+**********************/
+
+@media only screen and (max-width: 359px) {
+
+    .vca-tabs ul {
+        flex-wrap: wrap;
+    }
+
+    .vca-field-row .first input,
+    .vca-field-row .last input {
+        width: 100%;
+    }
+
+}
+
 </style>

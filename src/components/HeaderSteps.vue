@@ -1,12 +1,19 @@
 <template>
-        <div class="tabs">
+        <div class="steps">
             <ul>
-                <li v-for="step in getSteps" :key="step" :class="{ 'is-active': step.id == currentStep }">
-                    <div class="tab-content">
-                        <div class="tab-id">{{ step.id }}.</div>
-
-                        <div class="tab-label">{{ step.label }}</div>
+                <li v-for="step in steps" :key="step.id" 
+                    :class="{
+                         'is-active': step.id == currentStep, 
+                         'is-inactive': step.id != currentStep, 
+                         'last': step.id == steps.length, 
+                         'first': step.id == 1,
+                         'behind': step.id > currentStep
+                 }">
+                    <div class="step-content">
+                        <div class="step-id"><div>{{ step.id }}.</div></div>
+                        <div class="step-label"><div>{{ step.label }}</div></div>
                     </div>
+                    <div v-if="step.id != currentStep" class="step-background"></div>
                 </li>
             </ul>
         </div>
@@ -17,122 +24,340 @@ export default {
     name: 'HeaderSteps',
     props: {
         steps: {
-            type: Number,
-            default: 1
+            type: Array,
+            default() {
+                return [
+                    {
+                        id: '1',
+                        label: ''
+                    }
+                ]
+            }
         },
         currentStep: {
             type: Number,
             default: 1
-        },
-        currentLabel: {
-            type: String,
-            default: ''
-        }
-    },
-    computed: {
-        getSteps() {
-            console.log(this.steps)
-            console.log(this.currentStep)
-            return this.steps
         }
     }
 }
 </script>
 <style type="text/css">
 
-.tabs ul {
-    border-spacing: 5px 0;
+.first {
+    margin-left: 0px;
+}
+
+.last {
+    margin-right: 0px;
+}
+
+.behind .step-content {
+    right: 0;
+    left: unset !important;
+}
+
+.behind .step-background {
+    left: 0;
+}
+
+.step-background {
+    background-image: url("~@/assets/blue_pixel.jpg");
+    background-repeat: repeat-x;
+    background-position: center 42%;
+
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+}
+
+/*
+    Default CSS
+*/
+
+.steps ul {
     overflow: hidden;
     display: table;
+    margin-bottom: 0px;
+    padding: 0;
     width: 100%;
-    padding-left: 5px;
-    border: 1px solid #ccc;
-
-    margin-bottom: -1px;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    background-color: #fff;
 }
 
-ul li {
+/* Style the buttons inside the step */
+.steps li {
     list-style: none;
-}
-/* Style the buttons inside the tab */
-.tabs li {
-    background-color: inherit;
     display: table-cell;
-    margin: 0 2px;
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
-    border-top: 1px solid #dddddd;
-    border-right: 1px solid #dddddd;
-    border-left: 1px solid #dddddd;
-
-    outline: none;
+    position: relative;
     padding: 14px 16px;
     transition: 0.3s;
-    font-size: 17px;
+    font-size: 1.1em;
 }
 
-/* Change background color of buttons on hover */
-.tabs li:hover {
-    background-color: #ddd;
+.steps li div.step-content div.step-label {
+    white-space: nowrap;
 }
 
-/* Create an active/current tablink class */
-.tabs li.is-active {
+/* 
+    ACTIVE STEP
+*/
+.steps li.is-active {
     background-color: #008fc3;
     border-color: #008fc3 #008fc3 #008fc3;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px 5px 0 0;
 }
 
-.tabs li.is-active div.tab-content {
-    color: white;/*#008fc3;*/
-    background-image: url("~@/assets/icon_drop_white.png");
-    background-size: contain;
-    background-position: 7% center; 
-    background-repeat: no-repeat;
-}
-.tabs li div.tab-content {
-    background-image: url("~@/assets/icon_drop.png");
-    background-size: contain;
-    background-position: 7% center; 
-    background-repeat: no-repeat;
+.steps li.is-active div.step-content {
     width: 100%;
     min-height: 75px;
     height: 100%;
-    margin: auto auto;
     text-decoration: none;
-    vertical-align: middle;
-    display: inline-flex;
-    justify-content: center;
-    text-align: center;
+    position: relative;
 }
 
-.tabs li div.tab-content div {
-    
-}
 
-.tabs li div.tab-content .tab-label {
-    flex-grow: 2;
-    width: 0;
-    margin: auto 0;
-}
-.tabs li.is-active div.tab-content .tab-id {
-    color: black;
-}
-
-.tabs li div.tab-content .tab-id {
+.steps li.is-active div.step-content div.step-id,
+.steps li.is-active div.step-content div.step-label {
+    display: table;
+    position: absolute;
     height: 100%;
-    margin: auto 0;
-    width: 0;
-    flex-grow: 1;
-    font-size: 2em;    
 }
+
+.steps li.is-active div.step-content div.step-id {
+    color: #008fc3;
+    font-weight: bold;
+    font-size: 2.2vw;
+    text-align: center;
+    
+    background-image: url("~@/assets/icon_drop_white.png");
+    background-size: contain;
+    background-position: center; 
+    background-repeat: no-repeat;
+    
+    left: 0;
+    width: 30%;
+}
+
+.steps li.is-active div.step-content div.step-label {
+    color: white;
+    font-size: 1.6vw;
+    text-align: left;
+    white-space: break-spaces;
+    
+    display: table;
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 30%;
+}
+
+.steps li.is-active div.step-content div.step-label div,
+.steps li.is-active div.step-content div.step-id div {
+    vertical-align: middle;
+    display: table-cell;
+    padding-top: 5px;
+}
+
+.steps li.is-active div.step-content div.step-id div {
+    padding-left: 5px;
+}
+
+.steps li.is-active div.step-content div.step-label div {
+    padding-left: 10px;
+}
+
+/*
+    INACTIVE steps
+*/
+
+.steps li.is-inactive {
+    vertical-align: middle;
+    opacity: 0.5;
+}
+
+.steps li.is-inactive div.step-content {
+    text-align: center;
+    text-decoration: none;
+
+    display: table;
+    padding-top: 20px;
+    padding-left: 5px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: auto;
+}
+
+.steps li.is-inactive div.step-content div.step-label {
+    color: #008fc3; 
+    display: table-row;
+}
+
+.steps li.is-inactive div.step-content div.step-id {
+    color: white;
+    background-image: url("~@/assets/icon_drop.png");
+    background-size: contain;
+    background-position: center center; 
+    background-repeat: no-repeat;
+    font-size: 1.1em;
+
+    margin: 5px auto;
+    display: table-row;
+    height: 40px;
+}
+
+.steps li.is-inactive div.step-content div.step-id div {
+    padding-top: 10px;
+    padding-left: 1px;
+}
+
+.steps li.is-inactive div.step-content div.step-label div {
+    padding-top: 5px;
+}
+
+/*********************
+*** SCREEN 1000 PX ***
+**********************/
+
+@media only screen and (max-width: 1000px) {
+
+    .steps li.is-inactive div.step-content div.step-label {
+        font-size: 1.3vw;
+        white-space: normal;
+    }
+
+    .steps li.is-inactive div.step-content div.step-id {
+        font-size: 1.5vw;
+    }
+
+    .steps li.is-inactive div.step-content div.step-id div {
+        padding-top: 12px;
+    }
+
+}
+
+/*********************
+*** SCREEN 800 PX ***
+**********************/
+
+@media only screen and (max-width: 800px) {
+
+    .step-background {
+        width: 40%;
+    }
+
+    .steps li.is-active div.step-content div.step-id {
+        width: 40%;
+    }
+
+    .steps li.is-active div.step-content div.step-label {
+        left: 40%;
+    }
+
+    .steps li.is-active div.step-content div.step-label div {
+        word-wrap: anywhere;
+    }
+
+    .steps li.is-active div.step-content div.step-label {
+        font-size: 2.1vw;
+    }
+
+    .steps li.is-inactive div.step-content div.step-label {
+        font-size: 1.7vw;
+    }
+
+    .steps li.is-active div.step-content div.step-label div {
+        word-wrap: anywhere;
+    }
+
+
+}
+
+/*********************
+*** SCREEN 700 PX ***
+**********************/
+
+@media only screen and (max-width: 700px) {
+
+    .step-background {
+        width: 35%;
+    }
+
+    .steps li.is-active div.step-content div.step-label {
+        font-size: .7em;
+        font-weight: bold;
+    }
+
+    .steps li.is-active div.step-content div.step-id {
+        font-size: 1.1em;
+    }
+
+    .steps li.is-active div.step-content div.step-id div {
+        padding-left: 3px;
+    }
+
+    .steps li.is-inactive div.step-content div.step-label {
+        font-size: .6em;
+    }
+
+    .steps li.is-inactive div.step-content div.step-id {
+        font-size: .9em;
+    }
+
+}
+
+/*********************
+*** SCREEN 600 PX ***
+**********************/
 
 @media only screen and (max-width: 600px) {
 
- 
+    .step-background {
+        display: none;
+    }
+
+    .steps li div.step-content div.step-label {
+        display: none !important;
+    }
+
+    .steps li {
+        padding: 7px 8px;
+    }
+
+    .steps li.is-active div.step-content div.step-id {
+        width: 100%;
+    }
+
+    .steps li.is-active div.step-content div.step-id div {
+        font-size: 7vw;
+    }
+
+    .steps li.is-inactive div.step-content {
+        display: block;
+        min-height: 75px;
+        width: 100%;
+        padding: 0px;
+        position: relative;
+    }
+
+    .steps li.is-inactive div.step-content div.step-id {
+        height: 80%;
+        width: 100%;
+        display: table;
+        position: absolute;
+        margin-top: 10px;
+    }
+
+    .steps li.is-inactive div.step-content div.step-id div {
+        font-size: 6vw;
+        display: table-cell;
+        vertical-align: middle;
+        padding-top: 5px !important;
+    }
 
 }
 
