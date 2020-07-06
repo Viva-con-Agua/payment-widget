@@ -2,7 +2,8 @@
     <div class="steptwo">
         <vca-field label="Ich spende via">
             <div class="paymentview">
-                <PaymentButtons v-on:success="success" v-on:paymentType="setPaymentType" :payment="payment" :label="label" :country="country" :valid="valid" @notValid="notValid"/>
+                <PaymentButtons :product="product" v-on:success="success" v-on:paymentType="setPaymentType" :payment="payment" :label="label" :country="country" :valid="valid" @notValid="notValid"/>
+
             </div>
         </vca-field>
         <div class="nav-btn-container">
@@ -17,7 +18,7 @@ import PaymentButtons from '../PaymentButtons'
 export default {
     name: 'StepThree',
 
-    props: ['payment', 'country', 'valid', 'label'],
+    props: ['payment', 'country', 'valid', 'label', 'product'],
     components: {PaymentButtons},
     data() {
         return {

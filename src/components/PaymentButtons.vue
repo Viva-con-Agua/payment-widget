@@ -6,8 +6,8 @@
             <button v-if="isDE" :class="{ 'selected': getPaymnetType('paypal')}" class="selection-button"  @click.prevent="setPaymentType('paypal')">Paypal</button>
         </div>
         <div class="payment-type">
-            <SEPA v-if="getPaymnetType('sepa')" v-on:success="success" :payment="payment" :label="label" :valid="valid" @notValid="notValid"/>
-            <CreditCard v-if="getPaymnetType('card')" v-on:success="success" :payment="payment" :label="label" :valid="valid" @notValid="notValid"/>
+            <SEPA v-if="getPaymnetType('sepa')" :product="product" v-on:success="success" :payment="payment" :label="label" :valid="valid" @notValid="notValid"/>
+            <CreditCard v-if="getPaymnetType('card')" :product="product" v-on:success="success" :payment="payment" :label="label" :valid="valid" @notValid="notValid"/>
             <PayPalButton v-if="getPaymnetType('paypal')" v-on:success="success" v-on:error="error" :payment="payment" :valid="valid" @notValid="notValid"/>
         </div>
     </div>
@@ -19,7 +19,7 @@ import CreditCard from './payments/subscription/CreditCard'
 export default {
     name: 'PaymentButtons',
     components: {SEPA, CreditCard, PayPalButton}, 
-    props: ['payment', 'country', 'valid', 'label'],
+    props: ['payment', 'country', 'valid', 'label', 'product'],
     data () {
         return {
             paymentType: "sepa"
