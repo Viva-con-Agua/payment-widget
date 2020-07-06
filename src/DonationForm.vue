@@ -231,7 +231,8 @@ body {
     margin: 0 0 1em;
 }
 .vca-field-label {
-    background-image: url("~@/assets/blue_pixel.jpg");
+    background-image: linear-gradient(to bottom, #008fc3 0%, #008fc3 51%, transparent 51%);
+    background-size: 100% 1px;
     background-repeat: repeat-x;
     background-position: center;
     margin: 1em;
