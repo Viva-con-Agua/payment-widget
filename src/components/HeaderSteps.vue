@@ -63,7 +63,7 @@ export default {
 .step-background {
     background-image: url("~@/assets/blue_pixel.jpg");
     background-repeat: repeat-x;
-    background-position: center 35%;
+    background-position: center 42%;
 
     height: 100%;
     position: absolute;
