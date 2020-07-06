@@ -1,12 +1,11 @@
 <template>
-    <div class="vca-input-checkbox">
+    <div class="vca-input-checkbox" :class="{error: hasError}">
         <label class="container">
             <input type="checkbox" v-model="checked" @change="change">
             <span class="checkmark"></span>
             <slot></slot>
         </label>
-        <span v-if="hasError">{{ errorMsg }}</span>
-        <span v-else></span>
+        <span class="error-msg" v-if="hasError">{{ errorMsg }}</span>
     </div>
 </template>
 <script>
@@ -36,12 +35,12 @@ export default {
     },
     data(){
         return {
-            check: false,
+            checked: false,
             hasError: false
         }
     },
     mounted () {
-        this.check = this.value
+        this.checked = this.value
     },
     methods: {
         change (e) {

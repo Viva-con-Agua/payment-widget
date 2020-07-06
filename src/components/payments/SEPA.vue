@@ -4,12 +4,14 @@
 
         <vca-field  label="Weitere Angaben">
             <CheckBox
+                :rules="$v.accept"
+                ref="accept"
+                v-model="accept"
                 errorMsg="Bitte bestätige die Ermächtigung">
                         Ich ermächtige Viva con Agua de Sankt Pauli e.V., Zahlungen von meinem Konto mittels Lastschrift zum 15. des Folgemonats einzuziehen. Zugleich weise ich mein Kreditinstitut an, die von Viva con Agua de Sankt Pauli e.V. auf mein Konto gezogene Lastschrift einzulösen.<br>
                         <strong>Hinweis:</strong> Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrags verlangen. Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen.
             </CheckBox>
         </vca-field>
-        
         <button type="button" v-on:click.prevent="purchase" class="stripe-donation-button"> {{ label }} </button>
     </div>
 </template>
@@ -60,8 +62,20 @@ export default {
     name: 'SEPA',
     props: ['payment', 'valid', 'label', 'country'],
     components: {CheckBox},
+    data() {
+        return {
+            accept: false
+        }
+    },
     mounted () {
         element.mount(this.$refs.element)
+    },
+    validations() {
+        return {
+            accept: {
+                watcher: value => value === true
+            }
+        }
     },
     methods: {
         stripeRequestIBAN (client_secret) {
@@ -104,6 +118,7 @@ export default {
                     this.stripeRequestIBAN(response.data.client_secret)
                 ))
             } else {
+                this.$refs.accept.validate()
                 this.$emit('notValid')
             }
         }
