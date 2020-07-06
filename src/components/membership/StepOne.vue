@@ -1,45 +1,45 @@
 <template>
     <div class="stepone">
         <vca-field label="Wähle deinen Spendenturnus">
-            <div class="interval">
-                <button id="interval-month" :class="getIntervalClass('month')" class="selectbutton" @click.prevent="selectInterval('month')">Monatsbeitrag</button>
-                <button id="interval-year" :class="getIntervalClass('year')" class="selectbutton" @click.prevent="selectInterval('year')">Jahresbeitrag</button>
+            <div class="btn-center-container">
+                <button :class="btnSelected('month')" class="selection-button" @click.prevent="selectInterval('month')">Monatsbeitrag</button>
+                <button :class="btnSelected('year')" class="selection-button" @click.prevent="selectInterval('year')">Jahresbeitrag</button>
             </div>
         </vca-field>
         <vca-field label="Wähle deinen Spendenbetrag">
-            <div v-if="interval === 'month'" class="paymentsteps">
-                <button class="btn_drop" :class="getAmountClass(500)" @click.prevent="selectAmount(500)">
+            <div v-if="interval === 'month'" class="btn-flex-container">
+                <button class="btn-drop .btn-flex-box" :class="dropSelected(500)" @click.prevent="selectAmount(500)">
                     <img v-if="money.amount != 500" src="~@/assets/icon_vca.png"/>
                     <img v-else src="~@/assets/icon_vca_white.png"/><br/>
-                    <span class="amountAmount">5 EURO</span><br/><div class="amountType">TROPFEN Fördermitglied</div>
+                    <span class="btn-amount">5 EURO</span><br/><div class="btn-type">TROPFEN Fördermitglied</div>
                 </button>
-                <button class="btn_drop" :class="getAmountClass(1000)" @click.prevent="selectAmount(1000)">
+                <button class="btn-drop .btn-flex-box" :class="dropSelected(1000)" @click.prevent="selectAmount(1000)">
                     <img v-if="money.amount != 1000" src="~@/assets/icon_well.png"/>
                     <img v-else src="~@/assets/icon_well_white.png"/><br/>
-                    <span class="amountAmount">10 EURO</span><br/><div class="amountType">BRUNNEN Fördermitglied</div>
+                    <span class="btn-amount">10 EURO</span><br/><div class="btn-type">BRUNNEN Fördermitglied</div>
                 </button>
-                <button class="btn_drop" :class="getAmountClass(2000)" @click.prevent="selectAmount(2000)">
+                <button class="btn-drop .btn-flex-box" :class="dropSelected(2000)" @click.prevent="selectAmount(2000)">
                     <img v-if="money.amount != 2000" src="~@/assets/icon_fountain.png"/>
                     <img v-else src="~@/assets/icon_fountain_white.png"/><br/>
-                    <span class="amountAmount">20 EURO</span><br/><div class="amountType">QUELLEN Fördermitglied</div>
+                    <span class="btn-amount">20 EURO</span><br/><div class="btn-type">QUELLEN Fördermitglied</div>
                 </button>
             </div>
 
-            <div v-if="interval === 'year'" class="paymentsteps">
-                <button class="btn_drop" :class="getAmountClass(6000)" @click.prevent="selectAmount(6000)">
+            <div v-if="interval === 'year'" class="btn-flex-container">
+                <button class="btn-drop .btn-flex-box" :class="dropSelected(6000)" @click.prevent="selectAmount(6000)">
                     <img v-if="money.amount != 6000" src="~@/assets/icon_vca.png"/>
                     <img v-else src="~@/assets/icon_vca_white.png"/><br/>
-                    <span class="amountAmount">60 EURO</span><br/><div class="amountType">TROPFEN Fördermitglied</div>
+                    <span class="btn-amount">60 EURO</span><br/><div class="btn-type">TROPFEN Fördermitglied</div>
                 </button>
-                <button class="btn_drop" :class="getAmountClass(12000)" @click.prevent="selectAmount(12000)">
+                <button class="btn-drop .btn-flex-box" :class="dropSelected(12000)" @click.prevent="selectAmount(12000)">
                     <img v-if="money.amount != 12000" src="~@/assets/icon_well.png"/>
                     <img v-else src="~@/assets/icon_well_white.png"/><br/>
-                    <span class="amountAmount">120 EURO</span><br/><div class="amountType">BRUNNEN Fördermitglied</div>
+                    <span class="btn-amount">120 EURO</span><br/><div class="btn-type">BRUNNEN Fördermitglied</div>
                 </button>
-                <button class="btn_drop" :class="getAmountClass(24000)" @click.prevent="selectAmount(24000)">
+                <button class="btn-drop .btn-flex-box" :class="dropSelected(24000)" @click.prevent="selectAmount(24000)">
                     <img v-if="money.amount != 24000" src="~@/assets/icon_fountain.png"/>
                     <img v-else src="~@/assets/icon_fountain_white.png"/><br/>
-                    <span class="amountAmount">240 EURO</span><br/><div class="amountType">QUELLEN Fördermitglied</div>
+                    <span class="btn-amount">240 EURO</span><br/><div class="btn-type">QUELLEN Fördermitglied</div>
                 </button>
             </div>
         </vca-field>
@@ -54,7 +54,12 @@
                         topText="anderer Betrag?"/>
             </vca-field-row>
         </vca-field>
-        <button class="submit btn_nav" @click.prevent="submit" :disabled="$v.$invalid"> Weiter zu Schritt 2 </button>
+
+        <div class="nav-btn-container">
+            <div class="nav-next">
+                <button class="submit nav-btn" @click.prevent="submit" :disabled="$v.$invalid"> Weiter zu Schritt 2 </button>
+            </div>
+        </div>
     </div>
 
 </template>
@@ -101,11 +106,11 @@ export default {
         } 
     },
     methods: {
-        getIntervalClass(val) {
-            return (this.interval == val) ? 'btn_selected' : 'btn_deselected'
+        btnSelected(val) {
+            return (this.interval == val) ? 'selected' : ''
         },
-        getAmountClass(val) {
-            return (this.money.amount == val) ? 'btn_selected_amount' : 'btn_drop_deselected'
+        dropSelected(val) {
+            return (this.money.amount == val) ? 'btn-drop-selected' : ''
         },
         selectInterval(interval) {
             this.interval = interval
@@ -124,33 +129,27 @@ export default {
 }
 </script>
 <style type="text/css">
-.amountAmount {
-    font-size: 20px;
+
+.btn-amount {
+    font-size: 1.4em;
 }
-.amountType {
+.btn-type {
     max-width: 180px;
     margin: 0 auto;
     text-align: center;
-    font-size: 14px;
-}
-.amountDesc {
-    display: none;
-    font-size: 10px;
-    color: black;
-}
-.paymentsteps {
-    display: flex;
+    font-size: .9em;
 }
 
+/*********************
+*** SCREEN 600 PX ***
+**********************/
+
 @media only screen and (max-width: 600px) {
-    .paymentsteps {
-        flex-wrap: wrap;
+    .btn-type {
+        font-size: .8em;
     }
-    .amountType {
-        font-size: 12px;
-    }
-    .amountAmount {
-        font-size: 14px;
+    .btn-amount {
+        font-size: .9em;
     }
 }
 
