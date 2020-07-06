@@ -99,7 +99,7 @@
                 <button class="submit nav-btn-back>" @click.prevent="back"> Zurück zu Schritt 1 </button>
             </div>
             <div class="nav-next">
-                <button class="submit nav-btn" @click.prevent="submit"  :disabled="$v.$invalid"> Weiter zu Schritt 3 </button>
+                <button class="submit nav-btn" @click.prevent="submit" :disabled="$v.$invalid"> Weiter zu Schritt 3 </button>
             </div>
         </div>
     </div>

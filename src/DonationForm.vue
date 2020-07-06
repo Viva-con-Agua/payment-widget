@@ -313,15 +313,31 @@ body {
 }
 
 .vca-input .error,
-.vca-checkbox .error,
+.vca-input-checkbox.error input,
 .vca-country-select .error select {
     border-color: #dc3545;
 }
 
-.error span {
+.vca-input.error span,
+.vca-country-select.error span {
+    display: block;
+}
+
+.vca-input.error span,
+.vca-input-checkbox.error span,
+.vca-country-select.error span {
     width: 100%;
     color: #dc3545;
 }
+
+.vca-input.error.last span {
+    text-align: left;
+    margin-left: 5%;
+}
+.vca-input-checkbox.error span { 
+    float: left;
+}
+
 
 .vca-label {
     width: 100%;
@@ -486,6 +502,14 @@ ul li {
 .stripe-donation-button:hover, .vca-tabs li.is-active:hover {
     background-color: #0070ba;
 }
+.stripe-donation-button:disabled,
+.stripe-donation-button:disabled {
+    background: #fff;
+    color: #008fc3;
+    opacity: 0.3;
+    cursor: default;
+}
+
 .stripe-donation-button {
     cursor: pointer;
     margin-top: 1em;
