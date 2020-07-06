@@ -174,7 +174,7 @@ export default {
                 },
                 offset: {
                     data_privacy: {
-                        required
+                        watcher: value => value === true                    
                     }
                 }
             }
@@ -207,7 +207,8 @@ export default {
                 },
                 offset: {
                     data_privacy: {
-                        watcher: value => value === true                    }
+                        watcher: value => value === true                    
+                    }
                 }
             }
         }

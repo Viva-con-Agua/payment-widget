@@ -5,7 +5,7 @@
                 <vca-form>
                     <HeaderSteps :currentStep=step :steps=steps />
                     <div class="membership-form-content">
-                        <StepOne v-if="step === 1" @submit="submitStepOne"/>
+                        <StepOne v-if="step === 1" @submit="submitStepOne" :moneyprop="payment.money"/>
                         <StepTwo v-if="step === 2" @submit="submitStepTwo" @back="backStepOne" :supp="payment.supporter" :off="payment.offset"/>
                         <StepThree v-if="step === 3" :payment="payment" :country="country" :label="getLabel" :valid="$v.payment" @back="backStepTwo" @success="success"/>
                         <StepThanks v-if="step === 4" :payment="payment"/>
