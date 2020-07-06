@@ -108,7 +108,7 @@ export default {
                         product: this.product
                     })
                     .then(
-                        this.payment.transaction.id = result.paymentIntent.id,
+                        this.payment.transaction.id = result.setupIntent.id,
                         this.payment.transaction.provider = "stripe",
                         this.$emit('success', this.payment)
                     )

@@ -81,7 +81,8 @@ export default {
     },
     methods: {
         success(e) {
-            axios.post(process.env.VUE_APP_IROBERT_URL, JSON.stringify(e))
+            var url = (this.membership) ? process.env.VUE_APP_IROBERT_MEMBERSHIP : process.env.VUE_APP_IROBERT_DONATION
+            axios.post(url, JSON.stringify(e))
                 .then(response => (
                     console.log(response.data)
                 ))
