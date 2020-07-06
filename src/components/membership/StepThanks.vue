@@ -35,7 +35,12 @@ export default {
             return this.payment.money.amount / 100
         },
         getCurrency() {
-            return this.payment.    money.currency
+            switch(this.payment.money.currency) {
+                case 'CHF':
+                    return 'Schweizer Franken'
+                default:
+                    return 'Euro'
+            }
         }
     }
 }
