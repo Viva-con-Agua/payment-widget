@@ -3,7 +3,6 @@
         <vca-field label="Ich spende via">
             <div class="paymentview">
                 <PaymentButtons :product="product" v-on:success="success" v-on:paymentType="setPaymentType" :payment="payment" :label="label" :country="country" :valid="valid" @notValid="notValid"/>
-
             </div>
         </vca-field>
         <div class="nav-btn-container">
@@ -26,8 +25,8 @@ export default {
         }
     },
     methods: {
-        success() {
-            this.$emit("success")
+        success(e) {
+            this.$emit("success", e)
         },
         notValid() {
             this.$emit("notValid")

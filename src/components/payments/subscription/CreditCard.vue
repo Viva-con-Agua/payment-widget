@@ -79,7 +79,7 @@ export default {
                             .then(
                                 this.payment.transaction.id = result.setupIntent.id,
                                 this.payment.transaction.provider = "stripe",
-                                this.success()
+                                this.$emit('success', this.payment)
                             )
                     }
                 }
@@ -104,9 +104,6 @@ export default {
             }else {
                 this.$emit('notValid')
             }
-        },
-        success () {
-            this.$emit('success')
         },
         validate () {
             this.$emit('validate') 

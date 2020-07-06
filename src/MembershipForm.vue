@@ -163,7 +163,8 @@ export default {
             this.payment.offset = offset
             this.step = 3
         },
-        success() {
+        success(e) {
+            this.$emit("success", e)
             this.step = 4
         }
     }

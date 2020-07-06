@@ -151,6 +151,9 @@ export default {
         isCH() {
             return this.country == 'CH'
         },
+        isAT() {
+            return this.country == 'AT'
+        },
         isDE() {
             return this.country == 'DE'
         },

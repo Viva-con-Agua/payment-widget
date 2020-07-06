@@ -1,6 +1,6 @@
 <template>
     <div id=payment-widget class="payment-widget">
-        <div class="widget" v-if="donation">
+        <div class="widget" v-if="donation && slider == 'cupslide'">
             <CupSlide ref="amount_widget" @amount="setAmount"/>
         </div>
         <div style="display: flex" v-if="donation">
@@ -24,6 +24,10 @@ export default {
         type: {
             type: String,
             default: 'donation'
+        },
+        slider: {
+            type: String,
+            default: 'cupslide'
         },
         campaign_id: {
             type: Number,

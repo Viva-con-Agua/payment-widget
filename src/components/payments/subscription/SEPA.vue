@@ -2,7 +2,7 @@
     <div class="stripe-payment-container">
         <div class="vca-input-border"><div ref="element" label="IBAN" class="stripe-payment"></div></div>
 
-        <vca-field  label="Weitere Angaben">
+        <vca-field  v-if="isDE" label="Weitere Angaben">
             <CheckBox
                 :rules="$v.accept"
                 ref="accept"
@@ -60,7 +60,7 @@ let stripe = window.Stripe(process.env.VUE_APP_STRIPE_PUBLIC_KEY),
 
 export default {
     name: 'SEPA',
-    props: ['payment', 'valid', 'label', 'product'],
+    props: ['payment', 'valid', 'label', 'product', 'country'],
     components: {CheckBox},
     data() {
         return {
@@ -76,6 +76,17 @@ export default {
                 watcher: value => value === true
             }
         }
+    },
+    computed: {
+        isCH() {
+            return this.country == 'CH'
+        },
+        isAT() {
+            return this.country == 'AT'
+        },
+        isDE() {
+            return this.country == 'DE'
+        },
     },
     methods: {
         stripeRequestCard(client_secret) {
@@ -137,7 +148,9 @@ export default {
             }
         },
         validate () {
-            this.$refs.accept.validate()
+            if (this.isDE) {
+                this.$refs.accept.validate()
+            }
             this.$emit('validate') 
         }
     }

@@ -2,13 +2,13 @@
     <div class="stripe-payment-container">
         <div class="vca-input-border"><div ref="element" label="IBAN" class="stripe-payment"></div></div>
 
-        <vca-field  label="Weitere Angaben">
+        <vca-field  v-if="isDE" label="Weitere Angaben">
             <CheckBox
                 :rules="$v.accept"
                 ref="accept"
                 v-model="accept"
                 errorMsg="Bitte bestätige die Ermächtigung">
-                        Ich ermächtige Viva con Agua de Sankt Pauli e.V., Zahlungen von meinem Konto mittels Lastschrift zum 15. des Folgemonats einzuziehen. Zugleich weise ich mein Kreditinstitut an, die von Viva con Agua de Sankt Pauli e.V. auf mein Konto gezogene Lastschrift einzulösen.<br>
+                        Ich ermächtige Viva con Agua de Sankt Pauli e.V., Zahlungen von meinem Konto mittels Lastschrift einzuziehen. Zugleich weise ich mein Kreditinstitut an, die von Viva con Agua de Sankt Pauli e.V. auf mein Konto gezogene Lastschrift einzulösen.<br>
                         <strong>Hinweis:</strong> Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrags verlangen. Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen.
             </CheckBox>
         </vca-field>
@@ -77,6 +77,17 @@ export default {
             }
         }
     },
+    computed: {
+        isCH() {
+            return this.country == 'CH'
+        },
+        isAT() {
+            return this.country == 'AT'
+        },
+        isDE() {
+            return this.country == 'DE'
+        },
+    },
     methods: {
         stripeRequestIBAN (client_secret) {
             stripe.confirmSepaDebitPayment(
@@ -118,7 +129,9 @@ export default {
                     this.stripeRequestIBAN(response.data.client_secret)
                 ))
             } else {
-                this.$refs.accept.validate()
+                if (this.isDE) {
+                    this.$refs.accept.validate()
+                }
                 this.$emit('notValid')
             }
         }
