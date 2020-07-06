@@ -95,7 +95,9 @@ export default {
             this.$refs.donation_form.setAmount(value)
         },
         replyAmount(value) {
-            this.$refs.amount_widget.replyAmount(value)
+            if (this.$refs.amount_widget) {
+                this.$refs.amount_widget.replyAmount(value)
+            }
         }
     }
 }
