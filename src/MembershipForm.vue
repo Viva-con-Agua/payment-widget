@@ -18,6 +18,7 @@
     </div>
 </template>
 <script>
+import axios from 'axios'
 import { required, email, minValue } from 'vuelidate/lib/validators'
 import StepOne from './components/membership/StepOne'
 import StepTwo from './components/membership/StepTwo'
@@ -139,6 +140,11 @@ export default {
             return "Pay now"
         }
     },
+    mounted() {
+        this.payment.campaign = this.campaign
+        this.payment.money.currency = this.currency
+        this.getLocation()
+    },
     methods: {
         setAmount (value) {
             if (value.amount > this.open) {
@@ -166,6 +172,18 @@ export default {
         success(e) {
             this.$emit("success", e)
             this.step = 4
+        },
+        getLocation() {
+            var that = this
+            axios.get("https://ipinfo.io/json?token=" + process.env.VUE_APP_IPINFO_TOKEN)
+                .then(response => (
+                    that.payment.supporter.country = response.data.country
+                ))
+                .catch(function (error) {
+                    if (error.response) {
+                      console.log(error.response.data.error.message);
+                    }
+                })
         }
     }
 }
