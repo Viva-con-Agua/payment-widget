@@ -18,7 +18,7 @@
                     <strong>Du bekommst von uns automatisch:</strong>
                     <ul>
                         <li>Eine Bestätigung deiner Mitgliedschaft per E-Mail</li>
-                        <li>Eine Spendenbescheinigung im Monat Januar des Folgejahres</li>
+                        <li>Eine Spendenbescheinigung im Januar des Folgejahres</li>
                     </ul>
                 </div>
             </div>
