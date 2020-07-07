@@ -3,7 +3,7 @@
         <div class="btn-center-container">
             <button v-if="isDE || isAT" :class="{ 'selected': getPaymnetType('sepa')}" class="selection-button"  @click.prevent="setPaymentType('sepa')">SEPA</button>
             <button v-if="isDE || isAT" :class="{ 'selected': getPaymnetType('card')}" class="selection-button"  @click.prevent="setPaymentType('card')">Kreditkarte</button>
-            <button v-if="isDE || isAT" :class="{ 'selected': getPaymnetType('paypal')}" class="selection-button"  @click.prevent="setPaymentType('paypal')">Paypal</button>
+            <!--button v-if="isDE || isAT" :class="{ 'selected': getPaymnetType('paypal')}" class="selection-button"  @click.prevent="setPaymentType('paypal')">Paypal</button-->
         </div>
         <div class="payment-type">
             <SEPA v-if="getPaymnetType('sepa')" :product="product" v-on:success="success" :payment="payment" :label="label" :country="country" :valid="valid" @notValid="notValid"/>
@@ -18,7 +18,7 @@ import PayPalButton from './payments/PayPal'
 import CreditCard from './payments/subscription/CreditCard'
 export default {
     name: 'PaymentButtons',
-    components: {SEPA, CreditCard, PayPalButton}, 
+    components: {SEPA, CreditCard, PayPalButton},
     props: ['payment', 'country', 'valid', 'label', 'product'],
     data () {
         return {
