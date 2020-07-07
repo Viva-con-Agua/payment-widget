@@ -7,7 +7,7 @@
             <DonationForm ref="donation_form" v-on:success="success" :currency="currency" :campaign="campaign" :country="country" @replyAmount="replyAmount" :reqNewsletter="req_newsletter"/>
         </div>
         <div v-if="membership">
-            <MembershipForm v-on:success="success" :product="product"/>
+            <MembershipForm v-on:success="success" :campaign="campaign" :country="country" :product="product"/>
         </div>
     </div>
 </template>
