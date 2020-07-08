@@ -13,7 +13,7 @@ module.exports = {
         },
     },
     publicPath: process.env.NODE_ENV === 'production'
-        ? '/payment-widget/default'
+        ? process.env.VUE_APP_CONTEXT
         : '/'
 
 }
