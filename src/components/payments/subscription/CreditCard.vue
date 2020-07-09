@@ -65,7 +65,7 @@ export default {
                     // The payment has been processed!
                     console.log(result)
                     if (result.setupIntent.status === 'succeeded') {
-                        axios.post(process.env.VUE_APP_BACKEND_URL + '/api/v1/payment/subscription',
+                        axios.post(process.env.VUE_APP_BACKEND_URL + '/v1/payment/subscription',
                             { 
                                 amount: this.payment.money.amount,
                                 currency: this.payment.money.currency,
@@ -87,7 +87,7 @@ export default {
         },
         purchase () {
             if (this.valid.$invalid === false) {
-                axios.post(process.env.VUE_APP_BACKEND_URL + '/api/v1/payment/default', 
+                axios.post(process.env.VUE_APP_BACKEND_URL + '/v1/payment/default', 
                     { 
                         amount: this.payment.money.amount,
                         name: this.payment.supporter.first_name + ' ' + this.payment.supporter.last_name,
