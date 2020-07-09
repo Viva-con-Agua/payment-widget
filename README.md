@@ -28,8 +28,7 @@ The parameter describes the name of the campaign, which was created in civiCRM f
 
 The parameter describes campaign, which was created in civiCRM for the form
 
-!Not fully implemented yet!
-**country => [DE|CH|AT]**
+**country => [DE|CH|AT]** (!Not fully implemented yet!)
 
 The parameter describes if the newsletter will requested in widget
 
@@ -50,7 +49,11 @@ Send Json to crm service.
     "transaction":{
         "id":"",
         "provider":""           # possible providers "", "paypal" and "stripe"
-        "payment_type":"sepa"   # possible payment_types "sepa", "paypal", "creditcard"
+        "payment_type":"sepa"   # possible payment_types "sepa", "paypal", "creditcard"   
+        "account": {
+            "iban":"",
+            "bic":""
+        },
     },
     "loop":"single",
     "supporter":{
@@ -58,10 +61,6 @@ Send Json to crm service.
         "first_name":"",
         "last_name":"",
         "country":""
-    },        
-    "account": {
-        "iban":"",
-        "bic":""
     },
     "money":{
         "amount":12000,
