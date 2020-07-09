@@ -12,30 +12,30 @@ Embedded in Website:
 
 ### PARAMETER
 
-> type => [donation|membership]
-> 
-> The parameter describes the type of contribution that was made using the form
-> ----
-> campaign_id => (int)
-> 
-> The parameter describes the ID of the campaign, which was created in civiCRM for the form
-> ----
-> campaign_name => (string)
-> 
-> The parameter describes the name of the campaign, which was created in civiCRM for the form
-> ----
-> campaign_description => (string)
-> 
-> The parameter describes campaign, which was created in civiCRM for the form
-> ----
-> !Not fully implemented yet!
-> country => [DE|CH|AT]
-> 
-> The parameter describes if the newsletter will requested in widget
-> ----
-> req_newsletter => (boolean)
-> 
-> The parameter describes the country in which the form is used. Depending on this, the corresponding payment methods respectively recipient accounts are used
+**type => [donation|membership]**
+
+The parameter describes the type of contribution that was made using the form
+
+**campaign_id => (int)**
+
+The parameter describes the ID of the campaign, which was created in civiCRM for the form
+
+**campaign_name => (string)**
+
+The parameter describes the name of the campaign, which was created in civiCRM for the form
+
+**campaign_description => (string)**
+
+The parameter describes campaign, which was created in civiCRM for the form
+
+!Not fully implemented yet!
+**country => [DE|CH|AT]**
+
+The parameter describes if the newsletter will requested in widget
+
+**req_newsletter => (boolean)**
+
+The parameter describes the country in which the form is used. Depending on this, the corresponding payment methods respectively recipient accounts are used
 
 ### Success for Donation
 
