@@ -76,12 +76,12 @@ export default {
                                 type: 'card',
                                 product: this.product
                             })
-                            .then(
-                                this.payment.transaction.id = result.setupIntent.id,
+                            .then(response => {
+                                this.payment.transaction.id = response.data.id,
                                 this.payment.transaction.provider = "stripe",
                                 this.payment.transaction.payment_type = 'creditcard',
                                 this.$emit('success', this.payment)
-                            )
+                            })
                     }
                 }
             });
