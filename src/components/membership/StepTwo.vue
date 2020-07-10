@@ -81,7 +81,7 @@
                         </CheckBox>
                     <CheckBox
                         v-model="offset.newsletter">
-                            FLASCHENPOST: Hier klicken, wenn du News und Projektupdates per E-Mail haben möchtest.<br/>
+                            <div class="highlight">FLASCHENPOST:</div> Hier klicken, wenn du News und Projektupdates per E-Mail haben möchtest.<br/>
                             Kommt ca 1. im Monat und kannst du in jedem Newsletter wieder abbestellen. :)
                     </CheckBox>
                         <div class="select-known">

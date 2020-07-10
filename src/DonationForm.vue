@@ -212,6 +212,16 @@ export default {
 body {
     min-width: auto;
 }
+
+div.highlight {
+    color: white;
+    font-weight: bold;
+    font-size: 1.1em;
+    padding: 5px 10px;
+    background-color: rgba(0, 143, 195, 0.7);
+    display: inline-block;
+}
+
 .simple-donation {
     font-family: Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     width: 100%;
@@ -366,7 +376,6 @@ body {
     color:  #008fc3;
 }
 
-
 .vca-form form .vca-field .vca-money-input {
     display: inline-flex;
     border-radius: 0em;
@@ -374,6 +383,23 @@ body {
     float: right;
     margin-right: 5px;
     width: auto;
+    font-size: 1.2rem;
+}
+.vca-form form .vca-field .vca-money-input:hover {
+    color: #0070ba;
+}
+
+.vca-form form .vca-field .vca-money-input input {
+    border: solid thin rgba(0, 143, 195, 0.5);
+}
+
+.vca-form form .vca-field .vca-money-input .currency-label,
+.vca-form form .vca-field .vca-money-input input {
+    font-size: 1.2rem;
+}
+
+.vca-form form .vca-field .vca-money-input .vca-input-container label {
+    font-size: .8rem;
 }
 
 .vca-money-container {
@@ -425,7 +451,7 @@ body {
 }
 
 .currency-label {
-    background: rgba(34,36,38,.15);
+    background-color: rgba(0, 143, 195, 0.5);
     width: 20%;
     display: flex;
     align-items: center;
@@ -492,6 +518,10 @@ ul li {
     color: white;
 }
 
+.stripe-payment-container input, .sepa-payment-container input {
+    line-height: 2;
+    font-size: 1.1em
+}
 .stripe-payment-container, .sepa-payment-container, .paypal-payment-container {
     padding-top: 10px;
 }
@@ -550,11 +580,17 @@ ul li {
     .stripe-donation-button {
         font-size: .9rem !important;
     }
+
     .vca-input select,
     .vca-input input,
     .error span,
     .vca-field-label label {
         font-size: .8em;
+    }
+
+    .stripe-payment-container input, .sepa-payment-container input {
+        line-height: 2;
+        font-size: 1.1em
     }
 }
 

@@ -10,6 +10,8 @@ import axios from 'axios'
 const style = {
     base: {
         color: '#32325d',
+        fontSize: '1.1em',
+        lineHeight: '2',
         '::placeholder': {
             color: '#aab7c4'
         },
