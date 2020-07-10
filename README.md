@@ -49,11 +49,6 @@ Send Json to crm service.
     "transaction":{
         "id":"",
         "provider":""           # possible providers "", "paypal" and "stripe"
-        "payment_type":"sepa"   # possible payment_types "sepa", "paypal", "creditcard"   
-        "account": {
-            "iban":"",
-            "bic":""
-        },
     },
     "loop":"single",
     "supporter":{
@@ -84,9 +79,14 @@ Send Json to crm service.
     },
     transaction: {
         id: '',
-        provider: '',
+        provider: '',           # possible providers "", "paypal" and "stripe"
         abo: true,
-        interval: ''   // 'month' or 'year'
+        interval: ''   // 'month' or 'year'        
+        payment_type: 'sepa'   # possible payment_types "sepa", "paypal", "creditcard"   
+        account: {
+            iban:'',
+            bic:''
+        },
     },
     supporter: {
         email: '',
