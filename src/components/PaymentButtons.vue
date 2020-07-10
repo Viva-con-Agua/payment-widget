@@ -6,19 +6,19 @@
             <!--button v-if="isDE || isAT" :class="{ 'selected': getPaymnetType('paypal')}" class="selection-button"  @click.prevent="setPaymentType('paypal')">Paypal</button-->
         </div>
         <div class="payment-type">
-            <SEPA v-if="getPaymnetType('sepa')" :product="product" v-on:success="success" :payment="payment" :label="label" :country="country" :valid="valid" @notValid="notValid"/>
+            <CiviSEPA v-if="getPaymnetType('sepa')" :product="product" v-on:success="success" :payment="payment" :label="label" :country="country" :valid="valid" @notValid="notValid"/>
             <CreditCard v-if="getPaymnetType('card')" :product="product" v-on:success="success" :payment="payment" :label="label" :country="country" :valid="valid" @notValid="notValid"/>
             <PayPalButton v-if="getPaymnetType('paypal')" v-on:success="success" v-on:error="error" :payment="payment" :valid="valid" @notValid="notValid"/>
         </div>
     </div>
 </template>
 <script>
-import SEPA from './payments/subscription/SEPA'
+import CiviSEPA from './payments/subscription/CiviSEPA'
 import PayPalButton from './payments/PayPal'
 import CreditCard from './payments/subscription/CreditCard'
 export default {
     name: 'PaymentButtons',
-    components: {SEPA, CreditCard, PayPalButton},
+    components: {CiviSEPA, CreditCard, PayPalButton},
     props: ['payment', 'country', 'valid', 'label', 'product'],
     data () {
         return {

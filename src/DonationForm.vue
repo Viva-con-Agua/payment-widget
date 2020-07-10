@@ -492,7 +492,7 @@ ul li {
     color: white;
 }
 
-.stripe-payment-container, .paypal-payment-container {
+.stripe-payment-container, .sepa-payment-container, .paypal-payment-container {
     padding-top: 10px;
 }
 .vca-input-border {
@@ -505,14 +505,14 @@ ul li {
 .stripe-donation-button:hover, .vca-tabs li.is-active:hover {
     background-color: #0070ba;
 }
-.stripe-donation-button:disabled,
+.sepa-donation-button:disabled,
 .stripe-donation-button:disabled {
     background: #fff;
     color: #008fc3;
     opacity: 0.3;
     cursor: default;
 }
-
+.sepa-donation-button,
 .stripe-donation-button {
     cursor: pointer;
     margin-top: 1em;
@@ -546,6 +546,7 @@ ul li {
 
 @media only screen and (max-width: 600px) {
 
+    .sepa-donation-button,
     .stripe-donation-button {
         font-size: .9rem !important;
     }

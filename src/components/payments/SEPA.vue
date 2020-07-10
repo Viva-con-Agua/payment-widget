@@ -107,8 +107,9 @@ export default {
                     } else {
                         // The payment is state processing!
                         if (result.paymentIntent.status === 'processing') {
-                            this.payment.transaction.id = result.paymentIntent.id,
+                            this.payment.transaction.id = result.paymentIntent.id
                             this.payment.transaction.provider = "stripe"
+                            this.payment.transaction.payment_type = 'sepa'
                             this.$emit('success', this.payment)
                         }
                     }
