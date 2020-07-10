@@ -63,8 +63,9 @@ export default {
                 } else {
                     // The payment has been processed!
                     if (result.paymentIntent.status === 'succeeded') {
-                        this.payment.transaction.id = result.paymentIntent.id,
+                        this.payment.transaction.id = result.paymentIntent.id
                         this.payment.transaction.provider = "stripe"
+                        this.payment.transaction.payment_type = 'creditcard'
                         this.$emit('success', this.payment)
                     }
                 }

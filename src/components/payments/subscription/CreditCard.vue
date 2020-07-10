@@ -79,6 +79,7 @@ export default {
                             .then(
                                 this.payment.transaction.id = result.setupIntent.id,
                                 this.payment.transaction.provider = "stripe",
+                                this.payment.transaction.payment_type = 'creditcard',
                                 this.$emit('success', this.payment)
                             )
                     }

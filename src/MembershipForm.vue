@@ -79,7 +79,9 @@ export default {
                     id: '',
                     provider: '',
                     abo: false,
-                    interval: ''
+                    interval: '',
+                    payment_type: '',
+                    account: {}
                 },
                 supporter: {
                     email: '',
@@ -273,8 +275,8 @@ export default {
     background-image: url("~@/assets/icon_drop.png");
 }
 
-.btn-drop img {
-    width: 40px;
+.btn-drop div img {
+    width: 35px;
     position: relative;
     bottom: 10px;
 }
@@ -370,6 +372,10 @@ export default {
     /*
         CSS DROP BUTTON
     */
+
+    .btn-drop div img {
+        width: 30px;
+    }
     .btn-drop {
         max-width: 170px;
         background-image: url("~@/assets/icon_drop_white_outline.png");

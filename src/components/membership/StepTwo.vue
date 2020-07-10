@@ -75,20 +75,24 @@
                         <CheckBox
                             ref="data_privacy"
                             v-model="offset.data_privacy" 
-                            errorMsg="Datenschutzerklärung" 
+                            errorMsg="Bitte bestätige die Datenschutzerklärung und die AGB" 
                             :rules="$v.offset.data_privacy" >
                                     Ich habe die <a href="https://www.vivaconagua.org/datenschutzerklaerung" target="_blank">Datenschutzerklärung</a> und die <a href="https://www.vivaconagua.org/agb" target="_blank">AGB</a> gelesen.
                         </CheckBox>
                     <CheckBox
-                        v-model="offset.newsletter" 
-                        errorMsg="Datenschutzerklärung" >
-                                 Ich würde mich gerne zusätzlich zur Viva con Agua Flaschenpost eintragen.
+                        v-model="offset.newsletter">
+                            FLASCHENPOST: Hier klicken, wenn du News und Projektupdates per E-Mail haben möchtest.<br/>
+                            Kommt ca 1. im Monat und kannst du in jedem Newsletter wieder abbestellen. :)
                     </CheckBox>
                         <div class="select-known">
                             <label>So bin ich auf euch aufmerksam geworden</label>
                             <div class="vca-input">
                                 <select v-model="offset.known_from" name="known">
                                     <option value="">Bitte wählen</option>
+                                    <option value="family_friends">Familie & Freunde</option>
+                                    <option value="festivals_cupdonation">Festivals & Becherspende</option>
+                                    <option value="water">Wasser</option>
+                                    <option value="instagram">Instagram</option>
                                     <option value="facebook">Facebook</option>
                                 </select>
                             </div>
