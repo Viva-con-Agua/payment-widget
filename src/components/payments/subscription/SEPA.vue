@@ -108,22 +108,22 @@ export default {
                     console.log(result)
                     if (result.setupIntent.status === 'succeeded') {
                         axios.post(process.env.VUE_APP_BACKEND_URL + '/v1/payment/subscription',
-                    { 
-                        amount: this.payment.money.amount,
-                        currency: this.payment.money.currency,
-                        name: this.payment.supporter.first_name + ' ' + this.payment.supporter.last_name,
-                        email: this.payment.supporter.email,
-                        interval: this.payment.transaction.interval,
-                        locale: this.payment.supporter.country,
-                        type: 'sepa_debit',
-                        product: this.product
-                    })
-                    .then(
-                        this.payment.transaction.id = result.setupIntent.id,
-                        this.payment.transaction.provider = "stripe",
-                        this.payment.transaction.payment_type = 'sepa',
-                        this.$emit('success', this.payment)
-                    )
+                        { 
+                            amount: this.payment.money.amount,
+                            currency: this.payment.money.currency,
+                            name: this.payment.supporter.first_name + ' ' + this.payment.supporter.last_name,
+                            email: this.payment.supporter.email,
+                            interval: this.payment.transaction.interval,
+                            locale: this.payment.supporter.country,
+                            type: 'sepa_debit',
+                            product: this.product
+                        })
+                        .then(response => {
+                            this.payment.transaction.id = response.data.id,
+                            this.payment.transaction.provider = "stripe",
+                            this.payment.transaction.payment_type = 'sepa',
+                            this.$emit('success', this.payment)
+                        })
                     }
                 }
             });
