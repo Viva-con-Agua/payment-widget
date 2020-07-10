@@ -50,7 +50,7 @@
                    ref="zip"
                    first
                    errorMsg="Bitte gib deine Postleitzahl an"
-                   placeholder="Plz"
+                   placeholder="PLZ"
                    v-model.trim="supporter.zip" 
                    :rules="$v.supporter.zip">
                         </vca-input>
