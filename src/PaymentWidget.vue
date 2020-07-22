@@ -81,15 +81,26 @@ export default {
             } else {
                 return false
             }
+        },
+        isCH() {
+            return this.country == 'CH'
+        },
+        isAT() {
+            return this.country == 'AT'
+        },
+        isDE() {
+            return this.country == 'DE'
         }
     },
     methods: {
         success(e) {
             var url = (this.membership) ? process.env.VUE_APP_IROBERT_MEMBERSHIP : process.env.VUE_APP_IROBERT_DONATION
-            axios.post(url, JSON.stringify(e))
+            if (url != false) {
+                axios.post(url, JSON.stringify(e))
                 .then(response => (
                     console.log(response.data)
                 ))
+            }
         },
         setAmount(value) {
             this.$refs.donation_form.setAmount(value)
@@ -98,6 +109,15 @@ export default {
             if (this.$refs.amount_widget) {
                 this.$refs.amount_widget.replyAmount(value)
             }
+        },
+        getURL() {
+            var url = false
+            if(this.isDE) {
+                url = (this.membership) ? process.env.VUE_APP_IROBERT_MEMBERSHIP : process.env.VUE_APP_IROBERT_DONATION
+            } else if (this.isAT) {
+                url = process.env.VUE_APP_IROBERT_DONATION_AT
+            }
+            return url
         }
     }
 }
