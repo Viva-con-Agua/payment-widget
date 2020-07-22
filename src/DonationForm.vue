@@ -151,6 +151,9 @@ export default {
         isCH() {
             return this.country == 'CH'
         },
+        hasFbq() {
+            return window.fbq
+        },
         isAT() {
             return this.country == 'AT'
         },
@@ -183,6 +186,9 @@ export default {
             this.donation.lastName = value
         },
         success(e) {
+            if (this.isAT && this.hasFbq) {
+                window.fbq('track', 'Donate');
+            }
             this.successView = true
             this.$emit("success", e)
         },
