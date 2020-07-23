@@ -48,6 +48,17 @@ export default {
     mounted () {
         element.mount(this.$refs.card)
     },
+    computed: {
+        isCH() {
+            return this.country == 'CH'
+        },
+        isAT() {
+            return this.country == 'AT'
+        },
+        isDE() {
+            return this.country == 'DE'
+        },
+    },
     methods: {
         stripeRequestCard(client_secret) {
             stripe.confirmCardSetup(client_secret, {
@@ -90,7 +101,8 @@ export default {
         },
         purchase () {
             if (this.valid.$invalid === false) {
-                axios.post(process.env.VUE_APP_BACKEND_URL + '/v1/payment/default', 
+                var country = this.isDE ? '' : '-' + this.country.toLowerCase()
+                axios.post(process.env.VUE_APP_BACKEND_URL + '/v1/payment' + country + '/default',
                     { 
                         amount: this.payment.money.amount,
                         name: this.payment.supporter.first_name + ' ' + this.payment.supporter.last_name,
