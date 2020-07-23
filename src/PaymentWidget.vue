@@ -94,7 +94,7 @@ export default {
     },
     methods: {
         success(e) {
-            var url = (this.membership) ? process.env.VUE_APP_IROBERT_MEMBERSHIP : process.env.VUE_APP_IROBERT_DONATION
+            var url = this.getURL()
             if (url != false) {
                 axios.post(url, JSON.stringify(e))
                 .then(response => (
