@@ -52,7 +52,7 @@ const options = {
     // the IBAN format of your customer's country. If you know your
     // customer's country, we recommend passing it to the Element as the
     // placeholderCountry.
-    placeholderCountry: 'DE',
+    placeholderCountry: 'AT',
 };
 let stripe = window.Stripe(process.env.VUE_APP_STRIPE_PUBLIC_KEY),
     elements = stripe.elements(),

@@ -18,6 +18,7 @@
                             placeholder="E-Mail Adresse"
                             v-model.trim="payment.supporter.email" 
                             :rules="$v.payment.supporter.email"/>
+
                         <vca-field-row>
                         <vca-input 
                             ref="first_name"
@@ -32,10 +33,18 @@
                             last
                             errorMsg="Bitte Nachnamen eintragen"
                             placeholder="Nachname"
-                            v-model.trim="payment.supporter.last_name" 
+                            v-model.trim="payment.supporter.last_name"
                             :rules="$v.payment.supporter.last_name">
                         </vca-input>
                         </vca-field-row>
+                        <vca-input-date
+                            ref="birthdate"
+                            placeholder="Geburtsdatum"
+                            @input="setDate"
+                            errorMsg="Bitte Geburtsdatum eintragen"
+                            format="dd.MM.yyyy"
+                            :rules="$v.payment.supporter.birthdate"
+                            />
                         <div v-if="reqNewsletter" class="vca-input-checkbox">
                             <label class="container">
                                 <input type="checkbox" v-model="payment.offset.newsletter">
@@ -72,7 +81,7 @@ export default {
         },
         country: {
             type: String,
-            default: 'DE'
+            default: 'AT'
         },
         currency: {
             type: String,
@@ -107,7 +116,8 @@ export default {
                     email: '',
                     first_name: '',
                     last_name: '',
-                    country: 'DE'
+                    country: 'DE',
+                    birthdate: null
                 },
                 money: {
                     amount: 0,
@@ -136,6 +146,9 @@ export default {
                     required
                 },
                 last_name: {
+                    required
+                },
+                birthdate: {
                     required
                 }
             },
@@ -176,6 +189,11 @@ export default {
         this.getLocation()
     },
     methods: {
+        setDate(value) {
+            if (!this.$refs.birthdate.validate()) {
+                this.payment.supporter.birthdate = value.getTime()
+            }
+        },
         setAmount (value) {
             this.payment.money.amount = value
         },
@@ -194,6 +212,7 @@ export default {
         },
         validate () {
             this.$refs.email.validate()
+            this.$refs.birthdate.validate()
             this.$refs.first_name.validate()
             this.$refs.last_name.validate()
             this.$refs.money.validate()
@@ -311,6 +330,7 @@ div.highlight {
     flex-shrink: 1; 
 }
 
+.vca-input-date input,
 .vca-input input {
     width: 100%;
     border: 1px solid #ccc;
@@ -331,6 +351,7 @@ div.highlight {
     outline-color: #008fc2;
 }
 
+.vca-input-date .error div input,
 .vca-input .error,
 .vca-input-checkbox.error input,
 .vca-country-select .error select {
@@ -340,6 +361,10 @@ div.highlight {
 .vca-input.error span,
 .vca-country-select.error span {
     display: block;
+}
+
+.vca-input-date.error:not(.vdp-datepicker) > span {
+    color: #dc3545;
 }
 
 .vca-input.error span,

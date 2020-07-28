@@ -36,7 +36,7 @@ export default {
         },
         country: {
             type: String,
-            default: 'DE'
+            default: 'AT'
         },
         currency: {
             type: String,
@@ -90,7 +90,7 @@ export default {
                     street: '',
                     zip: '',
                     city: '',
-                    country: 'DE',
+                    country: 'AT',
                     company_name: ''
                 },
                 money: {

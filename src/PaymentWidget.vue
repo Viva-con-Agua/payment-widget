@@ -43,7 +43,7 @@ export default {
         },
         country: {
             type: String,
-            default: 'DE'
+            default: 'AT'
         },
         currency: {
             type: String,

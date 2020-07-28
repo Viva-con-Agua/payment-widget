@@ -138,7 +138,7 @@ export default {
                 street: '',
                 zip: '',
                 city: '',
-                country: 'DE'
+                country: 'AT'
             }
         }
     },
