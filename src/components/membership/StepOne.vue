@@ -1,6 +1,6 @@
 <template>
     <div class="stepone">
-        <vca-field label="Wähle deine Intervall">
+        <vca-field label="Wähle dein Intervall">
             <div class="btn-center-container">
                 <button :class="btnSelected('month')" class="selection-button" @click.prevent="selectInterval('month')">Monatsbeitrag</button>
                 <button :class="btnSelected('year')" class="selection-button" @click.prevent="selectInterval('year')">Jahresbeitrag</button>
