@@ -62,7 +62,7 @@ export default {
             step: 1,
             steps: 
             [
-                {id: 1, label: 'Meine Spende' },
+                {id: 1, label: 'Mitgliedsbeitrag' },
                 {id: 2, label: 'Meine Kontaktdaten' },
                 {id: 3, label: 'Zahlungsart' },
                 {id: 4, label: 'Danke!' }

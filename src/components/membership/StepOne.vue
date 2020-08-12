@@ -1,12 +1,12 @@
 <template>
     <div class="stepone">
-        <vca-field label="Wähle deinen Spendenturnus">
+        <vca-field label="Wähle deine Intervall">
             <div class="btn-center-container">
                 <button :class="btnSelected('month')" class="selection-button" @click.prevent="selectInterval('month')">Monatsbeitrag</button>
                 <button :class="btnSelected('year')" class="selection-button" @click.prevent="selectInterval('year')">Jahresbeitrag</button>
             </div>
         </vca-field>
-        <vca-field label="Wähle deinen Spendenbetrag">
+        <vca-field label="Wähle deinen Mitgliedsbeitrag">
             <div v-if="interval === 'month'" class="btn-flex-container">
                 <button class="btn-drop .btn-flex-box" :class="dropSelected(500)" @click.prevent="selectAmount(500)">
                     <div v-if="money.amount != 500" >
@@ -130,9 +130,9 @@ export default {
     computed: {
         customPaymentMin: function () {
             if (this.interval === 'month') {
-                return "Du willst einen anderen Betrag spenden? Kein Problem! (ab 5 Euro)"
+                return "Du willst einen anderen Mitgliedsbeitrag? Kein Problem! (ab 5 Euro)"
             } else {
-                return "Du willst einen anderen Betrag spenden? Kein Problem! (ab 60 Euro)"
+                return "Du willst einen anderen Mitgliedsbeitrag? Kein Problem! (ab 60 Euro)"
             }
         },
         paymentMin: function () {
