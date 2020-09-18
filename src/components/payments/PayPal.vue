@@ -54,8 +54,9 @@ export default {
     },
     methods: {
         success(e) {
-            this.payment.transaction.id = e.id,
+            this.payment.transaction.id = e.id
             this.payment.transaction.provider = 'paypal'
+            this.payment.transaction.payment_type = 'paypal'
             this.$emit("success", this.payment)
         },
         error(e) {
@@ -74,4 +75,9 @@ export default {
 
     }
 }
-</script> 
+</script>
+<style>
+    .paypal-payment-container {
+        text-align: center;
+    }
+</style>

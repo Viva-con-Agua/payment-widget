@@ -36,6 +36,13 @@
                             :rules="$v.payment.supporter.last_name">
                         </vca-input>
                         </vca-field-row>
+                        <div v-if="reqNewsletter" class="vca-input-checkbox">
+                            <label class="container">
+                                <input type="checkbox" v-model="payment.offset.newsletter">
+                                <span class="checkmark"></span>
+                                 Ich würde mich gerne zusätzlich zur Viva con Agua Flaschenpost eintragen.
+                            </label>
+                        </div>
                     </vca-field>
                     <Payment v-if="!isCH" v-on:success="success" :payment="payment" :label="getLabel" :country="country" :valid="$v.payment" @notValid="validate"/>
                 </vca-form>
@@ -76,6 +83,10 @@ export default {
             default() {
                 return {}
             }
+        },
+        reqNewsletter: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -140,6 +151,12 @@ export default {
         isCH() {
             return this.country == 'CH'
         },
+        hasFbq() {
+            return window.fbq
+        },
+        isAT() {
+            return this.country == 'AT'
+        },
         isDE() {
             return this.country == 'DE'
         },
@@ -169,6 +186,9 @@ export default {
             this.donation.lastName = value
         },
         success(e) {
+            if (this.isAT && this.hasFbq) {
+                window.fbq('track', 'Donate');
+            }
             this.successView = true
             this.$emit("success", e)
         },
@@ -198,17 +218,31 @@ export default {
 body {
     min-width: auto;
 }
+
+div.highlight {
+    color: white;
+    font-weight: bold;
+    font-size: 1.1em;
+    padding: 5px 10px;
+    background-color: rgba(0, 143, 195, 0.7);
+    display: inline-block;
+}
+
 .simple-donation {
     font-family: Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     width: 100%;
     position: center;
     font-size: 15px;
     line-height: 15px;
+    padding: 10px;
 }
 .vca-form {
     width: 100%;
     max-width: 100%;
     padding: 0.6em 0.6em;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;   
 }
 .vca-field {
     display: flex;
@@ -216,8 +250,15 @@ body {
     margin: 0 0 1em;
 }
 .vca-field-label {
-    font-size: 1rem;
-    margin-bottom: 1em;
+    background-image: linear-gradient(to bottom, #008fc3 0%, #008fc3 51%, transparent 51%);
+    background-size: 100% 1px;
+    background-repeat: repeat-x;
+    background-position: center;
+    margin: 1em;
+}
+.vca-field-label label {
+    background-color: white;
+    padding-right: 2em;
 }
 .vca-field-content{
     flex-direction: column;
@@ -232,14 +273,34 @@ body {
 .vca-field-row .first {
     width: 100%;
     box-shadow: none;
-    padding-right: 0.6em;
 }
 
+.vca-field-row .first input,
+.vca-field-row .last input {
+    width: 95%;
+}
 .vca-field-row .last {
     width: 100%;
     box-shadow: none;
-    padding-left: 0.6em;
+    text-align: right;
 }
+
+.vca-input select {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 0.2rem;
+    padding: 0.6em 1em;
+    box-shadow: none;
+    outline-color: #008fc2;  
+    background-color:white;
+}
+
+.vca-input select option {
+  background:white;
+  border-top:1px solid #444;
+  padding:.3em 1em .3em 1em;
+}
+
 .vca-input {
     width: 100%;
     box-shadow: none;
@@ -250,7 +311,6 @@ body {
     flex-shrink: 1; 
 }
 
-
 .vca-input input {
     width: 100%;
     border: 1px solid #ccc;
@@ -258,16 +318,45 @@ body {
     padding: 0.6em 1em;
     box-shadow: none;
     outline-color: #008fc2;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;   
 }
 
-.vca-input .error {
+.vca-input input[type=checkbox] {
+    border: 1px solid #ccc;
+    border-radius: 0.2rem;
+    padding: 0.6em 1em;
+    box-shadow: none;
+    outline-color: #008fc2;
+}
+
+.vca-input .error,
+.vca-input-checkbox.error input,
+.vca-country-select .error select {
     border-color: #dc3545;
 }
 
-.error span {
+.vca-input.error span,
+.vca-country-select.error span {
+    display: block;
+}
+
+.vca-input.error span,
+.vca-input-checkbox.error span,
+.vca-country-select.error span {
     width: 100%;
     color: #dc3545;
 }
+
+.vca-input.error.last span {
+    text-align: left;
+    margin-left: 5%;
+}
+.vca-input-checkbox.error span { 
+    float: left;
+}
+
 
 .vca-label {
     width: 100%;
@@ -290,16 +379,33 @@ body {
     font-size: 22px;
     font-weight: 900;
     width: 100%;
-    color:  #0070ba;
-
+    color:  #008fc3;
 }
 
-
 .vca-form form .vca-field .vca-money-input {
-    width: 100%;
     display: inline-flex;
     border-radius: 0em;
     border: 0em;
+    float: right;
+    margin-right: 5px;
+    width: auto;
+    font-size: 1.2rem;
+}
+.vca-form form .vca-field .vca-money-input:hover {
+    color: #0070ba;
+}
+
+.vca-form form .vca-field .vca-money-input input {
+    border: solid thin rgba(0, 143, 195, 0.5);
+}
+
+.vca-form form .vca-field .vca-money-input .currency-label,
+.vca-form form .vca-field .vca-money-input input {
+    font-size: 1.2rem;
+}
+
+.vca-form form .vca-field .vca-money-input .vca-input-container label {
+    font-size: .8rem;
 }
 
 .vca-money-container {
@@ -328,8 +434,7 @@ body {
 }
 
 .focus label {
-    color: #0070ba;
-    
+    color: #008fc3;
 }
 
 .currency-select {
@@ -352,7 +457,7 @@ body {
 }
 
 .currency-label {
-    background: rgba(34,36,38,.15);
+    background-color: rgba(0, 143, 195, 0.5);
     width: 20%;
     display: flex;
     align-items: center;
@@ -370,9 +475,8 @@ body {
 .vca-tabs ul {
     border-spacing: 5px 0;
     overflow: hidden;
-    display: table;
-    width: 100%;
-    padding-left: 5px;
+    display: flex;
+    padding: 0;
     border: 1px solid #ccc;
 
     margin-bottom: -1px;
@@ -388,13 +492,14 @@ ul li {
 /* Style the buttons inside the tab */
 .vca-tabs li {
     background-color: inherit;
-    display: inline-flex;
-    margin: 0 2px;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
     border-top: 1px solid #dddddd;
     border-right: 1px solid #dddddd;
     border-left: 1px solid #dddddd;
+
+    flex: auto;
+    flex-basis: 100%;
 
     outline: none;
     cursor: pointer;
@@ -411,19 +516,22 @@ ul li {
 /* Create an active/current tablink class */
 .vca-tabs li.is-active {
 
-    background-color: #0070ba;
-    border-color: #0070ba #0070ba #0070ba;
+    background-color: #008fc3;
+    border-color: #008fc3 #008fc3 #008fc3;
 }
 
 .vca-tabs li.is-active a {
     color: white;
 }
 
-.stripe-payment-container, .paypal-payment-container {
+.stripe-payment-container input, .sepa-payment-container input {
+    line-height: 2;
+    font-size: 1.1em
+}
+.stripe-payment-container, .sepa-payment-container, .paypal-payment-container {
     padding-top: 10px;
 }
 .vca-input-border {
-    width: 100%;
     border: 1px solid #ccc;
     border-radius: 0.2rem;
     padding: 0.6em 1em;
@@ -431,8 +539,16 @@ ul li {
     outline-color: #008fc2;
 }
 .stripe-donation-button:hover, .vca-tabs li.is-active:hover {
-    background-color: #006ab1;
+    background-color: #0070ba;
 }
+.sepa-donation-button:disabled,
+.stripe-donation-button:disabled {
+    background: #fff;
+    color: #008fc3;
+    opacity: 0.3;
+    cursor: default;
+}
+.sepa-donation-button,
 .stripe-donation-button {
     cursor: pointer;
     margin-top: 1em;
@@ -440,7 +556,7 @@ ul li {
     margin-bottom: 1em;
     height: 45px;
     width: 100%;
-    background-color: #0070ba;
+    background-color: #008fc3;
     color: #FFFFFF;
     padding: 0.5em 0;
     border: 0;
@@ -454,4 +570,51 @@ ul li {
     -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
     -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }
+
+.newsletter input[type=checkbox] {
+    border: none;
+    color: #ccc;
+}
+
+/*********************
+*** SCREEN 600 PX ***
+**********************/
+
+@media only screen and (max-width: 600px) {
+
+    .sepa-donation-button,
+    .stripe-donation-button {
+        font-size: .9rem !important;
+    }
+
+    .vca-input select,
+    .vca-input input,
+    .error span,
+    .vca-field-label label {
+        font-size: .8em;
+    }
+
+    .stripe-payment-container input, .sepa-payment-container input {
+        line-height: 2;
+        font-size: 1.1em
+    }
+}
+
+/*********************
+*** SCREEN 359 PX ***
+**********************/
+
+@media only screen and (max-width: 359px) {
+
+    .vca-tabs ul {
+        flex-wrap: wrap;
+    }
+
+    .vca-field-row .first input,
+    .vca-field-row .last input {
+        width: 100%;
+    }
+
+}
+
 </style>

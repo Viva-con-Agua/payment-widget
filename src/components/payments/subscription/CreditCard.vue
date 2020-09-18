@@ -10,6 +10,8 @@ import axios from 'axios'
 const style = {
     base: {
         color: '#32325d',
+        fontSize: '1.1em',
+        lineHeight: '2',
         '::placeholder': {
             color: '#aab7c4'
         },
@@ -42,7 +44,7 @@ let stripe = window.Stripe(process.env.VUE_APP_STRIPE_PUBLIC_KEY),
 
 export default {
     name: 'CreditCard',
-    props: ['payment', 'valid', 'label', 'country'],
+    props: ['payment', 'valid', 'label', 'product'],
     mounted () {
         element.mount(this.$refs.card)
     },
@@ -59,7 +61,7 @@ export default {
     },
     methods: {
         stripeRequestCard(client_secret) {
-            stripe.confirmCardPayment(client_secret, {
+            stripe.confirmCardSetup(client_secret, {
                 payment_method: {
                     card: element,
                     billing_details: {
@@ -68,16 +70,31 @@ export default {
                     }
                 }
             }).then(result => {
+                console.log(result)
                 if (result.error) {
                     // Show error to your customer (e.g., insufficient funds)
                     console.log(result.error.message);
                 } else {
                     // The payment has been processed!
-                    if (result.paymentIntent.status === 'succeeded') {
-                        this.payment.transaction.id = result.paymentIntent.id
-                        this.payment.transaction.provider = "stripe"
-                        this.payment.transaction.payment_type = 'creditcard'
-                        this.$emit('success', this.payment)
+                    console.log(result)
+                    if (result.setupIntent.status === 'succeeded') {
+                        axios.post(process.env.VUE_APP_BACKEND_URL + '/v1/payment/subscription',
+                            { 
+                                amount: this.payment.money.amount,
+                                currency: this.payment.money.currency,
+                                name: this.payment.supporter.first_name + ' ' + this.payment.supporter.last_name,
+                                email: this.payment.supporter.email,
+                                interval: this.payment.transaction.interval,
+                                locale: this.payment.supporter.country,
+                                type: 'card',
+                                product: this.product
+                            })
+                            .then(response => {
+                                this.payment.transaction.id = response.data.id,
+                                this.payment.transaction.provider = "stripe",
+                                this.payment.transaction.payment_type = 'creditcard',
+                                this.$emit('success', this.payment)
+                            })
                     }
                 }
             });
@@ -85,13 +102,15 @@ export default {
         purchase () {
             if (this.valid.$invalid === false) {
                 var country = this.isDE ? '' : '-' + this.country.toLowerCase()
-                axios.post(process.env.VUE_APP_BACKEND_URL + '/v1/payment' + country + '/card',
+                axios.post(process.env.VUE_APP_BACKEND_URL + '/v1/payment' + country + '/default',
                     { 
                         amount: this.payment.money.amount,
-                        currency: this.payment.money.currency,
                         name: this.payment.supporter.first_name + ' ' + this.payment.supporter.last_name,
                         email: this.payment.supporter.email,
-                        locale: this.payment.supporter.country
+                        interval: this.payment.transaction.interval,
+                        currency: this.payment.money.currency,
+                        locale: this.payment.supporter.country,
+                        type: 'card'
                     })
                     .then(response => (
                         console.log(response.data),
