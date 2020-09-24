@@ -84,8 +84,7 @@ export default {
         },
         purchase () {
             if (this.valid.$invalid === false) {
-                var country = this.isDE ? '' : '-' + this.country.toLowerCase()
-                axios.post(process.env.VUE_APP_BACKEND_URL + '/v1/payment' + country + '/card',
+                axios.post(process.env.VUE_APP_BACKEND_URL + '/v1/payment/card',
                     { 
                         amount: this.payment.money.amount,
                         currency: this.payment.money.currency,
