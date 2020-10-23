@@ -10,7 +10,7 @@
                         <StepThree v-if="step === 3" :product="product" :payment="payment" :country="country" :label="getLabel" :valid="$v.payment" @back="backStepTwo" @success="success"/>
                         <StepThanks v-if="step === 4" :payment="payment"/>
                     </div>
-                    <PaymentFooter v-if="step === 3 || step === 2" :money="payment.money" :interval="payment.interval" />
+                    <PaymentFooter v-if="step === 3 || step === 2" :money="payment.money" :interval="payment.transaction.interval" />
                 </vca-form>
             </div>
         </div>
