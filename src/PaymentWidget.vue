@@ -1,7 +1,7 @@
 <template>
     <div id=payment-widget class="payment-widget">
         <div class="widget" v-if="donation && slider == 'cupslide'">
-            <CupSlide ref="amount_widget" @amount="setAmount"/>
+            <CupSlide ref="amount_widget" :count="slide_count" @amount="setAmount"/>
         </div>
         <div style="display: flex" v-if="donation">
             <DonationForm ref="donation_form" v-on:success="success" :currency="currency" :campaign="campaign" :country="country" @replyAmount="replyAmount" :reqNewsletter="req_newsletter"/>
@@ -56,6 +56,14 @@ export default {
         product: {
             type: String,
             default: ""
+        },
+        slide_count: {
+            type: Number,
+            default: 10
+        },
+        amount: {
+            type: Number,
+            default: 100
         }
     },
     data() {
@@ -66,6 +74,11 @@ export default {
                 description: this.campaign_description
             }
         }
+    },
+    mounted(){
+        this.replyAmount(this.amount)
+        this.setAmount(this.amount)
+
     },
     computed: {
         donation () {

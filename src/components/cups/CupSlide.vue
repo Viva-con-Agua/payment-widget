@@ -10,18 +10,24 @@
     </div>
     <div class="count">
     <img class="count" src="@/assets/Einheiten.svg"/>
-    <input type="range" min="0" max="1000" :value="value" step="100" @input="setAmount">
+    <input type="range" min="0" :max="this.count * 100" :value="value" step="100" @input="setAmount">
     </div>
     </div>
 </template>
 <script>
 export default {
+    props: {
+        count: {
+            type: Number,
+            default: 10
+        }
+    },
     name: 'CupSlide',
     data () {
         return {
             value: 0,
-            empty: 10,
-            all: 10,
+            empty: this.count,
+            all: this.count,
             full: 0
         }
     },
@@ -29,16 +35,16 @@ export default {
         setAmount (e) {
             var mask = parseInt(e.target.value /100)
             this.full = mask
-            this.empty = 10 - mask
+            this.empty = this.count - mask
             this.$emit("amount", parseInt(e.target.value))
         },
         replyAmount (value) {
             this.value = value
-            if (value <= 1000) {
+            if (value <= this.count * 100) {
                 this.full = Math.floor(value / 100)
                 this.empty = 10 - Math.floor(value / 100)
             } else {
-                this.full = 10
+                this.full = this.count
                 this.empty = 0
             }
         }
