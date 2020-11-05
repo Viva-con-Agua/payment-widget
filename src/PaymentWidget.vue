@@ -78,7 +78,6 @@ export default {
     mounted(){
         this.replyAmount(this.amount)
         this.setAmount(this.amount)
-
     },
     computed: {
         donation () {
