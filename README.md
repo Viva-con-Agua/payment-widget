@@ -34,6 +34,14 @@ The parameter describes if the newsletter will requested in widget
 
 **req_newsletter => (boolean)**
 
+The parameter set the count of steps in slide. Default 10 for 10 Cups in Cupslide.
+
+**slide_count => (Number)** 
+
+The parameter set the default amount in cents. The slide recognizes the amount an set for example cups.
+
+**amount => (Number)**
+
 The parameter describes the country in which the form is used. Depending on this, the corresponding payment methods respectively recipient accounts are used
 
 ### Success for Donation
