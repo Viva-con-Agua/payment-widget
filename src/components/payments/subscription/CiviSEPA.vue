@@ -19,7 +19,7 @@
                         <strong>Hinweis:</strong> Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrags verlangen. Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen.
             </CheckBox>
         </vca-field>
-        <button type="button" v-on:click.prevent="purchase" :disabled="$v.$invalid" class="sepa-donation-button"> {{ label }} </button>
+        <button type="button" v-on:click.self.prevent="purchase" :disabled="$v.$invalid" class="sepa-donation-button"> {{ label }} </button>
     </div>
 </template>
 
